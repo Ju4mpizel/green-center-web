@@ -1,13 +1,15 @@
 // src/app/sitemap.js
-export default function sitemap() {
-  const baseUrl = "https://greencenterbo.com";
+import { siteConfig } from "@/data/siteConfig";
 
+export const dynamic = "force-static";
+
+export default function sitemap() {
   return [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: siteConfig.url,
+      lastModified: "2026-10-15T00:00:00.000Z",
       changeFrequency: "weekly",
-      priority: 1.0,
+      priority: 1,
     },
   ];
 }

@@ -8,13 +8,9 @@ import { X, ArrowRight } from "lucide-react";
 import { createWhatsAppLink } from "@/lib/whatsapp";
 
 export default function ProductDrawer({ product, isOpen, onClose }) {
-  const [selectedImg, setSelectedImg] = useState(0);
-
-  useEffect(() => {
-    if (product) {
-      setSelectedImg(0);
-    }
-  }, [product]);
+  // Estado derivado para evitar react-hooks/set-state-in-effect
+  const [pick, setPick] = useState({ id: null, i: 0 });
+  const selectedImg = pick.id === product?.id ? pick.i : 0;
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -38,7 +34,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay oscuro difuminado */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -47,7 +42,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
             className="fixed inset-0 bg-bosque/55 backdrop-blur-[6px] z-[95]"
           />
 
-          {/* Drawer deslizable */}
           <motion.aside
             initial={{ x: "115%" }}
             animate={{ x: "0%" }}
@@ -56,7 +50,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
             className="fixed top-3 right-3 bottom-3 w-[min(540px,calc(100%-24px))] bg-niebla rounded-[32px] z-[96] overflow-y-auto p-3.5 pb-8 shadow-2xl flex flex-col justify-between"
           >
             <div>
-              {/* Botón cerrar */}
               <button
                 onClick={onClose}
                 className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white flex items-center justify-center z-10 hover:rotate-90 transition-transform duration-300 shadow-sm"
@@ -76,13 +69,13 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                 />
               </div>
 
-              {/* Miniaturas (si tiene más de 1 imagen) */}
+              {/* Miniaturas */}
               {product.imgs.length > 1 && (
                 <div className="flex gap-2.5 mt-2.5">
                   {product.imgs.map((img, i) => (
                     <button
                       key={i}
-                      onClick={() => setSelectedImg(i)}
+                      onClick={() => setPick({ id: product.id, i })}
                       className={`relative w-[72px] h-[72px] rounded-2xl overflow-hidden transition-all ${
                         selectedImg === i
                           ? "ring-2 ring-hoja opacity-100"
@@ -91,7 +84,7 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                     >
                       <Image
                         src={img}
-                        alt=""
+                        alt={`${product.name} vista ${i + 1}`}
                         fill
                         sizes="72px"
                         className="object-cover"
@@ -115,7 +108,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   {product.desc}
                 </p>
 
-                {/* Lista de Ficha Técnica */}
                 <ul className="divide-y divide-tinta/10 my-6">
                   {product.specs.map((s, idx) => (
                     <li
@@ -130,7 +122,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   ))}
                 </ul>
 
-                {/* Precio */}
                 {product.price && product.price !== "Consultar" && (
                   <div className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-tinta mb-6">
                     {product.price}
@@ -139,7 +130,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
               </div>
             </div>
 
-            {/* Botón WhatsApp unificado y estético */}
             <div className="px-3 pt-4">
               <a
                 href={createWhatsAppLink(
@@ -153,7 +143,7 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   <div className="w-6 h-6 relative flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
                     <Image
                       src="/icons/whatsapp.svg"
-                      alt="WhatsApp"
+                      alt=""
                       fill
                       className="object-contain"
                     />

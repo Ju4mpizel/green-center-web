@@ -4,7 +4,8 @@
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { BRANCHES } from "@/data/branches";
-import { getWhatsAppUrl } from "@/data/siteConfig";
+import { createWhatsAppLink } from "@/lib/whatsapp";
+import { siteConfig } from "@/data/siteConfig";
 
 const EASE = [0.2, 0.8, 0.2, 1];
 
@@ -169,7 +170,7 @@ export default function Branches() {
                       Cómo llegar
                     </a>
                     <a
-                      href={getWhatsAppUrl(
+                      href={createWhatsAppLink(
                         `Hola Green Center, quiero visitar la sucursal: ${b.name}.`,
                       )}
                       target="_blank"
@@ -184,8 +185,8 @@ export default function Branches() {
             })}
 
             <p className="text-xs sm:text-sm text-musgo px-2 py-1 leading-relaxed">
-              Atención habitual: 08:00 a 18:00. Consultas directas por WhatsApp
-              para confirmar disponibilidad inmediata.
+              Horario de atención: {siteConfig.openingHours}. Consultas directas
+              por WhatsApp para confirmar disponibilidad inmediata.
             </p>
           </div>
 
@@ -307,7 +308,7 @@ export default function Branches() {
                   Centro
                 </text>
 
-                {/* 4. Pines de Santa Cruz con onda centrada mediante animate nativo */}
+                {/* 4. Pines de Santa Cruz con pulso concéntrico centrado */}
                 {BRANCHES.filter((b) => b.ring).map((b, i) => {
                   const [x, y] = P(b.ring, b.ang);
                   const isLeft = Math.cos((b.ang * Math.PI) / 180) < 0;
@@ -332,7 +333,6 @@ export default function Branches() {
                           ease: EASE,
                         }}
                       >
-                        {/* Onda concéntrica perfecta en el origen (0, 0) */}
                         {isSelected && (
                           <>
                             <circle

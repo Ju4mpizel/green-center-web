@@ -5,7 +5,8 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { siteConfig, getWhatsAppUrl } from "@/data/siteConfig";
+import { siteConfig } from "@/data/siteConfig";
+import { createWhatsAppLink } from "@/lib/whatsapp";
 
 const EASE = [0.2, 0.8, 0.2, 1];
 
@@ -68,13 +69,11 @@ export default function CTA() {
       </div>
 
       <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)]">
-        {/* Titular proporcionado */}
         <SplitHeadingCTA
           text="Tu próxima forma de moverte no hace"
           highlight="ruido."
         />
 
-        {/* Grupo de botones armónico y simétrico */}
         <motion.div
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -84,7 +83,7 @@ export default function CTA() {
         >
           {/* Botón WhatsApp */}
           <a
-            href={getWhatsAppUrl(
+            href={createWhatsAppLink(
               "Hola Green Center, quiero reservar un vehículo eléctrico.",
             )}
             target="_blank"
@@ -94,7 +93,7 @@ export default function CTA() {
             <div className="w-4 h-4 sm:w-5 sm:h-5 relative flex-shrink-0">
               <Image
                 src="/icons/whatsapp.svg"
-                alt="WhatsApp"
+                alt=""
                 fill
                 className="object-contain"
               />
@@ -105,7 +104,7 @@ export default function CTA() {
             </span>
           </a>
 
-          {/* Botón Instagram con borde nítido y flecha animada */}
+          {/* Botón Instagram */}
           <a
             href={siteConfig.instagram}
             target="_blank"
