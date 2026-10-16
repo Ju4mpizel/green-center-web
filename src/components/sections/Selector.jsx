@@ -274,7 +274,7 @@ export default function Selector() {
                 </div>
               </div>
 
-              {/* 2 Fotos de los modelos recomendados con altura explícita */}
+              {/* 2 Fotos de los modelos recomendados con altura explícita y alt descriptivo */}
               <div className="grid grid-cols-2 gap-2 sm:gap-2.5 p-2.5 sm:p-3.5">
                 {selectedOption.result.imgs.map((img, i) => (
                   <div
@@ -283,7 +283,7 @@ export default function Selector() {
                   >
                     <Image
                       src={img}
-                      alt="Recomendación"
+                      alt={`${selectedOption.result.t} - Modelo recomendado`}
                       fill
                       sizes="(max-width: 1024px) 50vw, 25vw"
                       className="object-cover"

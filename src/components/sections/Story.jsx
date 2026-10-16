@@ -165,8 +165,8 @@ export default function Story() {
               className="text-[#a9c1b0] text-[15px] sm:text-[clamp(17px,1.5vw,21px)] max-w-[560px] leading-relaxed mb-6 sm:mb-9"
             >
               Green Center Bolivia es una empresa importadora y comercializadora
-              de vehículos eléctricos. Desde Santa Cruz, trabajamos con motos,
-              bicicletas, trimotos, motocarros, scooters y patines.
+              de vehículos eléctricos. Desde Santa Cruz y Cochabamba, trabajamos
+              con motos, bicicletas, trimotos, motocarros, scooters y patines.
             </motion.p>
 
             {/* Imagen recortada */}
@@ -312,9 +312,9 @@ export default function Story() {
                   Llegamos a todo el país
                 </h3>
                 <p className="text-[#a9c1b0] text-sm sm:text-[17px] max-w-[520px] leading-relaxed">
-                  Atendemos en 3 sucursales en Santa Cruz y hacemos envíos a
-                  nivel nacional, para que vivas donde vivas puedas tener tu
-                  vehículo eléctrico.
+                  Atendemos en Santa Cruz y Cochabamba, además de realizar
+                  envíos a nivel nacional para que tengas tu vehículo eléctrico
+                  donde sea que vivas.
                 </p>
               </motion.li>
             </ol>

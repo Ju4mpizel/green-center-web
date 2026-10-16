@@ -1,8 +1,21 @@
 // src/app/layout.jsx
+import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google";
 import { siteConfig } from "@/data/siteConfig";
 import { BRANCHES } from "@/data/branches";
 import Providers from "@/components/Providers";
 import "./globals.css";
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage",
+  display: "swap",
+});
+
+const hanken = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken",
+  display: "swap",
+});
 
 const isIndexable = process.env.NEXT_PUBLIC_INDEXABLE === "true";
 
@@ -32,7 +45,7 @@ export default function RootLayout({ children }) {
     "@type": "AutoDealer",
     name: siteConfig.name,
     url: siteConfig.url,
-    telephone: siteConfig.whatsappNumber,
+    telephone: `+${siteConfig.whatsappNumber}`,
     department: BRANCHES.map((b) => ({
       "@type": "LocalBusiness",
       name: `${siteConfig.name} - ${b.name}`,
@@ -45,14 +58,14 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="es">
+    <html lang="es" className={`${bricolage.variable} ${hanken.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
       </head>
-      <body>
+      <body className="font-sans antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>
