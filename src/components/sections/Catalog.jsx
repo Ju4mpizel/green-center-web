@@ -7,11 +7,12 @@ import { PRODUCTS, CATEGORIES } from "@/data/products";
 import ProductDrawer from "@/components/ui/ProductDrawer";
 import ProductCard from "@/components/ui/ProductCard";
 
+const EASE = [0.2, 0.8, 0.2, 1];
+
 function SplitHeading({ text, highlight }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
   const words = text.split(" ");
-  const EASE = [0.2, 0.8, 0.2, 1];
 
   return (
     <h2
@@ -93,19 +94,25 @@ export default function Catalog() {
           </div>
         </div>
 
-        {/* Grid de Productos */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-5">
-          <AnimatePresence mode="popLayout">
-            {filteredProducts.map((p, index) => (
+        {/* Transición fluida del grid sin colisiones ni rebotes */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCat}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.28, ease: EASE }}
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-5"
+          >
+            {filteredProducts.map((p) => (
               <ProductCard
                 key={p.id}
                 product={p}
-                index={index}
                 onSelect={setSelectedProduct}
               />
             ))}
-          </AnimatePresence>
-        </div>
+          </motion.div>
+        </AnimatePresence>
 
         {/* Nota informativa */}
         <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-musgo text-center px-4">

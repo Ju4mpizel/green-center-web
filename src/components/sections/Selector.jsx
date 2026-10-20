@@ -72,9 +72,9 @@ const OPTIONS = [
       </svg>
     ),
     result: {
-      t: "Un scooter o una bici moto",
+      t: "Una scooter eléctrica",
       p: "Ágiles, fáciles de estacionar y muy baratas de cargar. Perfectas para tu rutina diaria.",
-      imgs: ["/img/scooter.jpg", "/img/superbike.jpg"],
+      imgs: ["/img/motos/moto-spyder.jpg", "/img/motos/moto-trueno.jpg"],
       cat: "Motos y scooters",
     },
   },
@@ -100,7 +100,7 @@ const OPTIONS = [
     result: {
       t: "Una trimoto o un motocarro",
       p: "Más espacio, más estabilidad y capacidad para llevar carga. Hechas para trabajar.",
-      imgs: ["/img/trimoto_roja.jpg", "/img/motocarro.jpg"],
+      imgs: ["/img/trimotos/trimoto_roja.jpg", "/img/trimotos/motocarro.jpg"],
       cat: "Trimotos y carga",
     },
   },
@@ -126,7 +126,7 @@ const OPTIONS = [
     result: {
       t: "Un mini auto eléctrico",
       p: "Techo, puertas y cuatro ruedas. La comodidad de un auto con el gasto de un eléctrico.",
-      imgs: ["/img/miniauto.jpg", "/img/trimoto_naranja.jpg"],
+      imgs: ["/img/autos/miniauto.jpg", "/img/trimotos/trimoto_naranja.jpg"],
       cat: "Autos",
     },
   },
@@ -152,7 +152,7 @@ const OPTIONS = [
     result: {
       t: "Una fat bike o una bici de montaña",
       p: "Para salir los fines de semana, subir cuestas sin cansarte y llegar más lejos.",
-      imgs: ["/img/fatred.jpg", "/img/mtb.jpg"],
+      imgs: ["/img/bicicletas/fatred.jpg", "/img/bicicletas/mtb.jpg"],
       cat: "Bicicletas",
     },
   },

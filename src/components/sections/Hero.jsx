@@ -8,22 +8,30 @@ import Button from "@/components/ui/Button";
 
 const HERO_ITEMS = [
   {
-    img: "/img/superbike.jpg",
+    img: "/img/bicicletas/superbike.jpg",
     n: "Bici Moto Super Bike",
     s: "800 W · hasta 45 km/h",
   },
-  { img: "/img/scooter.jpg", n: "Scooter retro", s: "Estilo para la ciudad" },
   {
-    img: "/img/trimoto_naranja.jpg",
+    img: "/img/motos/scooter.jpg",
+    n: "Scooter retro",
+    s: "Estilo para la ciudad",
+  },
+  {
+    img: "/img/trimotos/trimoto_naranja.jpg",
     n: "Trimoto clásica",
     s: "Comodidad y estabilidad",
   },
   {
-    img: "/img/miniauto.jpg",
+    img: "/img/autos/miniauto.jpg",
     n: "Mini auto eléctrico",
     s: "Techo solar · 80 km",
   },
-  { img: "/img/mtb.jpg", n: "Bici de montaña", s: "Batería integrada" },
+  {
+    img: "/img/bicicletas/mtb.jpg",
+    n: "Bici de montaña",
+    s: "Batería integrada",
+  },
 ];
 
 const EASE_ORIGINAL = [0.2, 0.8, 0.2, 1];
@@ -96,7 +104,7 @@ export default function Hero() {
                 className="w-full h-full relative"
               >
                 <Image
-                  src="/img/scooter.jpg"
+                  src="/img/motos/scooter.jpg"
                   alt="Scooter eléctrico"
                   fill
                   sizes="100px"
@@ -153,7 +161,7 @@ export default function Hero() {
                 className="w-full h-full relative"
               >
                 <Image
-                  src="/img/fatred.jpg"
+                  src="/img/bicicletas/fatred.jpg"
                   alt="Fat bike eléctrica"
                   fill
                   sizes="100px"

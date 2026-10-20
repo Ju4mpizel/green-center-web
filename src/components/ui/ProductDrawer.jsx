@@ -4,11 +4,20 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight } from "lucide-react";
+import { X, ArrowRight, ShieldCheck } from "lucide-react";
 import { createWhatsAppLink } from "@/lib/whatsapp";
 
+// Mapeo visual para los puntos de color
+const COLOR_HEX = {
+  Blanco: "#f8fafc",
+  Negro: "#1e293b",
+  Rojo: "#dc2626",
+  Azul: "#2563eb",
+  Plomo: "#64748b",
+  "Celeste eléctrico": "#06b6d4",
+};
+
 export default function ProductDrawer({ product, isOpen, onClose }) {
-  // Estado derivado para evitar react-hooks/set-state-in-effect
   const [pick, setPick] = useState({ id: null, i: 0 });
   const selectedImg = pick.id === product?.id ? pick.i : 0;
 
@@ -46,20 +55,21 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
             initial={{ x: "115%" }}
             animate={{ x: "0%" }}
             exit={{ x: "115%" }}
-            transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
-            className="fixed top-3 right-3 bottom-3 w-[min(540px,calc(100%-24px))] bg-niebla rounded-[32px] z-[96] overflow-y-auto p-3.5 pb-8 shadow-2xl flex flex-col justify-between"
+            transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
+            className="fixed top-2 sm:top-3 right-2 sm:right-3 bottom-2 sm:bottom-3 w-[min(540px,calc(100%-16px))] bg-niebla rounded-[28px] sm:rounded-[32px] z-[96] overflow-hidden shadow-2xl flex flex-col justify-between"
           >
-            <div>
+            {/* Contenido con Scroll */}
+            <div className="overflow-y-auto p-3.5 sm:p-5 pb-6">
               <button
                 onClick={onClose}
-                className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white flex items-center justify-center z-10 hover:rotate-90 transition-transform duration-300 shadow-sm"
+                className="absolute top-5 right-5 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/90 backdrop-blur flex items-center justify-center z-20 hover:rotate-90 transition-transform duration-300 shadow-sm border border-black/5"
                 aria-label="Cerrar ventana"
               >
                 <X className="w-5 h-5 text-tinta" />
               </button>
 
               {/* Imagen Principal */}
-              <div className="rounded-[24px] overflow-hidden aspect-square bg-salvia relative">
+              <div className="rounded-[22px] sm:rounded-[26px] overflow-hidden aspect-square bg-salvia relative shadow-inner">
                 <Image
                   src={product.imgs[selectedImg]}
                   alt={product.name}
@@ -69,24 +79,24 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                 />
               </div>
 
-              {/* Miniaturas */}
+              {/* Miniaturas de fotos */}
               {product.imgs.length > 1 && (
                 <div className="flex gap-2.5 mt-2.5">
                   {product.imgs.map((img, i) => (
                     <button
                       key={i}
                       onClick={() => setPick({ id: product.id, i })}
-                      className={`relative w-[72px] h-[72px] rounded-2xl overflow-hidden transition-all ${
+                      className={`relative w-16 h-16 rounded-xl overflow-hidden transition-all ${
                         selectedImg === i
                           ? "ring-2 ring-hoja opacity-100"
-                          : "opacity-55 hover:opacity-85"
+                          : "opacity-50 hover:opacity-80"
                       }`}
                     >
                       <Image
                         src={img}
                         alt={`${product.name} vista ${i + 1}`}
                         fill
-                        sizes="72px"
+                        sizes="64px"
                         className="object-cover"
                       />
                     </button>
@@ -94,25 +104,63 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                 </div>
               )}
 
-              {/* Contenido / Especificaciones */}
-              <div className="pt-5 px-3">
-                <span className="inline-block text-xs font-semibold text-hoja bg-hoja/10 px-3 py-1 rounded-full mb-2">
-                  {product.tag}
-                </span>
+              {/* Encabezado e Info */}
+              <div className="pt-4 px-1.5 sm:px-2">
+                <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
+                  <span className="inline-block text-xs font-semibold text-hoja bg-hoja/10 px-3 py-1 rounded-full">
+                    {product.tag}
+                  </span>
 
-                <h3 className="font-display font-bold text-3xl sm:text-4xl tracking-[-0.035em] text-tinta mb-2">
+                  {product.warranty && (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-bosque bg-brote/40 border border-brote px-2.5 py-1 rounded-full">
+                      <ShieldCheck className="w-3.5 h-3.5 text-hoja" />
+                      {product.warranty}
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="font-display font-bold text-2xl sm:text-3xl tracking-tight text-tinta mb-1.5">
                   {product.name}
                 </h3>
 
-                <p className="text-musgo text-sm sm:text-base leading-relaxed mb-6">
+                <p className="text-musgo text-xs sm:text-[14.5px] leading-relaxed mb-5">
                   {product.desc}
                 </p>
 
-                <ul className="divide-y divide-tinta/10 my-6">
+                {/* Colores Disponibles */}
+                {product.colors && product.colors.length > 0 && (
+                  <div className="mb-6 p-3.5 rounded-2xl bg-white shadow-xs border border-tinta/5">
+                    <span className="block text-xs font-semibold text-musgo mb-2 uppercase tracking-wider">
+                      Colores disponibles
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {product.colors.map((c) => (
+                        <span
+                          key={c}
+                          className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-niebla text-tinta border border-tinta/10"
+                        >
+                          <span
+                            className="w-3 h-3 rounded-full border border-black/15 flex-shrink-0"
+                            style={{
+                              backgroundColor: COLOR_HEX[c] || "#94a3b8",
+                            }}
+                          />
+                          {c}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Tabla de Especificaciones Técnicas */}
+                <span className="block text-xs font-semibold text-musgo mb-1 uppercase tracking-wider">
+                  Especificaciones técnicas
+                </span>
+                <ul className="divide-y divide-tinta/10">
                   {product.specs.map((s, idx) => (
                     <li
                       key={idx}
-                      className="flex justify-between items-center py-3.5 text-sm sm:text-[15px]"
+                      className="flex justify-between items-center py-2.5 text-xs sm:text-sm"
                     >
                       <span className="text-musgo">{s.label}</span>
                       <b className="font-semibold text-tinta text-right">
@@ -121,37 +169,30 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                     </li>
                   ))}
                 </ul>
-
-                {product.price && product.price !== "Consultar" && (
-                  <div className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-tinta mb-6">
-                    {product.price}
-                  </div>
-                )}
               </div>
             </div>
 
-            <div className="px-3 pt-4">
+            {/* Pie Fijo: Precio + Botón de Acción Directa */}
+            <div className="p-3.5 sm:p-4 bg-white border-t border-tinta/10 flex items-center justify-between gap-3 shadow-lg">
+              <div>
+                <span className="block text-[11px] font-medium text-musgo leading-none">
+                  Precio de referencia
+                </span>
+                <b className="font-display font-bold text-xl sm:text-2xl tracking-tight text-tinta">
+                  {product.price}
+                </b>
+              </div>
+
               <a
                 href={createWhatsAppLink(
-                  `Hola Green Center, me interesa consultar por el modelo: ${product.name}.`,
+                  `Hola Green Center, me interesa consultar por el modelo: ${product.name} (${product.price}).`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group w-full inline-flex items-center justify-between px-6 py-4 rounded-full bg-hoja hover:bg-bosque text-white font-semibold text-base transition-all duration-300 shadow-md hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-hoja hover:bg-bosque text-white font-semibold text-xs sm:text-sm transition-all duration-300 shadow-md hover:-translate-y-0.5"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 relative flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
-                    <Image
-                      src="/icons/whatsapp.svg"
-                      alt=""
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  <span>Consultar por este modelo</span>
-                </div>
-
-                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                <span>Consultar por WhatsApp</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </div>
           </motion.aside>

@@ -53,25 +53,25 @@ function SplitHeadingSteps({ text, highlight }) {
 const STEPS = [
   {
     n: 1,
-    img: "/img/superbike.jpg",
+    img: "/img/bicicletas/superbike.jpg",
     title: "Elige",
     desc: "Mira el catálogo o cuéntanos qué necesitas.",
   },
   {
     n: 2,
-    img: "/img/scooter.jpg",
+    img: "/img/motos/scooter.jpg",
     title: "Consulta",
     desc: "Resolvemos tus dudas por WhatsApp o en el local.",
   },
   {
     n: 3,
-    img: "/img/motocarro.jpg",
+    img: "/img/trimotos/motocarro.jpg",
     title: "Coordina",
     desc: "Acordamos el pago y la forma de entrega.",
   },
   {
     n: 4,
-    img: "/img/trimoto_naranja.jpg",
+    img: "/img/trimotos/trimoto_naranja.jpg",
     title: "Recíbela",
     desc: "La retiras en Santa Cruz o te la enviamos a tu ciudad.",
   },

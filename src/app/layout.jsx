@@ -46,12 +46,13 @@ export default function RootLayout({ children }) {
     name: siteConfig.name,
     url: siteConfig.url,
     telephone: `+${siteConfig.whatsappNumber}`,
-    department: BRANCHES.map((b) => ({
+    department: BRANCHES.filter((b) => !b.isNew).map((b) => ({
       "@type": "LocalBusiness",
       name: `${siteConfig.name} - ${b.name}`,
       address: {
         "@type": "PostalAddress",
         streetAddress: b.address,
+        addressLocality: "Santa Cruz de la Sierra",
         addressCountry: "BO",
       },
     })),

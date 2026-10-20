@@ -53,25 +53,25 @@ function SplitHeadingComp({ text, highlight }) {
 const TYPES = [
   {
     n: "Bici eléctrica",
-    img: "/img/mtb.jpg",
+    img: "/img/bicicletas/mtb.jpg",
     ideal: "Paseo y cortos",
     scores: [5, 5, 1, 1],
   },
   {
     n: "Moto/scooter",
-    img: "/img/scooter.jpg",
+    img: "/img/motos/scooter.jpg",
     ideal: "Ciudad día a día",
     scores: [4, 4, 2, 2],
   },
   {
     n: "Trimoto",
-    img: "/img/trimoto_roja.jpg",
+    img: "/img/trimotos/trimoto_roja.jpg",
     ideal: "Carga y trabajo",
     scores: [4, 3, 4, 3],
   },
   {
     n: "Mini auto",
-    img: "/img/miniauto.jpg",
+    img: "/img/autos/miniauto.jpg",
     ideal: "Familia/confort",
     scores: [3, 2, 5, 5],
   },

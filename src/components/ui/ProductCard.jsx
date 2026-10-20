@@ -2,25 +2,25 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-export default function ProductCard({ product, index, onSelect }) {
+// Mapeo de colores a valores hexadecimales
+const COLOR_HEX = {
+  Blanco: "#f8fafc",
+  Negro: "#1e293b",
+  Rojo: "#dc2626",
+  Azul: "#2563eb",
+  Plomo: "#64748b",
+  "Celeste eléctrico": "#06b6d4",
+};
+
+export default function ProductCard({ product, onSelect }) {
   const isLg = product.lg;
 
   return (
-    <motion.article
-      layout
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{
-        duration: 0.3,
-        delay: (index % 4) * 0.04,
-        ease: [0.2, 0.8, 0.2, 1],
-      }}
+    <article
       onClick={() => onSelect(product)}
-      className={`group bg-white rounded-[22px] sm:rounded-[32px] p-2.5 sm:p-3 pb-3.5 sm:pb-[22px] flex flex-col justify-between cursor-pointer transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-15px_rgba(13,42,28,0.2)] shadow-xs ${
+      className={`group bg-white rounded-[22px] sm:rounded-[32px] p-2.5 sm:p-3 pb-3.5 sm:pb-[22px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-12px_rgba(13,42,28,0.18)] shadow-xs ${
         isLg
           ? "col-span-2 sm:col-span-2 lg:col-span-6 lg:row-span-2"
           : "col-span-1 lg:col-span-3"
@@ -51,9 +51,28 @@ export default function ProductCard({ product, index, onSelect }) {
       {/* Info de la Card */}
       <div className="pt-2.5 sm:pt-4 px-1 sm:px-3 flex flex-col justify-between flex-1">
         <div>
-          <span className="inline-block text-[10px] sm:text-[13px] font-semibold text-hoja bg-hoja/10 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full mb-1.5 sm:mb-2.5">
-            {product.tag}
-          </span>
+          <div className="flex items-center justify-between gap-1.5 mb-1.5 sm:mb-2.5 flex-wrap">
+            <span className="inline-block text-[10px] sm:text-[13px] font-semibold text-hoja bg-hoja/10 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full">
+              {product.tag}
+            </span>
+
+            {/* Muestras circulares de colores disponibles */}
+            {product.colors && product.colors.length > 0 && (
+              <div
+                className="flex items-center gap-1 sm:gap-1.5 py-0.5 px-1.5 rounded-full bg-niebla/80 border border-tinta/5"
+                title={`Colores: ${product.colors.join(", ")}`}
+              >
+                {product.colors.map((c) => (
+                  <span
+                    key={c}
+                    className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full border border-black/15 shadow-2xs"
+                    style={{ backgroundColor: COLOR_HEX[c] || "#94a3b8" }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
           <h3
             className={`font-display font-bold tracking-tight text-tinta mb-1 leading-snug line-clamp-1 sm:line-clamp-none ${
               isLg
@@ -83,6 +102,6 @@ export default function ProductCard({ product, index, onSelect }) {
           )}
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
