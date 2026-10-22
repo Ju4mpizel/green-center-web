@@ -3,29 +3,29 @@ import Image from "next/image";
 
 const GALLERY_ITEMS = [
   {
-    src: "/img/variados/superbike.jpg",
+    src: "/img/variados/superbike.webp",
     alt: "Bicimoto eléctrica en exhibición",
   },
-  { src: "/img/variados/scooter.jpg", alt: "Scooter eléctrica urbana" },
+  { src: "/img/variados/scooter.webp", alt: "Scooter eléctrica urbana" },
   {
-    src: "/img/variados/trimoto_naranja.jpg",
+    src: "/img/variados/trimoto_naranja.webp",
     alt: "Trimoto eléctrica con asientos confort",
   },
   {
-    src: "/img/variados/miniauto.jpg",
+    src: "/img/variados/miniauto.webp",
     alt: "Mini auto eléctrico con techo solar",
   },
   {
-    src: "/img/variados/mtb.jpg",
+    src: "/img/variados/mtb.webp",
     alt: "Bicicleta de montaña con asistencia eléctrica",
   },
   {
-    src: "/img/variados/fatred.jpg",
+    src: "/img/variados/fatred.webp",
     alt: "Bicicleta eléctrica Fat Bike con llantas anchas",
   },
-  { src: "/img/variados/trimoto_roja.jpg", alt: "Trimoto eléctrica urbana" },
+  { src: "/img/variados/trimoto_roja.webp", alt: "Trimoto eléctrica urbana" },
   {
-    src: "/img/variados/motocarro.jpg",
+    src: "/img/variados/motocarro.webp",
     alt: "Motocarro eléctrico de carga pesada",
   },
 ];

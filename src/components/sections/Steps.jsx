@@ -53,25 +53,25 @@ function SplitHeadingSteps({ text, highlight }) {
 const STEPS = [
   {
     n: 1,
-    img: "/img/bicicletas/bicimoto-tornado.jpg",
+    img: "/img/bicicletas/bicimoto-tornado.webp",
     title: "Elige",
     desc: "Mira el catálogo o cuéntanos qué necesitas.",
   },
   {
     n: 2,
-    img: "/img/motos/moto-spyder.jpg",
+    img: "/img/motos/moto-spyder.webp",
     title: "Consulta",
     desc: "Resolvemos tus dudas por WhatsApp o en nuestras sucursales.",
   },
   {
     n: 3,
-    img: "/img/autos/sky-car.jpg",
+    img: "/img/autos/sky-car.webp",
     title: "Coordina",
     desc: "Acordamos el pago y la forma de entrega.",
   },
   {
     n: 4,
-    img: "/img/trimotos/trimoto-familiar.jpg",
+    img: "/img/trimotos/trimoto-familiar.webp",
     title: "Recíbela",
     desc: "La retiras en Santa Cruz o te la enviamos a cualquier ciudad de Bolivia.",
   },

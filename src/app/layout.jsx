@@ -17,25 +17,27 @@ const hanken = Hanken_Grotesk({
   display: "swap",
 });
 
-const isIndexable = process.env.NEXT_PUBLIC_INDEXABLE === "true";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://greencenterbolivia.com";
 
 export const metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title:
-    "Green Center Bolivia | Movilidad Eléctrica en Santa Cruz y Cochabamba",
+  metadataBase: new URL(siteUrl),
+  title: "Green Center Bolivia | Movilidad Eléctrica en Bolivia",
   description:
-    "Vehículos eléctricos en Bolivia. Motos, bicicletas, trimotos y autos eléctricos para moverte con ahorro y estilo.",
+    "Venta de motos, bicimotos, trimotos solares, autos urbanos y montacargas eléctricos en Santa Cruz, Cochabamba y toda Bolivia.",
   robots: {
-    index: isIndexable,
-    follow: isIndexable,
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
-  openGraph: {
-    title: "Green Center Bolivia | Movilidad Eléctrica",
-    description: "Motos, bicicletas, trimotos y autos eléctricos en Bolivia.",
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    locale: "es_BO",
-    type: "website",
+  alternates: {
+    canonical: "/",
   },
 };
 

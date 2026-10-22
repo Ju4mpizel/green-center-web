@@ -53,25 +53,25 @@ function SplitHeadingComp({ text, highlight }) {
 const TYPES = [
   {
     n: "Bicimoto / Bici",
-    img: "/img/bicicletas/bicimoto-tornado.jpg",
+    img: "/img/bicicletas/bicimoto-tornado.webp",
     ideal: "Paseo y cortos",
     scores: [5, 5, 1, 1],
   },
   {
     n: "Moto / Scooter",
-    img: "/img/motos/moto-valkiria.jpg",
+    img: "/img/motos/moto-valkiria.webp",
     ideal: "Ciudad día a día",
     scores: [4, 4, 2, 2],
   },
   {
     n: "Trimoto solar",
-    img: "/img/trimotos/trimoto-familiar.jpg",
+    img: "/img/trimotos/trimoto-familiar.webp",
     ideal: "Familia y trabajo",
     scores: [4, 3, 4, 3],
   },
   {
     n: "Mini auto solar",
-    img: "/img/autos/sky-car.jpg",
+    img: "/img/autos/sky-car.webp",
     ideal: "Confort total",
     scores: [3, 2, 5, 5],
   },

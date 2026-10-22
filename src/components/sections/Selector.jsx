@@ -76,11 +76,11 @@ const OPTIONS = [
       p: "Ágiles, fáciles de parquear y con carga económica. Perfectas para evitar el tráfico y moverte a diario sin gastar en gasolina.",
       imgs: [
         {
-          src: "/img/motos/moto-spyder.jpg",
+          src: "/img/motos/moto-spyder.webp",
           alt: "Moto Spyder eléctrica para ciudad",
         },
         {
-          src: "/img/bicicletas/bicimoto-tornado.jpg",
+          src: "/img/bicicletas/bicimoto-tornado.webp",
           alt: "Bicimoto Tornado cafe racer para ciudad",
         },
       ],
@@ -111,11 +111,11 @@ const OPTIONS = [
       p: "Capacidad de elevación de hasta 2 toneladas o traslado diario con tolva y cabina. Rendimiento silencioso y cero emisiones.",
       imgs: [
         {
-          src: "/img/maquinaria/montacargas-ironmax-2t.jpg",
+          src: "/img/maquinaria/montacargas-ironmax-2t.webp",
           alt: "Montacargas Iron Max para logística pesada",
         },
         {
-          src: "/img/trimotos/trimoto-familiar.jpg",
+          src: "/img/trimotos/trimoto-familiar.webp",
           alt: "Trimoto eléctrica para transporte",
         },
       ],
@@ -146,10 +146,10 @@ const OPTIONS = [
       p: "Cabina cerrada de 4 puertas, 4 asientos y panel solar superior. La comodidad de un auto con el ahorro de un vehículo eléctrico.",
       imgs: [
         {
-          src: "/img/autos/sky-car.jpg",
+          src: "/img/autos/sky-car.webp",
           alt: "Sky Car eléctrico de 4 puertas",
         },
-        { src: "/img/autos/moon-car.jpg", alt: "Moon Car eléctrico bicolor" },
+        { src: "/img/autos/moon-car.webp", alt: "Moon Car eléctrico bicolor" },
       ],
       cat: "Autos",
     },
@@ -178,11 +178,11 @@ const OPTIONS = [
       p: "Neumáticos anchos para adoquines o asfalto, aceleración instantánea y tecnología NFC para encender sin llave.",
       imgs: [
         {
-          src: "/img/bicicletas/bicimoto-tornado.jpg",
+          src: "/img/bicicletas/bicimoto-tornado.webp",
           alt: "Bicimoto eléctrica Tornado estilo cafe racer",
         },
         {
-          src: "/img/motos/moto-pantera.jpg",
+          src: "/img/motos/moto-pantera.webp",
           alt: "Moto eléctrica Pantera deportiva",
         },
       ],

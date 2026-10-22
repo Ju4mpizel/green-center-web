@@ -179,7 +179,7 @@ export default function Story() {
               className="w-[min(100%,320px)] sm:w-[min(100%,360px)] aspect-[1/1.05] rounded-[50%_50%_24px_24px_/_36%_36%_24px_24px] overflow-hidden bg-bosque2 relative shadow-2xl"
             >
               <Image
-                src="/img/trimotos/trimoto-familiar.jpg"
+                src="/img/trimotos/trimoto-familiar.webp"
                 alt="Trimoto eléctrica familiar con panel solar Green Center"
                 fill
                 sizes="(max-width: 768px) 100vw, 360px"

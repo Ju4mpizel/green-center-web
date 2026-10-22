@@ -8,27 +8,27 @@ import Button from "@/components/ui/Button";
 
 const HERO_ITEMS = [
   {
-    img: "/img/motos/moto-valkiria.jpg",
+    img: "/img/motos/moto-valkiria.webp",
     n: "Valkiria Eléctrica",
     s: "2.000 W · hasta 70 km/h · 72V 32Ah",
   },
   {
-    img: "/img/bicicletas/bicimoto-tornado.jpg",
+    img: "/img/bicicletas/bicimoto-tornado.webp",
     n: "Bicimoto Tornado",
     s: "800 W · Estilo Cafe Racer · NFC",
   },
   {
-    img: "/img/trimotos/trimoto-familiar.jpg",
+    img: "/img/trimotos/trimoto-familiar.webp",
     n: "Trimoto Familiar Solar",
     s: "Techo rígido · Panel solar integrado",
   },
   {
-    img: "/img/autos/sky-car.jpg",
+    img: "/img/autos/sky-car.webp",
     n: "Sky Car Eléctrico",
     s: "4 Puertas · Cabina cerrada con panel solar",
   },
   {
-    img: "/img/maquinaria/montacargas-ironmax-2t.jpg",
+    img: "/img/maquinaria/montacargas-ironmax-2t.webp",
     n: "Montacargas Iron Max",
     s: "5.000 W · Elevación 3m · Carga pesada",
   },
@@ -114,7 +114,6 @@ export default function Hero() {
             </span>
 
             {/* Píldora 1: Valkiria */}
-            {/* Píldora 1: Valkiria (LCP) */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
@@ -128,13 +127,14 @@ export default function Hero() {
                 className="w-full h-full relative"
               >
                 <Image
-                  src="/img/motos/moto-valkiria.jpg"
+                  src="/img/motos/moto-valkiria.webp"
                   alt="Moto eléctrica Valkiria"
                   fill
                   sizes="100px"
                   className="object-cover"
                   priority
                   loading="eager"
+                  fetchPriority="high"
                 />
               </motion.div>
             </motion.span>
@@ -173,7 +173,6 @@ export default function Hero() {
               </motion.span>
             </span>
             {/* Píldora 2: Bicimoto Tornado */}
-            {/* Píldora 2: Bicimoto Tornado */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
@@ -187,7 +186,7 @@ export default function Hero() {
                 className="w-full h-full relative"
               >
                 <Image
-                  src="/img/bicicletas/bicimoto-tornado.jpg"
+                  src="/img/bicicletas/bicimoto-tornado.webp"
                   alt="Bicimoto eléctrica Tornado"
                   fill
                   sizes="100px"
@@ -270,6 +269,7 @@ export default function Hero() {
                   }`}
                   priority={index === 0}
                   loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
                 />
 
                 <div

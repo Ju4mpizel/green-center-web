@@ -21,7 +21,7 @@ export const PRODUCTS = [
     price: "15.900 Bs",
     line: "2.000 W · hasta 70 km/h · 72V 32Ah",
     desc: "La scooter eléctrica más potente de la línea. Diseñada para 2 personas con doble amortiguación, baulera integrada y encendido inteligente mediante tarjeta NFC.",
-    imgs: ["/img/motos/moto-valkiria.jpg"],
+    imgs: ["/img/motos/moto-valkiria.webp"],
     lg: true,
     warranty: "+1 Año por motor eléctrico",
     colors: ["Plomo"],
@@ -46,7 +46,7 @@ export const PRODUCTS = [
     price: "10.900 Bs",
     line: "1.000 W · 60 km/h · Frenos hidráulicos",
     desc: "Scooter de alto rendimiento urbano con frenos hidráulicos dobles y capacidad de carga reforzada de 180 kg para el día a día.",
-    imgs: ["/img/motos/moto-falconpro.jpg"],
+    imgs: ["/img/motos/moto-falconpro.webp"],
     warranty: "+1 Año por motor eléctrico",
     colors: ["Azul", "Rojo", "Plomo", "Negro"],
     specs: [
@@ -66,7 +66,7 @@ export const PRODUCTS = [
     price: "10.900 Bs",
     line: "1.000 W · 60 km/h · 180 kg de carga",
     desc: "Diseño agresivo y parabrisas frontal deportivo. Equipada con frenos hidráulicos en ambas ruedas y baulera trasera incluida.",
-    imgs: ["/img/motos/moto-pantera.jpg"],
+    imgs: ["/img/motos/moto-pantera.webp"],
     warranty: "+1 Año por motor eléctrico",
     colors: ["Azul", "Plomo", "Rojo", "Negro", "Blanco"],
     specs: [
@@ -88,7 +88,7 @@ export const PRODUCTS = [
     price: "10.200 Bs",
     line: "1.000 W · 50 km/h · Freno hidráulico",
     desc: "Combina la practicidad de la tarjeta NFC con la suavidad de frenos hidráulicos y baulera trasera de serie.",
-    imgs: ["/img/motos/moto-fenix.jpg"],
+    imgs: ["/img/motos/moto-fenix.webp"],
     warranty: "+1 Año por motor eléctrico",
     colors: ["Blanco", "Plomo", "Negro"],
     specs: [
@@ -110,7 +110,7 @@ export const PRODUCTS = [
     price: "9.900 Bs",
     line: "1.000 W · 50 km/h · Baulera incluida",
     desc: "Excelente balance entre agilidad, maniobrabilidad y precio para desplazarte por la ciudad sin gastar en gasolina.",
-    imgs: ["/img/motos/moto-huracan.jpg"],
+    imgs: ["/img/motos/moto-huracan.webp"],
     warranty: "+1 Año por motor eléctrico",
     colors: ["Blanco", "Rojo", "Negro", "Azul"],
     specs: [
@@ -131,7 +131,7 @@ export const PRODUCTS = [
     price: "9.900 Bs",
     line: "1.000 W · 50 km/h · Tarjeta NFC",
     desc: "Líneas afiladas, color exclusivo y tecnología de arranque por proximidad NFC. Práctica, ligera y con baulera trasera.",
-    imgs: ["/img/motos/moto-spyder.jpg"],
+    imgs: ["/img/motos/moto-spyder.webp"],
     warranty: "+1 Año por motor eléctrico",
     colors: ["Celeste eléctrico"],
     specs: [
@@ -152,7 +152,7 @@ export const PRODUCTS = [
     price: "9.900 Bs",
     line: "1.000 W · 50 km/h · Faros duales en X",
     desc: "Iluminación frontal en X y arranque inteligente con tarjeta NFC. Cero emisiones y máximo ahorro.",
-    imgs: ["/img/motos/moto-trueno.jpg"],
+    imgs: ["/img/motos/moto-trueno.webp"],
     warranty: "+1 Año por motor eléctrico",
     colors: ["Negro", "Azul", "Blanco", "Rojo"],
     specs: [
@@ -178,7 +178,7 @@ export const PRODUCTS = [
     price: "10.700 Bs",
     line: "800 W · Llantas Fat 20x4.0 · Tarjeta NFC",
     desc: "Estilo retro cafe-racer con llantas fat todoterreno, amortiguación delantera y trasera, panel digital y encendido con tarjeta NFC.",
-    imgs: ["/img/bicicletas/bicimoto-tornado.jpg"],
+    imgs: ["/img/bicicletas/bicimoto-tornado.webp"],
     warranty: "+1 Año por motor eléctrico",
     colors: ["Negro"],
     specs: [
@@ -206,7 +206,7 @@ export const PRODUCTS = [
     price: "1.820 $",
     line: "1.500 W · hasta 55 km/h · Techo solar",
     desc: "Cabina abierta con techo y panel solar integrado para recarga continua durante el día. Asientos amplios y cómodos para traslados familiares o compras.",
-    imgs: ["/img/trimotos/trimoto-familiar.jpg"],
+    imgs: ["/img/trimotos/trimoto-familiar.webp"],
     colors: ["Lila"],
     specs: [
       { label: "Potencia de motor", val: "1.500 Watts" },
@@ -229,7 +229,7 @@ export const PRODUCTS = [
     price: "4.600 $",
     line: "1.000 W · 4 Puertas · 4 Asientos",
     desc: "Carrocería cerrada de 4 puertas con techo y panel solar integrado. Ideal para circular con total comodidad protegido del clima.",
-    imgs: ["/img/autos/sky-car.jpg"],
+    imgs: ["/img/autos/sky-car.webp"],
     colors: ["Azul pastel", "Blanco entero", "Verde menta pastel"],
     specs: [
       { label: "Potencia de motor", val: "1.000 Watts" },
@@ -250,7 +250,7 @@ export const PRODUCTS = [
     price: "4.600 $",
     line: "1.000 W · 4 Puertas · 4 Asientos",
     desc: "Vehículo urbano compacto cerrado con faros modernos, 4 puertas y panel solar en el techo para optimizar el rendimiento de la batería.",
-    imgs: ["/img/autos/light-car.jpg"],
+    imgs: ["/img/autos/light-car.webp"],
     colors: ["Celeste pastel", "Morado pastel", "Verde pastel"],
     specs: [
       { label: "Potencia de motor", val: "1.000 Watts" },
@@ -271,7 +271,7 @@ export const PRODUCTS = [
     price: "4.600 $",
     line: "1.000 W · 4 Puertas · 4 Asientos",
     desc: "Diseño bicolor blanco con celeste, 4 plazas confortables, cabina cerrada resistente y recarga asistida por panel solar.",
-    imgs: ["/img/autos/moon-car.jpg"],
+    imgs: ["/img/autos/moon-car.webp"],
     colors: ["Verde pastel", "Morado pastel", "Azul pastel"],
     specs: [
       { label: "Potencia de motor", val: "1.000 Watts" },
@@ -296,7 +296,7 @@ export const PRODUCTS = [
     price: "7.450 $",
     line: "5.000 W · Elevación 3 m · 6 Baterías",
     desc: "Montacargas industrial 100% eléctrico para bodegas y almacenes. Cero emisiones en interiores con potente motor de 5.000 W y torre de elevación de 3 metros.",
-    imgs: ["/img/maquinaria/montacargas-ironmax-1.3t.jpg"],
+    imgs: ["/img/maquinaria/montacargas-ironmax-1.3t.webp"],
     colors: ["Rojo"],
     specs: [
       { label: "Potencia de motor", val: "5.000 Watts" },
@@ -317,7 +317,7 @@ export const PRODUCTS = [
     price: "7.990 $",
     line: "5.000 W · Elevación 3 m · Capacidad 2.000 kg",
     desc: "Versión de trabajo pesado con capacidad para 2 toneladas métricas. Robusto, silencioso y económico para faenas continuas en planta.",
-    imgs: ["/img/maquinaria/montacargas-ironmax-2t.jpg"],
+    imgs: ["/img/maquinaria/montacargas-ironmax-2t.webp"],
     colors: ["Amarillo"],
     specs: [
       { label: "Potencia de motor", val: "5.000 Watts" },
