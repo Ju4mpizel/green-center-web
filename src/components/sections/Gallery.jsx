@@ -3,33 +3,30 @@ import Image from "next/image";
 
 const GALLERY_ITEMS = [
   {
-    src: "/img/bicicletas/superbike.jpg",
-    alt: "Bici moto eléctrica Super Bike en exhibición",
+    src: "/img/variados/superbike.jpg",
+    alt: "Bicimoto eléctrica en exhibición",
   },
-  { src: "/img/motos/scooter.jpg", alt: "Scooter eléctrica urbana clásica" },
+  { src: "/img/variados/scooter.jpg", alt: "Scooter eléctrica urbana" },
   {
-    src: "/img/trimotos/trimoto_naranja.jpg",
-    alt: "Trimoto eléctrica de pasajeros color naranja",
-  },
-  {
-    src: "/img/autos/miniauto.jpg",
-    alt: "Mini auto eléctrico con techo solar para ciudad",
+    src: "/img/variados/trimoto_naranja.jpg",
+    alt: "Trimoto eléctrica con asientos confort",
   },
   {
-    src: "/img/bicicletas/mtb.jpg",
-    alt: "Bicicleta de montaña eléctrica con batería integrada",
+    src: "/img/variados/miniauto.jpg",
+    alt: "Mini auto eléctrico con techo solar",
   },
   {
-    src: "/img/bicicletas/fatred.jpg",
-    alt: "Bicicleta eléctrica Fat Bike con llantas anchas todo terreno",
+    src: "/img/variados/mtb.jpg",
+    alt: "Bicicleta de montaña con asistencia eléctrica",
   },
   {
-    src: "/img/trimotos/trimoto_roja.jpg",
-    alt: "Trimoto eléctrica color rojo con asiento confortable",
+    src: "/img/variados/fatred.jpg",
+    alt: "Bicicleta eléctrica Fat Bike con llantas anchas",
   },
+  { src: "/img/variados/trimoto_roja.jpg", alt: "Trimoto eléctrica urbana" },
   {
-    src: "/img/trimotos/motocarro.jpg",
-    alt: "Motocarro eléctrico de carga pesada con tolva trasera",
+    src: "/img/variados/motocarro.jpg",
+    alt: "Motocarro eléctrico de carga pesada",
   },
 ];
 
@@ -39,7 +36,6 @@ export default function Gallery() {
       className="overflow-hidden pt-[clamp(60px,8vw,110px)] select-none pointer-events-none"
       aria-label="Galería de vehículos"
     >
-      {/* Fila 1: Hacia la izquierda */}
       <div className="flex gap-4 w-max mb-4 animate-[marquee_45s_linear_infinite]">
         {[...GALLERY_ITEMS, ...GALLERY_ITEMS].map((item, i) => (
           <div
@@ -57,7 +53,6 @@ export default function Gallery() {
         ))}
       </div>
 
-      {/* Fila 2: En sentido inverso */}
       <div className="flex gap-4 w-max animate-[marquee-rev_55s_linear_infinite]">
         {[...GALLERY_ITEMS, ...GALLERY_ITEMS].reverse().map((item, i) => (
           <div

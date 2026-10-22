@@ -8,29 +8,29 @@ import Button from "@/components/ui/Button";
 
 const HERO_ITEMS = [
   {
-    img: "/img/bicicletas/superbike.jpg",
-    n: "Bici Moto Super Bike",
-    s: "800 W · hasta 45 km/h",
+    img: "/img/motos/moto-valkiria.jpg",
+    n: "Valkiria Eléctrica",
+    s: "2.000 W · hasta 70 km/h · 72V 32Ah",
   },
   {
-    img: "/img/motos/scooter.jpg",
-    n: "Scooter retro",
-    s: "Estilo para la ciudad",
+    img: "/img/bicicletas/bicimoto-tornado.jpg",
+    n: "Bicimoto Tornado",
+    s: "800 W · Estilo Cafe Racer · NFC",
   },
   {
-    img: "/img/trimotos/trimoto_naranja.jpg",
-    n: "Trimoto clásica",
-    s: "Comodidad y estabilidad",
+    img: "/img/trimotos/trimoto-familiar.jpg",
+    n: "Trimoto Familiar Solar",
+    s: "Techo rígido · Panel solar integrado",
   },
   {
-    img: "/img/autos/miniauto.jpg",
-    n: "Mini auto eléctrico",
-    s: "Techo solar · 80 km",
+    img: "/img/autos/sky-car.jpg",
+    n: "Sky Car Eléctrico",
+    s: "4 Puertas · Cabina cerrada con panel solar",
   },
   {
-    img: "/img/bicicletas/mtb.jpg",
-    n: "Bici de montaña",
-    s: "Batería integrada",
+    img: "/img/maquinaria/montacargas-ironmax-2t.jpg",
+    n: "Montacargas Iron Max",
+    s: "5.000 W · Elevación 3m · Carga pesada",
   },
 ];
 
@@ -90,7 +90,7 @@ export default function Hero() {
               </motion.span>
             </span>
 
-            {/* Píldora 1 */}
+            {/* Píldora 1: Valkiria */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
@@ -104,8 +104,8 @@ export default function Hero() {
                 className="w-full h-full relative"
               >
                 <Image
-                  src="/img/motos/scooter.jpg"
-                  alt="Scooter eléctrico"
+                  src="/img/motos/moto-valkiria.jpg"
+                  alt="Moto eléctrica Valkiria"
                   fill
                   sizes="100px"
                   className="object-cover"
@@ -147,7 +147,7 @@ export default function Hero() {
                 para
               </motion.span>
             </span>
-            {/* Píldora 2 */}
+            {/* Píldora 2: Bicimoto Tornado */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
@@ -161,8 +161,8 @@ export default function Hero() {
                 className="w-full h-full relative"
               >
                 <Image
-                  src="/img/bicicletas/fatred.jpg"
-                  alt="Fat bike eléctrica"
+                  src="/img/bicicletas/bicimoto-tornado.jpg"
+                  alt="Bicimoto eléctrica Tornado"
                   fill
                   sizes="100px"
                   className="object-cover"
@@ -183,16 +183,16 @@ export default function Hero() {
           </span>
         </h1>
 
-        {/* BAJADA Y BOTONES PROPORCIONADOS */}
+        {/* BAJADA Y BOTONES */}
         <div className="flex flex-col items-center text-center gap-4 sm:gap-6 mt-4 sm:mt-7">
           <motion.p
             initial={{ opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.8, ease: EASE_ORIGINAL }}
-            className="text-musgo text-[14px] sm:text-lg max-w-[500px] leading-relaxed mx-auto px-2"
+            className="text-musgo text-[14px] sm:text-lg max-w-[540px] leading-relaxed mx-auto px-2"
           >
-            Motos, bicicletas, trimotos y autos eléctricos para moverte con
-            ahorro y estilo. Importamos y enviamos a todo el país.
+            Motos, bicimotos, trimotos con panel solar, autos urbanos y
+            montacargas industriales. Importamos y enviamos a todo el país.
           </motion.p>
 
           <motion.div

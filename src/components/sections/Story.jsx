@@ -166,10 +166,11 @@ export default function Story() {
             >
               Green Center Bolivia es una empresa importadora y comercializadora
               de vehículos eléctricos. Desde Santa Cruz y Cochabamba, trabajamos
-              con motos, bicicletas, trimotos, motocarros, scooters y patines.
+              con motos, bicimotos, trimotos solares, mini autos y maquinaria
+              industrial.
             </motion.p>
 
-            {/* Imagen recortada */}
+            {/* Imagen recortada con la foto real de la trimoto familiar solar */}
             <motion.div
               initial={{ clipPath: "inset(100% 0 0 0 round 24px)" }}
               whileInView={{ clipPath: "inset(0 0 0 0 round 28px)" }}
@@ -178,8 +179,8 @@ export default function Story() {
               className="w-[min(100%,320px)] sm:w-[min(100%,360px)] aspect-[1/1.05] rounded-[50%_50%_24px_24px_/_36%_36%_24px_24px] overflow-hidden bg-bosque2 relative shadow-2xl"
             >
               <Image
-                src="/img/trimotos/motocarro.jpg"
-                alt="Motocarro eléctrico Green Center"
+                src="/img/trimotos/trimoto-familiar.jpg"
+                alt="Trimoto eléctrica familiar con panel solar Green Center"
                 fill
                 sizes="(max-width: 768px) 100vw, 360px"
                 className="object-cover"
@@ -218,12 +219,13 @@ export default function Story() {
                   Importamos con criterio
                 </h3>
                 <p className="text-[#a9c1b0] text-sm sm:text-[17px] max-w-[520px] leading-relaxed">
-                  Elegimos modelos eléctricos pensados para el uso de todos los
-                  días: ciudad, trabajo y paseo.
+                  Elegimos modelos eléctricos pensados para la realidad
+                  boliviana: ciudad, trabajo diario, transporte familiar y
+                  logística de carga.
                 </p>
               </motion.li>
 
-              {/* Item 2 (Estadísticas con layout rígido anti-flicker) */}
+              {/* Item 2 */}
               <motion.li
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -247,7 +249,7 @@ export default function Story() {
                   eléctrico.
                 </p>
 
-                {/* Grid fijo de 2 columnas para que los números nunca salten de línea ni se reacomoden */}
+                {/* Grid fijo de estadísticas */}
                 <div className="grid grid-cols-2 gap-3 sm:gap-[clamp(24px,5vw,64px)] max-w-[420px]">
                   <div className="flex flex-col min-h-[72px] justify-start">
                     <b className="font-display text-[clamp(32px,7vw,72px)] font-bold tracking-[-0.05em] leading-none text-white block">
@@ -288,8 +290,8 @@ export default function Story() {
                 </h3>
                 <p className="text-[#a9c1b0] text-sm sm:text-[17px] max-w-[520px] leading-relaxed">
                   Estuvimos en Expo Cruz 2026 con nuestro propio stand, con
-                  motos, trimotos y autos eléctricos para ver y probar en
-                  persona.
+                  motos, trimotos, autos y maquinaria eléctrica para ver y
+                  probar en persona[cite: 2].
                 </p>
               </motion.li>
 

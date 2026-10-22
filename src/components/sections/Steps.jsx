@@ -53,27 +53,27 @@ function SplitHeadingSteps({ text, highlight }) {
 const STEPS = [
   {
     n: 1,
-    img: "/img/bicicletas/superbike.jpg",
+    img: "/img/bicicletas/bicimoto-tornado.jpg",
     title: "Elige",
     desc: "Mira el catálogo o cuéntanos qué necesitas.",
   },
   {
     n: 2,
-    img: "/img/motos/scooter.jpg",
+    img: "/img/motos/moto-spyder.jpg",
     title: "Consulta",
-    desc: "Resolvemos tus dudas por WhatsApp o en el local.",
+    desc: "Resolvemos tus dudas por WhatsApp o en nuestras sucursales.",
   },
   {
     n: 3,
-    img: "/img/trimotos/motocarro.jpg",
+    img: "/img/autos/sky-car.jpg",
     title: "Coordina",
     desc: "Acordamos el pago y la forma de entrega.",
   },
   {
     n: 4,
-    img: "/img/trimotos/trimoto_naranja.jpg",
+    img: "/img/trimotos/trimoto-familiar.jpg",
     title: "Recíbela",
-    desc: "La retiras en Santa Cruz o te la enviamos a tu ciudad.",
+    desc: "La retiras en Santa Cruz o te la enviamos a cualquier ciudad de Bolivia.",
   },
 ];
 
@@ -101,7 +101,7 @@ export default function Steps() {
         {/* Titular */}
         <SplitHeadingSteps text="Cuatro pasos y" highlight="listo." />
 
-        {/* Grid: 2 columnas compactas en móvil para evitar scroll infinito */}
+        {/* Grid de pasos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-14">
           {STEPS.map((s, idx) => (
             <motion.div

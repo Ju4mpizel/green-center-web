@@ -4,14 +4,25 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
-// Mapeo de colores a valores hexadecimales
+// Mapeo completo de colores a valores hexadecimales
 const COLOR_HEX = {
+  // Básicos
   Blanco: "#f8fafc",
+  "Blanco entero": "#f8fafc",
   Negro: "#1e293b",
   Rojo: "#dc2626",
   Azul: "#2563eb",
   Plomo: "#64748b",
+  Amarillo: "#eab308",
   "Celeste eléctrico": "#06b6d4",
+  Lila: "#c4b5fd",
+
+  // Tonos pastel para autos
+  "Verde pastel": "#bbf7d0",
+  "Verde menta pastel": "#a7f3d0",
+  "Morado pastel": "#e9d5ff",
+  "Azul pastel": "#bae6fd",
+  "Celeste pastel": "#7dd3fc",
 };
 
 export default function ProductCard({ product, onSelect }) {

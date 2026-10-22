@@ -3,13 +3,16 @@
 export const CATEGORIES = [
   "Todo",
   "Motos y scooters",
-  "Trimotos y carga",
+  "Bicicletas y bicimotos",
+  "Trimotos",
   "Autos",
-  "Bicicletas",
+  "Maquinaria industrial",
 ];
 
 export const PRODUCTS = [
-  // 1. Valkiria
+  // ==========================================
+  // MOTOS Y SCOOTERS
+  // ==========================================
   {
     id: "valkiria",
     name: "Valkiria Eléctrica",
@@ -30,13 +33,11 @@ export const PRODUCTS = [
       { label: "Capacidad de carga", val: "200 kg (hasta 2 personas)" },
       { label: "Seguridad", val: "Encendido con Tarjeta NFC" },
       { label: "Suspensión", val: "Delantera y doble amortiguador trasero" },
-      { label: "Frenos", val: "Freno delantero y freno de tambor trasero" },
+      { label: "Frenos", val: "Freno delantero y freno tambor trasero" },
       { label: "Aro", val: "10" },
       { label: "Equipamiento", val: "Baulera trasera integrada" },
     ],
   },
-
-  // 2. Falcón Pro
   {
     id: "falcon-pro",
     name: "Falcón Pro Eléctrica",
@@ -57,8 +58,6 @@ export const PRODUCTS = [
       { label: "Batería", val: "Plomo ácido" },
     ],
   },
-
-  // 3. Moto Pantera
   {
     id: "moto-pantera",
     name: "Moto Pantera Eléctrica",
@@ -81,8 +80,28 @@ export const PRODUCTS = [
       { label: "Equipamiento", val: "Baulera trasera incluida" },
     ],
   },
-
-  // 4. Huracán Eléctrica
+  {
+    id: "moto-fenix",
+    name: "Moto Fénix Eléctrica",
+    tag: "Tarjeta NFC + Hidráulicos",
+    cat: "Motos y scooters",
+    price: "10.200 Bs",
+    line: "1.000 W · 50 km/h · Freno hidráulico",
+    desc: "Combina la practicidad de la tarjeta NFC con la suavidad de frenos hidráulicos y baulera trasera de serie.",
+    imgs: ["/img/motos/moto-fenix.jpg"],
+    warranty: "+1 Año por motor eléctrico",
+    colors: ["Blanco", "Plomo", "Negro"],
+    specs: [
+      { label: "Potencia de motor", val: "1.000 W" },
+      { label: "Autonomía", val: "50 km por carga" },
+      { label: "Velocidad máxima", val: "50 km/h" },
+      { label: "Frenos", val: "Frenos hidráulicos" },
+      { label: "Seguridad", val: "Encendido con Tarjeta NFC" },
+      { label: "Capacidad de carga", val: "170 kg" },
+      { label: "Aro", val: "10" },
+      { label: "Equipamiento", val: "Baulera trasera incluida" },
+    ],
+  },
   {
     id: "huracan",
     name: "Huracán Eléctrica",
@@ -104,8 +123,6 @@ export const PRODUCTS = [
       { label: "Equipamiento", val: "Baulera trasera incluida" },
     ],
   },
-
-  // 5. Moto Spyder
   {
     id: "moto-spyder",
     name: "Moto Spyder Eléctrica",
@@ -127,8 +144,6 @@ export const PRODUCTS = [
       { label: "Equipamiento", val: "Baulera trasera incluida" },
     ],
   },
-
-  // 6. Moto Trueno
   {
     id: "moto-trueno",
     name: "Moto Trueno Eléctrica",
@@ -152,123 +167,167 @@ export const PRODUCTS = [
     ],
   },
 
-  // 7. Moto Fénix
+  // ==========================================
+  // BICICLETAS Y BICIMOTOS
+  // ==========================================
   {
-    id: "moto-fenix",
-    name: "Moto Fénix Eléctrica",
-    tag: "Tarjeta NFC + Hidráulicos",
-    cat: "Motos y scooters",
-    price: "9.900 Bs",
-    line: "1.000 W · 50 km/h · Freno hidráulico",
-    desc: "Combina la practicidad de la tarjeta NFC con la suavidad de frenos hidráulicos y baulera trasera de serie.",
-    imgs: ["/img/motos/moto-fenix.jpg"],
+    id: "tornado",
+    name: "Bicimoto Tornado",
+    tag: "Diseño Tipo Motocicleta",
+    cat: "Bicicletas y bicimotos",
+    price: "10.700 Bs",
+    line: "800 W · Llantas Fat 20x4.0 · Tarjeta NFC",
+    desc: "Estilo retro cafe-racer con llantas fat todoterreno, amortiguación delantera y trasera, panel digital y encendido con tarjeta NFC.",
+    imgs: ["/img/bicicletas/bicimoto-tornado.jpg"],
     warranty: "+1 Año por motor eléctrico",
-    colors: ["Blanco", "Plomo", "Negro"],
+    colors: ["Negro"],
     specs: [
-      { label: "Potencia de motor", val: "1.000 W" },
-      { label: "Autonomía", val: "50 km por carga" },
-      { label: "Velocidad máxima", val: "50 km/h" },
-      { label: "Frenos", val: "Frenos hidráulicos" },
-      { label: "Seguridad", val: "Encendido con Tarjeta NFC" },
-      { label: "Capacidad de carga", val: "170 kg" },
-      { label: "Aro", val: "10" },
-      { label: "Equipamiento", val: "Baulera trasera incluida" },
+      { label: "Potencia de motor", val: "800 Watts" },
+      { label: "Autonomía", val: "Hasta 55 km por carga" },
+      { label: "Velocidad máxima", val: "Hasta 60 km/h" },
+      { label: "Frenos", val: "Frenos a disco" },
+      { label: "Panel", val: "Digital completo" },
+      { label: "Capacidad de carga", val: "Soporta 150 kg" },
+      { label: "Amortiguadores", val: "Delanteros y traseros" },
+      { label: "Llantas", val: 'Fat tire 20" x 4.0' },
+      { label: "Seguridad y extras", val: "Guiñadores y Tarjeta NFC" },
+      { label: "Incluye", val: "2 llaves y 1 cargador" },
     ],
   },
 
-  // Bicicletas
+  // ==========================================
+  // TRIMOTOS
+  // ==========================================
   {
-    id: "superbike",
-    name: "Bici Moto Super Bike",
-    tag: "Pedal asistido",
-    cat: "Bicicletas",
-    price: "Consultar",
-    line: "800 W · hasta 45 km/h",
-    desc: "Versatilidad total entre bicicleta asistida y moto ligera. Perfecta para no pagar combustible nunca más.",
-    imgs: ["/img/bicicletas/superbike.jpg"],
+    id: "trimoto-familiar",
+    name: "Trimoto Familiar Solar",
+    tag: "Techo con Panel Solar",
+    cat: "Trimotos",
+    price: "1.820 $",
+    line: "1.500 W · hasta 55 km/h · Techo solar",
+    desc: "Cabina abierta con techo y panel solar integrado para recarga continua durante el día. Asientos amplios y cómodos para traslados familiares o compras.",
+    imgs: ["/img/trimotos/trimoto-familiar.jpg"],
+    colors: ["Lila"],
     specs: [
-      { label: "Motor", val: "800 W" },
-      { label: "Velocidad", val: "45 km/h" },
-      { label: "Autonomía", val: "40 a 50 km" },
-      { label: "Pedales", val: "Asistidos" },
-    ],
-  },
-  {
-    id: "fatred",
-    name: "Fat Bike Eléctrica",
-    tag: "Todo terreno",
-    cat: "Bicicletas",
-    price: "Consultar",
-    line: "Llantas anchas · Cero esfuerzo",
-    desc: "Llantas anchas para arena, tierra o adoquín con asistencia eléctrica al pedaleo.",
-    imgs: ["/img/bicicletas/fatred.jpg"],
-    specs: [
-      { label: "Llantas", val: "Fat Tire 4.0" },
-      { label: "Batería", val: "Removible" },
-    ],
-  },
-  {
-    id: "mtb",
-    name: "Bici MTB Eléctrica",
-    tag: "Deportiva",
-    cat: "Bicicletas",
-    price: "Consultar",
-    line: "Batería integrada · Suspensión",
-    desc: "Diseño moderno con batería oculta en el cuadro para deporte y ciudad.",
-    imgs: ["/img/bicicletas/mtb.jpg"],
-    specs: [
-      { label: "Cuadro", val: "Aluminio con batería interna" },
-      { label: "Frenos", val: "Disco" },
+      { label: "Potencia de motor", val: "1.500 Watts" },
+      { label: "Autonomía", val: "30 a 40 km" },
+      { label: "Velocidad máxima", val: "45 a 55 km/h" },
+      { label: "Capacidad de carga", val: "Soporta 250 kg" },
+      { label: "Llantas", val: "Aro 10" },
+      { label: "Equipamiento especial", val: "Techo rígido con panel solar" },
     ],
   },
 
-  // Trimotos y carga
+  // ==========================================
+  // AUTOS ELÉCTRICOS (Mini Autos)
+  // ==========================================
   {
-    id: "trimoto-clasica",
-    name: "Trimoto Pasajeros",
-    tag: "Estabilidad total",
-    cat: "Trimotos y carga",
-    price: "Consultar",
-    line: "Tres ruedas · Asiento ancho",
-    desc: "Máxima estabilidad y comodidad para adultos mayores o traslados diarios en el barrio.",
-    imgs: [
-      "/img/trimotos/trimoto_naranja.jpg",
-      "/img/trimotos/trimoto_roja.jpg",
-    ],
-    specs: [
-      { label: "Configuración", val: "3 ruedas" },
-      { label: "Asientos", val: "Confort con respaldo" },
-      { label: "Uso", val: "Paseo y compras" },
-    ],
-  },
-  {
-    id: "motocarro",
-    name: "Motocarro de Carga",
-    tag: "Trabajo pesado",
-    cat: "Trimotos y carga",
-    price: "Consultar",
-    line: "Tolva trasera · Gran capacidad",
-    desc: "Hecho para el trabajo diario: fletes, herramientas, mercadería y distribución.",
-    imgs: ["/img/trimotos/motocarro.jpg"],
-    specs: [
-      { label: "Tipo", val: "Tolva abatible" },
-      { label: "Carga", val: "Para trabajo pesado" },
-    ],
-  },
-
-  // Autos
-  {
-    id: "miniauto",
-    name: "Mini Auto Eléctrico",
-    tag: "Techo y puertas",
+    id: "sky-car",
+    name: "Sky Car Eléctrico",
+    tag: "Techo con Panel Solar",
     cat: "Autos",
-    price: "Consultar",
-    line: "4 ruedas · Techo solar · 80 km",
-    desc: "La comodidad y resguardo del sol o la lluvia con el costo de mantenimiento de un vehículo eléctrico.",
-    imgs: ["/img/autos/miniauto.jpg"],
+    price: "4.600 $",
+    line: "1.000 W · 4 Puertas · 4 Asientos",
+    desc: "Carrocería cerrada de 4 puertas con techo y panel solar integrado. Ideal para circular con total comodidad protegido del clima.",
+    imgs: ["/img/autos/sky-car.jpg"],
+    colors: ["Azul pastel", "Blanco entero", "Verde menta pastel"],
     specs: [
-      { label: "Plazas", val: "2 a 4 personas" },
-      { label: "Protección", val: "Cabina cerrada con techo solar" },
+      { label: "Potencia de motor", val: "1.000 Watts" },
+      { label: "Batería", val: "Plomo Ácido" },
+      { label: "Autonomía", val: "50 a 80 km" },
+      { label: "Velocidad", val: "60 km/h" },
+      { label: "Capacidad de carga", val: "400 kg" },
+      { label: "Carrocería", val: "Cerrada, 4 puertas, 4 asientos" },
+      { label: "Llantas", val: "Aro 10" },
+      { label: "Equipamiento", val: "Techo con panel solar" },
+    ],
+  },
+  {
+    id: "light-car",
+    name: "Light Car Eléctrico",
+    tag: "Techo con Panel Solar",
+    cat: "Autos",
+    price: "4.600 $",
+    line: "1.000 W · 4 Puertas · 4 Asientos",
+    desc: "Vehículo urbano compacto cerrado con faros modernos, 4 puertas y panel solar en el techo para optimizar el rendimiento de la batería.",
+    imgs: ["/img/autos/light-car.jpg"],
+    colors: ["Celeste pastel", "Morado pastel", "Verde pastel"],
+    specs: [
+      { label: "Potencia de motor", val: "1.000 Watts" },
+      { label: "Batería", val: "Plomo Ácido" },
+      { label: "Autonomía", val: "50 a 80 km" },
+      { label: "Velocidad", val: "60 km/h" },
+      { label: "Capacidad de carga", val: "400 kg" },
+      { label: "Carrocería", val: "Cerrada, 4 puertas, 4 asientos" },
+      { label: "Llantas", val: "Aro 10" },
+      { label: "Equipamiento", val: "Techo con panel solar" },
+    ],
+  },
+  {
+    id: "moon-car",
+    name: "Moon Car Eléctrico",
+    tag: "Techo con Panel Solar",
+    cat: "Autos",
+    price: "4.600 $",
+    line: "1.000 W · 4 Puertas · 4 Asientos",
+    desc: "Diseño bicolor blanco con celeste, 4 plazas confortables, cabina cerrada resistente y recarga asistida por panel solar.",
+    imgs: ["/img/autos/moon-car.jpg"],
+    colors: ["Verde pastel", "Morado pastel", "Azul pastel"],
+    specs: [
+      { label: "Potencia de motor", val: "1.000 Watts" },
+      { label: "Batería", val: "Plomo Ácido" },
+      { label: "Autonomía", val: "50 a 80 km" },
+      { label: "Velocidad", val: "60 km/h" },
+      { label: "Capacidad de carga", val: "400 kg" },
+      { label: "Carrocería", val: "Cerrada, 4 puertas, 4 asientos" },
+      { label: "Llantas", val: "Aro 10" },
+      { label: "Equipamiento", val: "Techo con panel solar" },
+    ],
+  },
+
+  // ==========================================
+  // MAQUINARIA INDUSTRIAL (Montacargas)
+  // ==========================================
+  {
+    id: "ironmax-1-3t",
+    name: "Montacargas Iron Max (1.3 T)",
+    tag: "Carga 1.3 Toneladas",
+    cat: "Maquinaria industrial",
+    price: "7.450 $",
+    line: "5.000 W · Elevación 3 m · 6 Baterías",
+    desc: "Montacargas industrial 100% eléctrico para bodegas y almacenes. Cero emisiones en interiores con potente motor de 5.000 W y torre de elevación de 3 metros.",
+    imgs: ["/img/maquinaria/montacargas-ironmax-1.3t.jpg"],
+    colors: ["Rojo"],
+    specs: [
+      { label: "Potencia de motor", val: "5.000 Watts" },
+      { label: "Capacidad de elevación", val: "Soporta 1.3 toneladas" },
+      { label: "Altura máxima de elevación", val: "3 metros" },
+      { label: "Baterías", val: "6 baterías de plomo ácido seco" },
+      { label: "Autonomía", val: "15 km" },
+      { label: "Velocidad máxima", val: "15 km/h" },
+      { label: "Llanta delantera", val: "Aro 10" },
+      { label: "Llantas traseras", val: "Aro 8" },
+    ],
+  },
+  {
+    id: "ironmax-2t",
+    name: "Montacargas Iron Max (2 T)",
+    tag: "Carga 2.0 Toneladas",
+    cat: "Maquinaria industrial",
+    price: "7.990 $",
+    line: "5.000 W · Elevación 3 m · Capacidad 2.000 kg",
+    desc: "Versión de trabajo pesado con capacidad para 2 toneladas métricas. Robusto, silencioso y económico para faenas continuas en planta.",
+    imgs: ["/img/maquinaria/montacargas-ironmax-2t.jpg"],
+    colors: ["Amarillo"],
+    specs: [
+      { label: "Potencia de motor", val: "5.000 Watts" },
+      { label: "Capacidad de elevación", val: "Soporta 2.0 toneladas" },
+      { label: "Altura máxima de elevación", val: "3 metros" },
+      { label: "Baterías", val: "6 baterías de plomo ácido seco" },
+      { label: "Autonomía", val: "15 km" },
+      { label: "Velocidad máxima", val: "15 km/h" },
+      { label: "Llanta delantera", val: "Aro 10" },
+      { label: "Llantas traseras", val: "Aro 8" },
     ],
   },
 ];

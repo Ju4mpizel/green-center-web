@@ -52,27 +52,27 @@ function SplitHeadingComp({ text, highlight }) {
 
 const TYPES = [
   {
-    n: "Bici eléctrica",
-    img: "/img/bicicletas/mtb.jpg",
+    n: "Bicimoto / Bici",
+    img: "/img/bicicletas/bicimoto-tornado.jpg",
     ideal: "Paseo y cortos",
     scores: [5, 5, 1, 1],
   },
   {
-    n: "Moto/scooter",
-    img: "/img/motos/scooter.jpg",
+    n: "Moto / Scooter",
+    img: "/img/motos/moto-valkiria.jpg",
     ideal: "Ciudad día a día",
     scores: [4, 4, 2, 2],
   },
   {
-    n: "Trimoto",
-    img: "/img/trimotos/trimoto_roja.jpg",
-    ideal: "Carga y trabajo",
+    n: "Trimoto solar",
+    img: "/img/trimotos/trimoto-familiar.jpg",
+    ideal: "Familia y trabajo",
     scores: [4, 3, 4, 3],
   },
   {
-    n: "Mini auto",
-    img: "/img/autos/miniauto.jpg",
-    ideal: "Familia/confort",
+    n: "Mini auto solar",
+    img: "/img/autos/sky-car.jpg",
+    ideal: "Confort total",
     scores: [3, 2, 5, 5],
   },
 ];
@@ -225,7 +225,7 @@ export default function Comparison() {
         {/* Nota */}
         <p className="mt-5 sm:mt-8 text-xs sm:text-sm text-musgo text-center">
           Guía orientativa para elegir. Cada modelo tiene sus propias
-          características.
+          características técnicas.
         </p>
       </div>
     </section>

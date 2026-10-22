@@ -72,16 +72,25 @@ const OPTIONS = [
       </svg>
     ),
     result: {
-      t: "Una scooter eléctrica",
-      p: "Ágiles, fáciles de estacionar y muy baratas de cargar. Perfectas para tu rutina diaria.",
-      imgs: ["/img/motos/moto-spyder.jpg", "/img/motos/moto-trueno.jpg"],
+      t: "Una scooter eléctrica o una bicimoto",
+      p: "Ágiles, fáciles de parquear y con carga económica. Perfectas para evitar el tráfico y moverte a diario sin gastar en gasolina.",
+      imgs: [
+        {
+          src: "/img/motos/moto-spyder.jpg",
+          alt: "Moto Spyder eléctrica para ciudad",
+        },
+        {
+          src: "/img/bicimotos/bicimoto-tornado.jpg",
+          alt: "Bicimoto Tornado cafe racer para ciudad",
+        },
+      ],
       cat: "Motos y scooters",
     },
   },
   {
     k: "carga",
     title: "Trabajar y llevar carga",
-    desc: "Reparto, negocio, herramientas",
+    desc: "Reparto, bodegas y logística",
     icon: (
       <svg
         className="w-8 h-8 sm:w-11 sm:h-11"
@@ -98,10 +107,19 @@ const OPTIONS = [
       </svg>
     ),
     result: {
-      t: "Una trimoto o un motocarro",
-      p: "Más espacio, más estabilidad y capacidad para llevar carga. Hechas para trabajar.",
-      imgs: ["/img/trimotos/trimoto_roja.jpg", "/img/trimotos/motocarro.jpg"],
-      cat: "Trimotos y carga",
+      t: "Un montacargas o una trimoto de carga",
+      p: "Capacidad de elevación de hasta 2 toneladas o traslado diario con tolva y cabina. Rendimiento silencioso y cero emisiones.",
+      imgs: [
+        {
+          src: "/img/maquinaria/montacargas-ironmax-2t.jpg",
+          alt: "Montacargas Iron Max para logística pesada",
+        },
+        {
+          src: "/img/trimotos/trimoto-familiar.jpg",
+          alt: "Trimoto eléctrica para transporte",
+        },
+      ],
+      cat: "Maquinaria industrial",
     },
   },
   {
@@ -124,16 +142,22 @@ const OPTIONS = [
       </svg>
     ),
     result: {
-      t: "Un mini auto eléctrico",
-      p: "Techo, puertas y cuatro ruedas. La comodidad de un auto con el gasto de un eléctrico.",
-      imgs: ["/img/autos/miniauto.jpg", "/img/trimotos/trimoto_naranja.jpg"],
+      t: "Un mini auto eléctrico con panel solar",
+      p: "Cabina cerrada de 4 puertas, 4 asientos y panel solar superior. La comodidad de un auto con el ahorro de un vehículo eléctrico.",
+      imgs: [
+        {
+          src: "/img/autos/sky-car.jpg",
+          alt: "Sky Car eléctrico de 4 puertas",
+        },
+        { src: "/img/autos/moon-car.jpg", alt: "Moon Car eléctrico bicolor" },
+      ],
       cat: "Autos",
     },
   },
   {
     k: "paseo",
     title: "Pasear y explorar",
-    desc: "Fines de semana, deporte",
+    desc: "Fines de semana y estilo",
     icon: (
       <svg
         className="w-8 h-8 sm:w-11 sm:h-11"
@@ -150,10 +174,19 @@ const OPTIONS = [
       </svg>
     ),
     result: {
-      t: "Una fat bike o una bici de montaña",
-      p: "Para salir los fines de semana, subir cuestas sin cansarte y llegar más lejos.",
-      imgs: ["/img/bicicletas/fatred.jpg", "/img/bicicletas/mtb.jpg"],
-      cat: "Bicicletas",
+      t: "Una bicimoto fat tire o una moto deportiva",
+      p: "Neumáticos anchos para adoquines o asfalto, aceleración instantánea y tecnología NFC para encender sin llave.",
+      imgs: [
+        {
+          src: "/img/bicimotos/bicimoto-tornado.jpg",
+          alt: "Bicimoto eléctrica Tornado estilo cafe racer",
+        },
+        {
+          src: "/img/motos/moto-pantera.jpg",
+          alt: "Moto eléctrica Pantera deportiva",
+        },
+      ],
+      cat: "Bicicletas y bicimotos",
     },
   },
 ];
@@ -276,14 +309,14 @@ export default function Selector() {
 
               {/* 2 Fotos de los modelos recomendados con altura explícita y alt descriptivo */}
               <div className="grid grid-cols-2 gap-2 sm:gap-2.5 p-2.5 sm:p-3.5">
-                {selectedOption.result.imgs.map((img, i) => (
+                {selectedOption.result.imgs.map((item, i) => (
                   <div
                     key={i}
                     className="relative rounded-[16px] sm:rounded-[20px] overflow-hidden w-full h-44 sm:h-60 bg-salvia"
                   >
                     <Image
-                      src={img}
-                      alt={`${selectedOption.result.t} - Modelo recomendado`}
+                      src={item.src}
+                      alt={item.alt}
                       fill
                       sizes="(max-width: 1024px) 50vw, 25vw"
                       className="object-cover"
