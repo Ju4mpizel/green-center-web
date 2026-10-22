@@ -31,7 +31,7 @@ export default function ProductCard({ product, onSelect }) {
   return (
     <article
       onClick={() => onSelect(product)}
-      className={`group bg-white rounded-[22px] sm:rounded-[32px] p-2.5 sm:p-3 pb-3.5 sm:pb-[22px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-12px_rgba(13,42,28,0.18)] shadow-xs ${
+      className={`group bg-white rounded-[22px] sm:rounded-[32px] p-2.5 sm:p-3 pb-3.5 sm:pb-[22px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-12px_rgba(13,42,28,0.18)] shadow-xs overflow-hidden ${
         isLg
           ? "col-span-2 sm:col-span-2 lg:col-span-6 lg:row-span-2"
           : "col-span-1 lg:col-span-3"
@@ -60,23 +60,27 @@ export default function ProductCard({ product, onSelect }) {
       </div>
 
       {/* Info de la Card */}
-      <div className="pt-2.5 sm:pt-4 px-1 sm:px-3 flex flex-col justify-between flex-1">
+      <div className="pt-2.5 sm:pt-4 px-1 sm:px-2 flex flex-col justify-between flex-1 min-w-0">
         <div>
-          <div className="flex items-center justify-between gap-1.5 mb-1.5 sm:mb-2.5 flex-wrap">
-            <span className="inline-block text-[10px] sm:text-[13px] font-semibold text-hoja bg-hoja/10 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full">
+          {/* Fila contenida: la etiqueta se trunca con ellipsis si no hay espacio para no empujar los colores */}
+          <div className="flex items-center justify-between gap-1 mb-1.5 sm:mb-2.5 min-h-[24px] sm:min-h-[26px]">
+            <span
+              title={product.tag}
+              className="inline-block text-[9.5px] sm:text-[13px] font-semibold text-hoja bg-hoja/10 px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-full truncate max-w-[65%] sm:max-w-none"
+            >
               {product.tag}
             </span>
 
             {/* Muestras circulares de colores disponibles */}
             {product.colors && product.colors.length > 0 && (
               <div
-                className="flex items-center gap-1 sm:gap-1.5 py-0.5 px-1.5 rounded-full bg-niebla/80 border border-tinta/5"
+                className="flex items-center gap-1 sm:gap-1.5 py-0.5 px-1.5 rounded-full bg-niebla/80 border border-tinta/5 shrink-0"
                 title={`Colores: ${product.colors.join(", ")}`}
               >
                 {product.colors.map((c) => (
                   <span
                     key={c}
-                    className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full border border-black/15 shadow-2xs"
+                    className="w-2 h-2 sm:w-3 sm:h-3 rounded-full border border-black/15 shadow-2xs shrink-0"
                     style={{ backgroundColor: COLOR_HEX[c] || "#94a3b8" }}
                   />
                 ))}
@@ -84,21 +88,25 @@ export default function ProductCard({ product, onSelect }) {
             )}
           </div>
 
+          {/* Título alineado */}
           <h3
-            className={`font-display font-bold tracking-tight text-tinta mb-1 leading-snug line-clamp-1 sm:line-clamp-none ${
+            className={`font-display font-bold tracking-tight text-tinta mb-1 leading-snug truncate ${
               isLg
                 ? "text-base sm:text-[clamp(26px,2.6vw,40px)]"
-                : "text-[14px] sm:text-[clamp(19px,1.6vw,25px)]"
+                : "text-[13.5px] sm:text-[clamp(19px,1.6vw,25px)]"
             }`}
           >
             {product.name}
           </h3>
-          <p className="text-musgo text-xs sm:text-[14.5px] line-clamp-1 sm:line-clamp-2">
+
+          {/* Subtítulo / línea técnica */}
+          <p className="text-musgo text-[11px] sm:text-[14.5px] truncate">
             {product.line}
           </p>
         </div>
 
-        <div className="flex items-baseline gap-1.5 mt-2.5 sm:mt-3.5 font-display font-bold text-sm sm:text-[22px] tracking-tight text-tinta">
+        {/* Precio al pie */}
+        <div className="flex items-baseline gap-1.5 mt-2 sm:mt-3.5 font-display font-bold text-sm sm:text-[22px] tracking-tight text-tinta">
           {product.price !== "Consultar" ? (
             <>
               <span>{product.price}</span>

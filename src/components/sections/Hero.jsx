@@ -51,25 +51,48 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative pt-[90px] sm:pt-[135px] pb-10 sm:pb-[70px] overflow-hidden bg-[radial-gradient(900px_500px_at_85%_10%,rgba(191,217,166,0.55),transparent_60%),radial-gradient(700px_500px_at_0%_70%,rgba(220,230,214,0.9),transparent_60%)]"
+      className="relative pt-[84px] sm:pt-[130px] pb-10 sm:pb-[70px] overflow-hidden bg-[radial-gradient(900px_500px_at_85%_10%,rgba(191,217,166,0.55),transparent_60%),radial-gradient(700px_500px_at_0%_70%,rgba(220,230,214,0.9),transparent_60%)]"
     >
-      <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)]">
-        {/* LOGO REDONDEADO DISCRETO */}
+      {/* MARCA DE AGUA SUTIL CON EL LOGO AL FONDO DERECHO */}
+      <div
+        className="pointer-events-none absolute -right-28 top-10 w-[560px] h-[560px] opacity-[0.05] hidden md:block select-none"
+        aria-hidden="true"
+      >
+        <Image
+          src="/img/logo-mark.png"
+          alt=""
+          fill
+          sizes="560px"
+          className="object-contain"
+        />
+      </div>
+
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)] relative z-10">
+        {/* CHIP DE MARCA MODERNO CON LOGO TRANSPARENTE */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EASE_ORIGINAL }}
           className="flex justify-center mb-3 sm:mb-5"
         >
-          <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-xs border border-bosque/10 bg-white">
-            <Image
-              src="/img/logo.jpg"
-              alt="Green Center Bolivia"
-              fill
-              sizes="56px"
-              className="object-cover"
-              priority
-            />
+          <div className="inline-flex items-center gap-2 pl-2 pr-3.5 sm:pr-4 py-1.5 rounded-full bg-white/75 backdrop-blur-md border border-bosque/10 shadow-xs">
+            <span className="relative w-6 h-6 sm:w-7 sm:h-7 shrink-0">
+              <Image
+                src="/img/logo-mark.png"
+                alt="Green Center"
+                fill
+                sizes="28px"
+                className="object-contain"
+                priority
+              />
+            </span>
+            <span className="text-[12px] sm:text-[13.5px] font-semibold text-tinta tracking-tight">
+              Green Center Bolivia
+              <span className="hidden sm:inline font-medium text-musgo">
+                {" "}
+                · Movilidad eléctrica
+              </span>
+            </span>
           </div>
         </motion.div>
 
@@ -91,6 +114,7 @@ export default function Hero() {
             </span>
 
             {/* Píldora 1: Valkiria */}
+            {/* Píldora 1: Valkiria (LCP) */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
@@ -110,6 +134,7 @@ export default function Hero() {
                   sizes="100px"
                   className="object-cover"
                   priority
+                  loading="eager"
                 />
               </motion.div>
             </motion.span>
@@ -148,6 +173,7 @@ export default function Hero() {
               </motion.span>
             </span>
             {/* Píldora 2: Bicimoto Tornado */}
+            {/* Píldora 2: Bicimoto Tornado */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
@@ -167,6 +193,7 @@ export default function Hero() {
                   sizes="100px"
                   className="object-cover"
                   priority
+                  loading="eager"
                 />
               </motion.div>
             </motion.span>

@@ -21,33 +21,33 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 w-[min(1160px,calc(100%-20px))] flex items-center justify-between gap-3 p-2 pl-2.5 sm:pl-3.5 rounded-full bg-[rgba(241,244,236,0.85)] backdrop-blur-md border border-[rgba(16,33,26,0.08)] z-50 transition-all duration-500 ${
+        className={`fixed top-2.5 sm:top-4 left-0 right-0 mx-auto w-[calc(100%-24px)] max-w-[1160px] flex items-center justify-between gap-2 p-1.5 sm:p-2 pl-2.5 sm:pl-3.5 rounded-full bg-[rgba(241,244,236,0.88)] backdrop-blur-md border border-[rgba(16,33,26,0.08)] z-50 transition-all duration-500 ${
           hidden && !mobileOpen
             ? "-translate-y-28 opacity-0"
             : "translate-y-0 opacity-100"
-        } ${scrolled ? "shadow-lg shadow-bosque/10 bg-[rgba(241,244,236,0.95)]" : ""}`}
+        } ${scrolled ? "shadow-lg shadow-bosque/10 bg-[rgba(241,244,236,0.96)]" : ""}`}
       >
-        {/* Identidad con Logo Redondeado */}
+        {/* Identidad con Logo Mark */}
         <a
           href="#inicio"
-          className="group flex items-center gap-2.5 sm:gap-3 select-none"
+          className="group flex items-center gap-2 sm:gap-2.5 select-none min-w-0"
         >
-          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden shadow-xs border border-bosque/10 flex-shrink-0 transition-transform duration-300 group-hover:scale-105 bg-white">
+          <div className="relative w-7 h-7 sm:w-9 sm:h-9 flex-shrink-0 transition-transform duration-500 group-hover:scale-105 group-hover:-rotate-6">
             <Image
-              src="/img/logo.jpg"
+              src="/img/logo-mark.png"
               alt="Green Center Bolivia"
               fill
               sizes="36px"
-              className="object-cover"
+              className="object-contain"
               priority
             />
           </div>
 
           <div className="flex flex-col justify-center leading-none">
-            <span className="font-display font-extrabold text-[14px] sm:text-[16px] tracking-tight text-bosque transition-colors group-hover:text-hoja">
+            <span className="font-display font-extrabold text-[13px] sm:text-[16px] tracking-tight text-bosque transition-colors group-hover:text-hoja whitespace-nowrap">
               GREEN CENTER
             </span>
-            <span className="text-[8.5px] sm:text-[9px] font-bold tracking-[0.24em] text-musgo mt-0.5">
+            <span className="text-[7.5px] sm:text-[9px] font-bold tracking-[0.24em] text-musgo mt-0.5 whitespace-nowrap">
               BOLIVIA
             </span>
           </div>
@@ -66,7 +66,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Botón WhatsApp */}
+        {/* Botón WhatsApp escritorio */}
         <div className="hidden sm:flex items-center">
           <a
             href={createWhatsAppLink(
@@ -91,12 +91,12 @@ export default function Navbar() {
         {/* Hamburguesa Móvil */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden w-9 h-9 rounded-full bg-bosque text-white flex items-center justify-center focus:outline-none"
+          className="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-bosque text-white flex items-center justify-center flex-shrink-0 focus:outline-none"
           aria-label="Abrir menú"
         >
           {mobileOpen ? (
             <svg
-              className="w-4.5 h-4.5"
+              className="w-4 h-4"
               fill="none"
               stroke="currentColor"
               strokeWidth="2.2"
@@ -110,7 +110,7 @@ export default function Navbar() {
             </svg>
           ) : (
             <svg
-              className="w-4.5 h-4.5"
+              className="w-4 h-4"
               fill="none"
               stroke="currentColor"
               strokeWidth="2.2"
@@ -128,20 +128,20 @@ export default function Navbar() {
 
       {/* Menú Móvil */}
       <div
-        className={`fixed inset-0 bg-bosque text-white z-40 flex flex-col justify-center px-8 gap-4 transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
+        className={`fixed inset-0 bg-bosque text-white z-40 flex flex-col justify-center px-8 gap-4 transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
           mobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
-          <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-white/20 flex-shrink-0 bg-white">
+          <div className="relative w-9 h-9 flex-shrink-0">
             <Image
-              src="/img/logo.jpg"
+              src="/img/logo-mark-claro.png"
               alt="Green Center Bolivia"
               fill
-              sizes="40px"
-              className="object-cover"
+              sizes="36px"
+              className="object-contain"
             />
           </div>
           <div className="flex flex-col justify-center leading-none">

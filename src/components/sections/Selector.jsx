@@ -80,7 +80,7 @@ const OPTIONS = [
           alt: "Moto Spyder eléctrica para ciudad",
         },
         {
-          src: "/img/bicimotos/bicimoto-tornado.jpg",
+          src: "/img/bicicletas/bicimoto-tornado.jpg",
           alt: "Bicimoto Tornado cafe racer para ciudad",
         },
       ],
@@ -178,7 +178,7 @@ const OPTIONS = [
       p: "Neumáticos anchos para adoquines o asfalto, aceleración instantánea y tecnología NFC para encender sin llave.",
       imgs: [
         {
-          src: "/img/bicimotos/bicimoto-tornado.jpg",
+          src: "/img/bicicletas/bicimoto-tornado.jpg",
           alt: "Bicimoto eléctrica Tornado estilo cafe racer",
         },
         {
