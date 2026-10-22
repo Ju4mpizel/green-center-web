@@ -80,14 +80,15 @@ export default function RootLayout({ children }) {
     logo: `${siteConfig.url}/img/logo.jpg`,
     image: `${siteConfig.url}/img/logo.jpg`,
     telephone: `+${siteConfig.whatsappNumber}`,
-    department: BRANCHES.filter((b) => !b.isNew).map((b) => ({
+    department: BRANCHES.map((b) => ({
       "@type": "LocalBusiness",
       name: `${siteConfig.name} - ${b.name}`,
       image: `${siteConfig.url}/img/logo.jpg`,
+      hasMap: b.mapUrl,
       address: {
         "@type": "PostalAddress",
         streetAddress: b.address,
-        addressLocality: "Santa Cruz de la Sierra",
+        addressLocality: b.city || "Santa Cruz de la Sierra",
         addressCountry: "BO",
       },
     })),
