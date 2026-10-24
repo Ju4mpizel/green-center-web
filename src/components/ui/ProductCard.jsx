@@ -17,16 +17,24 @@ const COLOR_HEX = {
   "Celeste eléctrico": "#06b6d4",
   Lila: "#c4b5fd",
 
-  // Tonos pastel para autos
-  "Verde pastel": "#bbf7d0",
+  // Tonos pastel y nuevos colores
+  "Verde pastel": "#86efac",
   "Verde menta pastel": "#a7f3d0",
   "Morado pastel": "#e9d5ff",
   "Azul pastel": "#bae6fd",
   "Celeste pastel": "#7dd3fc",
+  "Rosa completa": "#f472b6",
+  "Rosa con blanco": "#fbcfe8",
+  Crema: "#fef3c7",
+  "Café con crema": "#b45309",
+  Celeste: "#38bdf8",
+  "Azul eléctrico": "#1d4ed8",
 };
 
 export default function ProductCard({ product, onSelect }) {
   const isLg = product.lg;
+  const hasOptions =
+    product.batteryOptions && product.batteryOptions.length > 0;
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -73,7 +81,7 @@ export default function ProductCard({ product, onSelect }) {
       {/* Info de la Card */}
       <div className="pt-2.5 sm:pt-4 px-1 sm:px-2 flex flex-col justify-between flex-1 min-w-0">
         <div>
-          {/* Fila contenida: la etiqueta se trunca con ellipsis si no hay espacio para no empujar los colores */}
+          {/* Fila contenida: etiqueta y muestras de color */}
           <div className="flex items-center justify-between gap-1 mb-1.5 sm:mb-2.5 min-h-[24px] sm:min-h-[26px]">
             <span
               title={product.tag}
@@ -99,7 +107,7 @@ export default function ProductCard({ product, onSelect }) {
             )}
           </div>
 
-          {/* Título alineado */}
+          {/* Título */}
           <h3
             className={`font-display font-bold tracking-tight text-tinta mb-1 leading-snug truncate ${
               isLg
@@ -120,7 +128,14 @@ export default function ProductCard({ product, onSelect }) {
         <div className="flex items-baseline gap-1.5 mt-2 sm:mt-3.5 font-display font-bold text-sm sm:text-[22px] tracking-tight text-tinta">
           {product.price !== "Consultar" ? (
             <>
-              <span>{product.price}</span>
+              {hasOptions && (
+                <span className="text-[11px] sm:text-xs font-normal text-musgo">
+                  Desde
+                </span>
+              )}
+              <span>
+                {hasOptions ? product.batteryOptions[0].price : product.price}
+              </span>
               <small className="hidden sm:inline font-sans text-[12.5px] font-medium text-musgo tracking-normal">
                 Ref.
               </small>

@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, ShieldCheck } from "lucide-react";
+import { X, ArrowRight, ShieldCheck, BatteryCharging } from "lucide-react";
 import { createWhatsAppLink } from "@/lib/whatsapp";
 
 // Mapeo completo de colores
@@ -18,28 +18,45 @@ const COLOR_HEX = {
   Amarillo: "#eab308",
   "Celeste eléctrico": "#06b6d4",
   Lila: "#c4b5fd",
-  "Verde pastel": "#bbf7d0",
+  "Verde pastel": "#86efac",
   "Verde menta pastel": "#a7f3d0",
   "Morado pastel": "#e9d5ff",
   "Azul pastel": "#bae6fd",
   "Celeste pastel": "#7dd3fc",
+  "Rosa completa": "#f472b6",
+  "Rosa con blanco": "#fbcfe8",
+  Crema: "#fef3c7",
+  "Café con crema": "#b45309",
+  Celeste: "#38bdf8",
+  "Azul eléctrico": "#1d4ed8",
 };
 
-const DRAWER_EASE = [0.16, 1, 0.3, 1]; // Curva expo fluida de salida/entrada
+const DRAWER_EASE = [0.16, 1, 0.3, 1];
 
 export default function ProductDrawer({ product, isOpen, onClose }) {
   const [displayedProduct, setDisplayedProduct] = useState(product);
   const [pick, setPick] = useState({ id: null, i: 0 });
+  const [selectedBattery, setSelectedBattery] = useState(0);
 
-  // Retener el último producto activo para permitir que la animación de salida se reproduzca completa
   useEffect(() => {
     if (product) {
       setDisplayedProduct(product);
+      setSelectedBattery(0);
     }
   }, [product]);
 
   const activeProduct = product || displayedProduct;
   const selectedImg = pick.id === activeProduct?.id ? pick.i : 0;
+
+  // Determinar si el producto tiene múltiples opciones de batería
+  const hasBatteryOptions =
+    activeProduct?.batteryOptions && activeProduct.batteryOptions.length > 0;
+  const currentBattery = hasBatteryOptions
+    ? activeProduct.batteryOptions[selectedBattery]
+    : null;
+  const activePrice = currentBattery
+    ? currentBattery.price
+    : activeProduct?.price;
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -61,7 +78,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
     <AnimatePresence>
       {isOpen && activeProduct && (
         <>
-          {/* Backdrop liviano sin blur agresivo para fluidez total a 60fps */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -72,7 +88,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
             aria-hidden="true"
           />
 
-          {/* Panel con aceleración GPU y semántica accesible */}
           <motion.aside
             role="dialog"
             aria-modal="true"
@@ -105,7 +120,7 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                 />
               </div>
 
-              {/* Miniaturas */}
+              {/* Miniaturas si existen más de una */}
               {activeProduct.imgs.length > 1 && (
                 <div className="flex gap-2.5 mt-2.5">
                   {activeProduct.imgs.map((img, i) => (
@@ -149,9 +164,43 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   {activeProduct.name}
                 </h3>
 
-                <p className="text-musgo text-xs sm:text-[14.5px] leading-relaxed mb-5">
+                <p className="text-musgo text-xs sm:text-[14.5px] leading-relaxed mb-4">
                   {activeProduct.desc}
                 </p>
+
+                {/* Selector de tipo de batería si el modelo ofrece opciones */}
+                {hasBatteryOptions && (
+                  <div className="mb-5 p-3.5 rounded-2xl bg-white shadow-xs border border-hoja/20">
+                    <span className="flex items-center gap-1.5 text-xs font-bold text-bosque mb-2.5 uppercase tracking-wider">
+                      <BatteryCharging className="w-4 h-4 text-hoja" />
+                      Selecciona el tipo de batería:
+                    </span>
+                    <div className="grid grid-cols-2 gap-2">
+                      {activeProduct.batteryOptions.map((b, idx) => (
+                        <button
+                          key={b.type}
+                          type="button"
+                          onClick={() => setSelectedBattery(idx)}
+                          className={`p-2.5 rounded-xl border text-left transition-all ${
+                            selectedBattery === idx
+                              ? "border-hoja bg-brote/20 ring-1 ring-hoja"
+                              : "border-tinta/10 hover:border-tinta/30 bg-niebla"
+                          }`}
+                        >
+                          <b className="block text-xs sm:text-sm text-tinta font-bold">
+                            {b.type}
+                          </b>
+                          <span className="block text-xs font-semibold text-hoja mt-0.5">
+                            {b.price}
+                          </span>
+                          <span className="block text-[10px] text-musgo mt-1 leading-tight">
+                            {b.note}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Colores Disponibles */}
                 {activeProduct.colors && activeProduct.colors.length > 0 && (
@@ -183,17 +232,25 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   Especificaciones técnicas
                 </span>
                 <ul className="divide-y divide-tinta/10">
-                  {activeProduct.specs.map((s, idx) => (
-                    <li
-                      key={idx}
-                      className="flex justify-between items-center py-2.5 text-xs sm:text-sm"
-                    >
-                      <span className="text-musgo">{s.label}</span>
-                      <b className="font-semibold text-tinta text-right">
-                        {s.val}
-                      </b>
-                    </li>
-                  ))}
+                  {activeProduct.specs.map((s, idx) => {
+                    // Si seleccionó litio y esta fila es la batería, reflejar la opción actual
+                    const value =
+                      hasBatteryOptions &&
+                      s.label.toLowerCase().includes("batería")
+                        ? currentBattery.detail
+                        : s.val;
+                    return (
+                      <li
+                        key={idx}
+                        className="flex justify-between items-center py-2.5 text-xs sm:text-sm"
+                      >
+                        <span className="text-musgo">{s.label}</span>
+                        <b className="font-semibold text-tinta text-right">
+                          {value}
+                        </b>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>
@@ -202,16 +259,20 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
             <div className="p-3.5 sm:p-4 bg-white border-t border-tinta/10 flex items-center justify-between gap-3 shadow-lg">
               <div>
                 <span className="block text-[11px] font-medium text-musgo leading-none">
-                  Precio de referencia
+                  {hasBatteryOptions
+                    ? `Precio (${currentBattery.type})`
+                    : "Precio de referencia"}
                 </span>
                 <b className="font-display font-bold text-xl sm:text-2xl tracking-tight text-tinta">
-                  {activeProduct.price}
+                  {activePrice}
                 </b>
               </div>
 
               <a
                 href={createWhatsAppLink(
-                  `Hola Green Center, me interesa consultar por el modelo: ${activeProduct.name} (${activeProduct.price}).`,
+                  hasBatteryOptions
+                    ? `Hola Green Center, me interesa consultar por el modelo: ${activeProduct.name} con ${currentBattery.type} (${activePrice}).`
+                    : `Hola Green Center, me interesa consultar por el modelo: ${activeProduct.name} (${activeProduct.price}).`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
