@@ -55,8 +55,8 @@ export const metadata = {
     images: [
       {
         url: "/img/logo.jpg",
-        width: 1200,
-        height: 630,
+        width: 604,
+        height: 604,
         alt: "Green Center Bolivia Logo",
       },
     ],
@@ -64,7 +64,7 @@ export const metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Green Center Bolivia",
     description: "Movilidad Eléctrica en Bolivia",
     images: ["/img/logo.jpg"],

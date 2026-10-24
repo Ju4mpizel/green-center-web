@@ -194,6 +194,7 @@ export default function Comparison() {
                       }`}
                     >
                       <div
+                        role="img"
                         className="flex gap-1 sm:gap-1.5"
                         aria-label={`${score} de 5`}
                       >

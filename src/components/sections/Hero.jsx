@@ -40,33 +40,40 @@ export default function Hero() {
   const [active, setActive] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Detectar si estamos en vista móvil (<640px) donde el 5º arco está oculto
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener("resize", checkMobile, { passive: true });
+
+    // Retrasar el ciclo automático hasta después de la pintura inicial crítica
+    const timer = setTimeout(() => setIsLoaded(true), 2500);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !isLoaded) return;
     const totalItems = isMobile ? 4 : HERO_ITEMS.length;
 
     const interval = setInterval(() => {
       setActive((prev) => (prev + 1) % totalItems);
-    }, 4600);
+    }, 4800);
     return () => clearInterval(interval);
-  }, [isPaused, isMobile]);
+  }, [isPaused, isMobile, isLoaded]);
 
   return (
     <section
       id="inicio"
       className="relative pt-[84px] sm:pt-[130px] pb-10 sm:pb-[70px] overflow-hidden bg-[radial-gradient(900px_500px_at_85%_10%,rgba(191,217,166,0.55),transparent_60%),radial-gradient(700px_500px_at_0%_70%,rgba(220,230,214,0.9),transparent_60%)]"
     >
-      {/* MARCA DE AGUA SUTIL CON EL LOGO AL FONDO DERECHO */}
+      {/* Marca de agua de fondo */}
       <div
         className="pointer-events-none absolute -right-28 top-10 w-[560px] h-[560px] opacity-[0.05] hidden md:block select-none"
         aria-hidden="true"
@@ -81,7 +88,7 @@ export default function Hero() {
       </div>
 
       <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)] relative z-10">
-        {/* CHIP DE MARCA MODERNO CON LOGO TRANSPARENTE */}
+        {/* Chip de marca */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,7 +103,6 @@ export default function Hero() {
                 fill
                 sizes="28px"
                 className="object-contain"
-                priority
               />
             </span>
             <span className="text-[12px] sm:text-[13.5px] font-semibold text-tinta tracking-tight">
@@ -109,7 +115,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* TÍTULO PRINCIPAL */}
+        {/* Título Principal */}
         <h1
           aria-label="Movilidad eléctrica hecha para Bolivia"
           className="text-center font-display font-bold text-[clamp(32px,8vw,120px)] tracking-[-0.05em] leading-[1.02] sm:leading-[0.95] text-tinta"
@@ -126,30 +132,22 @@ export default function Hero() {
               </motion.span>
             </span>
 
-            {/* Píldora 1: Valkiria */}
+            {/* Píldora 1 */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
-              transition={{ duration: 1.3, delay: 0.7, ease: EASE_ORIGINAL }}
+              transition={{ duration: 1.1, delay: 0.5, ease: EASE_ORIGINAL }}
               className="inline-block h-[0.74em] rounded-full overflow-hidden align-[-0.03em] mx-[0.06em] bg-salvia relative"
             >
-              <motion.div
-                initial={{ scale: 1.25 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 1.6, delay: 0.7, ease: EASE_ORIGINAL }}
-                className="w-full h-full relative"
-              >
+              <div className="w-full h-full relative">
                 <Image
                   src="/img/motos/moto-valkiria.webp"
                   alt="Moto eléctrica Valkiria"
                   fill
-                  sizes="100px"
+                  sizes="50px"
                   className="object-cover"
-                  priority
-                  loading="eager"
-                  fetchPriority="high"
                 />
-              </motion.div>
+              </div>
             </motion.span>
 
             <span className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
@@ -185,29 +183,22 @@ export default function Hero() {
                 para
               </motion.span>
             </span>
-            {/* Píldora 2: Bicimoto Tornado */}
+            {/* Píldora 2 */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
-              transition={{ duration: 1.3, delay: 0.95, ease: EASE_ORIGINAL }}
+              transition={{ duration: 1.1, delay: 0.65, ease: EASE_ORIGINAL }}
               className="inline-block h-[0.74em] rounded-full overflow-hidden align-[-0.03em] mx-[0.06em] bg-salvia relative"
             >
-              <motion.div
-                initial={{ scale: 1.25 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 1.6, delay: 0.95, ease: EASE_ORIGINAL }}
-                className="w-full h-full relative"
-              >
+              <div className="w-full h-full relative">
                 <Image
                   src="/img/bicicletas/bicimoto-tornado.webp"
                   alt="Bicimoto eléctrica Tornado"
                   fill
-                  sizes="100px"
+                  sizes="50px"
                   className="object-cover"
-                  priority
-                  loading="eager"
                 />
-              </motion.div>
+              </div>
             </motion.span>
             <span className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
               <motion.span
@@ -222,12 +213,12 @@ export default function Hero() {
           </span>
         </h1>
 
-        {/* BAJADA Y BOTONES */}
+        {/* Bajada y botones */}
         <div className="flex flex-col items-center text-center gap-4 sm:gap-6 mt-4 sm:mt-7">
           <motion.p
-            initial={{ opacity: 0, y: 26 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.8, ease: EASE_ORIGINAL }}
+            transition={{ duration: 0.8, delay: 0.6, ease: EASE_ORIGINAL }}
             className="text-musgo text-[14px] sm:text-lg max-w-[540px] leading-relaxed mx-auto px-2"
           >
             Motos, bicimotos, trimotos con panel solar, autos urbanos y
@@ -235,9 +226,9 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 26 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.95, ease: EASE_ORIGINAL }}
+            transition={{ duration: 0.8, delay: 0.75, ease: EASE_ORIGINAL }}
             className="flex flex-row items-center justify-center gap-2.5 sm:gap-3.5 w-full flex-wrap"
           >
             <Button href="#catalogo" variant="bosque">
@@ -249,7 +240,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* GALERÍA DE ARCOS INTERACTIVOS */}
+        {/* Galería de Arcos */}
         <div
           className="flex gap-2 sm:gap-3.5 h-[320px] sm:h-[min(64vh,540px)] mt-6 sm:mt-12"
           onMouseEnter={() => setIsPaused(true)}
@@ -258,35 +249,25 @@ export default function Hero() {
           {HERO_ITEMS.map((item, index) => {
             const isActive = active === index;
             return (
-              <motion.article
+              <article
                 key={item.n}
                 onClick={() => setActive(index)}
-                initial={{ clipPath: "inset(100% 0 0 0)" }}
-                animate={{ clipPath: "inset(0 0 0 0)" }}
-                transition={{
-                  duration: 1.4,
-                  delay: 0.5 + index * 0.12,
-                  ease: EASE_ORIGINAL,
-                }}
-                className={`relative rounded-[50%_50%_20px_20px_/_34%_34%_20px_20px] sm:rounded-[50%_50%_28px_28px_/_34%_34%_28px_28px] overflow-hidden cursor-pointer bg-salvia transition-[flex] duration-700 sm:duration-1000 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
-                  isActive ? "flex-[4] sm:flex-[3.4]" : "flex-1"
+                className={`relative rounded-[50%_50%_20px_20px_/_34%_34%_20px_20px] sm:rounded-[50%_50%_28px_28px_/_34%_34%_28px_28px] overflow-hidden cursor-pointer bg-salvia transition-[flex-grow] duration-300 ease-out ${
+                  isActive ? "grow-[4] sm:grow-[3.4]" : "grow"
                 } ${index === 4 ? "hidden sm:block" : ""}`}
               >
                 <Image
                   src={item.img}
                   alt={item.n}
                   fill
-                  sizes="(max-width: 640px) 75vw, (max-width: 1200px) 40vw, 30vw"
-                  className={`object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
-                    isActive ? "scale-105" : "scale-100"
-                  }`}
+                  sizes="(max-width: 640px) 280px, 340px"
+                  className="object-cover"
                   priority={index === 0}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  fetchPriority={index === 0 ? "high" : "auto"}
+                  quality={75}
                 />
 
                 <div
-                  className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bosque/85 transition-opacity duration-500 ${
+                  className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bosque/85 transition-opacity duration-300 ${
                     isActive ? "opacity-100" : "opacity-0"
                   }`}
                 />
@@ -296,30 +277,21 @@ export default function Hero() {
                 </span>
 
                 {isActive && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      delay: 0.2,
-                      duration: 0.5,
-                      ease: EASE_ORIGINAL,
-                    }}
-                    className="absolute left-3 right-3 sm:left-6 sm:right-6 bottom-3 sm:bottom-[22px] z-10 text-white"
-                  >
+                  <div className="absolute left-3 right-3 sm:left-6 sm:right-6 bottom-3 sm:bottom-[22px] z-10 text-white">
                     <b className="block font-display text-[15px] sm:text-[clamp(20px,2.4vw,32px)] tracking-[-0.03em] leading-tight line-clamp-1">
                       {item.n}
                     </b>
                     <span className="text-[11px] sm:text-sm text-white/85 line-clamp-1">
                       {item.s}
                     </span>
-                  </motion.div>
+                  </div>
                 )}
-              </motion.article>
+              </article>
             );
           })}
         </div>
 
-        {/* LÍNEAS DE PROGRESO */}
+        {/* Líneas de progreso */}
         <div className="flex gap-1.5 sm:gap-2 mt-3.5">
           {HERO_ITEMS.map((_, index) => (
             <div
@@ -332,7 +304,7 @@ export default function Hero() {
               <div
                 className={`h-full bg-hoja transition-all duration-300 ${
                   active === index
-                    ? "w-full animate-[progress_4.6s_linear]"
+                    ? "w-full"
                     : index < active
                       ? "w-full"
                       : "w-0"
