@@ -28,10 +28,21 @@ const COLOR_HEX = {
 export default function ProductCard({ product, onSelect }) {
   const isLg = product.lg;
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onSelect(product);
+    }
+  };
+
   return (
     <article
+      role="button"
+      tabIndex={0}
       onClick={() => onSelect(product)}
-      className={`group bg-white rounded-[22px] sm:rounded-[32px] p-2.5 sm:p-3 pb-3.5 sm:pb-[22px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-12px_rgba(13,42,28,0.18)] shadow-xs overflow-hidden ${
+      onKeyDown={handleKeyDown}
+      aria-label={`Ver detalles de ${product.name}`}
+      className={`group bg-white rounded-[22px] sm:rounded-[32px] p-2.5 sm:p-3 pb-3.5 sm:pb-[22px] flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-12px_rgba(13,42,28,0.18)] shadow-xs overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-hoja ${
         isLg
           ? "col-span-2 sm:col-span-2 lg:col-span-6 lg:row-span-2"
           : "col-span-1 lg:col-span-3"

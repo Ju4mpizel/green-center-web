@@ -91,8 +91,9 @@ export default function Navbar() {
         {/* Hamburguesa Móvil */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-bosque text-white flex items-center justify-center flex-shrink-0 focus:outline-none"
-          aria-label="Abrir menú"
+          className="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-bosque text-white flex items-center justify-center flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-hoja"
+          aria-expanded={mobileOpen}
+          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
         >
           {mobileOpen ? (
             <svg

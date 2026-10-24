@@ -1,56 +1,29 @@
 // src/components/sections/Catalog.jsx
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { PRODUCTS, CATEGORIES } from "@/data/products";
 import ProductDrawer from "@/components/ui/ProductDrawer";
 import ProductCard from "@/components/ui/ProductCard";
+import SplitHeading from "@/components/ui/SplitHeading";
 
 const EASE = [0.2, 0.8, 0.2, 1];
-
-function SplitHeading({ text, highlight }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
-  const words = text.split(" ");
-
-  return (
-    <h2
-      ref={ref}
-      className="font-display font-bold text-[clamp(32px,5.8vw,88px)] tracking-[-0.04em] leading-[0.98] text-tinta"
-    >
-      {words.map((word, i) => (
-        <span
-          key={i}
-          className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em] mr-[0.22em] last:mr-0"
-        >
-          <motion.span
-            initial={{ y: "115%" }}
-            animate={isInView ? { y: "0%" } : { y: "115%" }}
-            transition={{ duration: 0.9, delay: i * 0.06, ease: EASE }}
-            className="inline-block"
-          >
-            {word}
-          </motion.span>
-        </span>
-      ))}
-      <span className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
-        <motion.span
-          initial={{ y: "115%" }}
-          animate={isInView ? { y: "0%" } : { y: "115%" }}
-          transition={{ duration: 0.9, delay: words.length * 0.06, ease: EASE }}
-          className="inline-block italic not-italic text-hoja"
-        >
-          {highlight}
-        </motion.span>
-      </span>
-    </h2>
-  );
-}
 
 export default function Catalog() {
   const [activeCat, setActiveCat] = useState("Todo");
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // Escuchar el evento personalizado desde Selector.jsx
+  useEffect(() => {
+    const handleFilter = (e) => {
+      if (e.detail && (CATEGORIES.includes(e.detail) || e.detail === "Todo")) {
+        setActiveCat(e.detail);
+      }
+    };
+    window.addEventListener("filter-catalog", handleFilter);
+    return () => window.removeEventListener("filter-catalog", handleFilter);
+  }, []);
 
   const filteredProducts =
     activeCat === "Todo"

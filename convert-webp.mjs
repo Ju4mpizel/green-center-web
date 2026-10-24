@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import sharp from "sharp";
 
-const directories = ["public/img/variados"];
+const directories = ["public/img/trimotos"];
 
 async function processImages() {
   for (const dir of directories) {
@@ -18,8 +18,8 @@ async function processImages() {
 
         console.log(`Optimizando: ${inputPath} -> ${outputPath}`);
         await sharp(inputPath)
-          .resize({ width: 1200, withoutEnlargement: true }) // Resolución máxima ideal
-          .webp({ quality: 80 }) // Calidad óptima reduciendo ~90% de peso
+          .resize({ width: 1200, withoutEnlargement: true })
+          .webp({ quality: 80 })
           .toFile(outputPath);
       }
     }

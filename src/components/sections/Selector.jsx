@@ -3,53 +3,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import SplitHeading from "@/components/ui/SplitHeading";
 
 const EASE = [0.2, 0.8, 0.2, 1];
-
-function SplitHeadingSelector({ text, highlight }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
-  const words = text.split(" ");
-
-  return (
-    <h2
-      ref={ref}
-      className="font-display font-bold text-[clamp(32px,5.8vw,88px)] tracking-[-0.04em] leading-[0.98] text-tinta"
-    >
-      {words.map((word, i) => (
-        <span
-          key={i}
-          className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em] mr-[0.22em] last:mr-0"
-        >
-          <motion.span
-            initial={{ y: "115%" }}
-            animate={isInView ? { y: "0%" } : { y: "115%" }}
-            transition={{ duration: 0.9, delay: i * 0.045, ease: EASE }}
-            className="inline-block"
-          >
-            {word}
-          </motion.span>
-        </span>
-      ))}
-      <span className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
-        <motion.span
-          initial={{ y: "115%" }}
-          animate={isInView ? { y: "0%" } : { y: "115%" }}
-          transition={{
-            duration: 0.9,
-            delay: words.length * 0.045,
-            ease: EASE,
-          }}
-          className="inline-block italic not-italic text-hoja"
-        >
-          {highlight}
-        </motion.span>
-      </span>
-    </h2>
-  );
-}
 
 const OPTIONS = [
   {
@@ -84,7 +42,7 @@ const OPTIONS = [
           alt: "Bicimoto Tornado cafe racer para ciudad",
         },
       ],
-      cat: "Motos y scooters",
+      cat: "Motos",
     },
   },
   {
@@ -119,7 +77,7 @@ const OPTIONS = [
           alt: "Trimoto eléctrica para transporte",
         },
       ],
-      cat: "Maquinaria industrial",
+      cat: "Maquinaria",
     },
   },
   {
@@ -186,7 +144,7 @@ const OPTIONS = [
           alt: "Moto eléctrica Pantera deportiva",
         },
       ],
-      cat: "Bicicletas y bicimotos",
+      cat: "Bicimotos",
     },
   },
 ];
@@ -209,12 +167,18 @@ export default function Selector() {
     }
   }, [selectedKey]);
 
+  const handleSelectModels = (cat) => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("filter-catalog", { detail: cat }));
+    }
+  };
+
   return (
     <section id="elegir" className="bg-salvia py-[clamp(60px,9vw,160px)]">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)]">
         {/* Cabecera animada */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-10 items-end mb-8 sm:mb-14">
-          <SplitHeadingSelector text="¿Para qué la vas a" highlight="usar?" />
+          <SplitHeading text="¿Para qué la vas a" highlight="usar?" />
 
           <motion.p
             initial={{ opacity: 0, y: 26 }}
@@ -297,6 +261,9 @@ export default function Selector() {
                 <div>
                   <a
                     href="#catalogo"
+                    onClick={() =>
+                      handleSelectModels(selectedOption.result.cat)
+                    }
                     className="inline-flex items-center gap-2.5 sm:gap-3.5 pl-5 sm:pl-6 pr-1.5 sm:pr-2 py-1.5 sm:py-2 rounded-full bg-white hover:bg-salvia text-bosque font-semibold text-xs sm:text-[15px] transition-transform duration-300 hover:-translate-y-0.5 shadow-sm"
                   >
                     <span>Ver estos modelos</span>
@@ -307,7 +274,7 @@ export default function Selector() {
                 </div>
               </div>
 
-              {/* 2 Fotos de los modelos recomendados con altura explícita y alt descriptivo */}
+              {/* 2 Fotos de los modelos recomendados */}
               <div className="grid grid-cols-2 gap-2 sm:gap-2.5 p-2.5 sm:p-3.5">
                 {selectedOption.result.imgs.map((item, i) => (
                   <div

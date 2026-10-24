@@ -28,8 +28,18 @@ const COLOR_HEX = {
 const DRAWER_EASE = [0.16, 1, 0.3, 1]; // Curva expo fluida de salida/entrada
 
 export default function ProductDrawer({ product, isOpen, onClose }) {
+  const [displayedProduct, setDisplayedProduct] = useState(product);
   const [pick, setPick] = useState({ id: null, i: 0 });
-  const selectedImg = pick.id === product?.id ? pick.i : 0;
+
+  // Retener el último producto activo para permitir que la animación de salida se reproduzca completa
+  useEffect(() => {
+    if (product) {
+      setDisplayedProduct(product);
+    }
+  }, [product]);
+
+  const activeProduct = product || displayedProduct;
+  const selectedImg = pick.id === activeProduct?.id ? pick.i : 0;
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -47,11 +57,9 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
-  if (!product) return null;
-
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isOpen && activeProduct && (
         <>
           {/* Backdrop liviano sin blur agresivo para fluidez total a 60fps */}
           <motion.div
@@ -61,10 +69,14 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
             transition={{ duration: 0.2 }}
             onClick={onClose}
             className="fixed inset-0 bg-black/60 z-[95] will-change-opacity"
+            aria-hidden="true"
           />
 
-          {/* Panel con aceleración GPU */}
+          {/* Panel con aceleración GPU y semántica accesible */}
           <motion.aside
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Detalles de ${activeProduct.name}`}
             initial={{ x: "100%" }}
             animate={{ x: "0%" }}
             exit={{ x: "100%" }}
@@ -75,7 +87,7 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
             <div className="overflow-y-auto p-3.5 sm:p-5 pb-6 overscroll-contain">
               <button
                 onClick={onClose}
-                className="absolute top-5 right-5 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white flex items-center justify-center z-20 hover:scale-105 active:scale-95 transition-transform duration-150 shadow-sm border border-black/5"
+                className="absolute top-5 right-5 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white flex items-center justify-center z-20 hover:scale-105 active:scale-95 transition-transform duration-150 shadow-sm border border-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-hoja"
                 aria-label="Cerrar ventana"
               >
                 <X className="w-5 h-5 text-tinta" />
@@ -84,8 +96,8 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
               {/* Imagen Principal */}
               <div className="rounded-[22px] sm:rounded-[26px] overflow-hidden aspect-square bg-salvia relative shadow-inner">
                 <Image
-                  src={product.imgs[selectedImg]}
-                  alt={product.name}
+                  src={activeProduct.imgs[selectedImg]}
+                  alt={activeProduct.name}
                   fill
                   sizes="(max-width: 640px) 100vw, 540px"
                   className="object-cover"
@@ -94,12 +106,12 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
               </div>
 
               {/* Miniaturas */}
-              {product.imgs.length > 1 && (
+              {activeProduct.imgs.length > 1 && (
                 <div className="flex gap-2.5 mt-2.5">
-                  {product.imgs.map((img, i) => (
+                  {activeProduct.imgs.map((img, i) => (
                     <button
                       key={i}
-                      onClick={() => setPick({ id: product.id, i })}
+                      onClick={() => setPick({ id: activeProduct.id, i })}
                       className={`relative w-16 h-16 rounded-xl overflow-hidden transition-opacity ${
                         selectedImg === i
                           ? "ring-2 ring-hoja opacity-100"
@@ -108,7 +120,7 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                     >
                       <Image
                         src={img}
-                        alt={`${product.name} vista ${i + 1}`}
+                        alt={`${activeProduct.name} vista ${i + 1}`}
                         fill
                         sizes="64px"
                         className="object-cover"
@@ -122,33 +134,33 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
               <div className="pt-4 px-1.5 sm:px-2">
                 <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
                   <span className="inline-block text-xs font-semibold text-hoja bg-hoja/10 px-3 py-1 rounded-full">
-                    {product.tag}
+                    {activeProduct.tag}
                   </span>
 
-                  {product.warranty && (
+                  {activeProduct.warranty && (
                     <span className="inline-flex items-center gap-1.5 text-xs font-bold text-bosque bg-brote/40 border border-brote px-2.5 py-1 rounded-full">
                       <ShieldCheck className="w-3.5 h-3.5 text-hoja" />
-                      {product.warranty}
+                      {activeProduct.warranty}
                     </span>
                   )}
                 </div>
 
                 <h3 className="font-display font-bold text-2xl sm:text-3xl tracking-tight text-tinta mb-1.5">
-                  {product.name}
+                  {activeProduct.name}
                 </h3>
 
                 <p className="text-musgo text-xs sm:text-[14.5px] leading-relaxed mb-5">
-                  {product.desc}
+                  {activeProduct.desc}
                 </p>
 
                 {/* Colores Disponibles */}
-                {product.colors && product.colors.length > 0 && (
+                {activeProduct.colors && activeProduct.colors.length > 0 && (
                   <div className="mb-6 p-3.5 rounded-2xl bg-white shadow-xs border border-tinta/5">
                     <span className="block text-xs font-semibold text-musgo mb-2 uppercase tracking-wider">
                       Colores disponibles
                     </span>
                     <div className="flex flex-wrap gap-2">
-                      {product.colors.map((c) => (
+                      {activeProduct.colors.map((c) => (
                         <span
                           key={c}
                           className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-niebla text-tinta border border-tinta/10"
@@ -171,7 +183,7 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   Especificaciones técnicas
                 </span>
                 <ul className="divide-y divide-tinta/10">
-                  {product.specs.map((s, idx) => (
+                  {activeProduct.specs.map((s, idx) => (
                     <li
                       key={idx}
                       className="flex justify-between items-center py-2.5 text-xs sm:text-sm"
@@ -193,13 +205,13 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   Precio de referencia
                 </span>
                 <b className="font-display font-bold text-xl sm:text-2xl tracking-tight text-tinta">
-                  {product.price}
+                  {activeProduct.price}
                 </b>
               </div>
 
               <a
                 href={createWhatsAppLink(
-                  `Hola Green Center, me interesa consultar por el modelo: ${product.name} (${product.price}).`,
+                  `Hola Green Center, me interesa consultar por el modelo: ${activeProduct.name} (${activeProduct.price}).`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

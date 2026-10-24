@@ -3,6 +3,8 @@ import Link from "next/link";
 import { siteConfig } from "@/data/siteConfig";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-bosque text-[#a9c1b0] relative overflow-hidden pt-12 sm:pt-16 pb-6">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)]">
@@ -17,11 +19,14 @@ export default function Footer() {
               Importadora y comercializadora de vehículos eléctricos en Bolivia.
               Modelos pensados para el ahorro, la ciudad y el trabajo.
             </p>
+            <p className="text-xs text-musgo mt-2">
+              © {currentYear} {siteConfig.name}. Todos los derechos reservados.
+            </p>
           </div>
 
           {/* Columna 2: Navegación (3 columnas) */}
           <div className="lg:col-span-3 flex flex-col gap-2.5">
-            <b className="text-white font-semibold text-sm tracking-wide uppercase text-opacity-90">
+            <b className="text-white font-semibold text-sm tracking-wide uppercase">
               Navegación
             </b>
             <div className="flex flex-col gap-2">
@@ -54,7 +59,7 @@ export default function Footer() {
 
           {/* Columna 3: Contacto & Redes (4 columnas) */}
           <div className="lg:col-span-4 flex flex-col gap-2.5">
-            <b className="text-white font-semibold text-sm tracking-wide uppercase text-opacity-90">
+            <b className="text-white font-semibold text-sm tracking-wide uppercase">
               Contacto Oficial
             </b>
             <div className="flex flex-col gap-2">
@@ -74,9 +79,12 @@ export default function Footer() {
                 <span>@greencentertv.electricos</span>
               </a>
 
-              <span className="text-white/90">
-                WhatsApp {siteConfig.whatsappNumber}
-              </span>
+              <a
+                href={`tel:+${siteConfig.whatsappNumber}`}
+                className="text-white hover:text-brote transition-colors"
+              >
+                {siteConfig.phoneFormatted}
+              </a>
               <span className="text-sm text-musgo">
                 Santa Cruz & Cochabamba, Bolivia
               </span>

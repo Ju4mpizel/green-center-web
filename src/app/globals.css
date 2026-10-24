@@ -30,6 +30,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Bloqueo de scroll cuando el drawer está activo */
+body.lock {
+  overflow: hidden;
+}
+
+/* Ocultar barra de scroll en contenedores desplazables */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Textura sutil original de fondo */
 body::after {
   content: "";

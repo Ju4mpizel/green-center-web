@@ -3,88 +3,41 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useTransform,
+  animate,
+} from "framer-motion";
+import SplitHeading from "@/components/ui/SplitHeading";
 
 const EASE = [0.2, 0.8, 0.2, 1];
 
-// Titular con palabras que suben desde máscara
-function SplitHeadingStory({ text, highlight }) {
+function Counter({ to, duration = 1.8, decimals = 0, suffix = "" }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
-  const words = text.split(" ");
-
-  return (
-    <h2
-      ref={ref}
-      className="font-display text-[clamp(34px,4.4vw,64px)] tracking-[-0.04em] leading-[0.98] font-bold mb-[26px] text-white"
-    >
-      {words.map((word, i) => (
-        <span
-          key={i}
-          className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em] mr-[0.22em] last:mr-0"
-        >
-          <motion.span
-            initial={{ y: "115%" }}
-            animate={isInView ? { y: "0%" } : { y: "115%" }}
-            transition={{ duration: 0.9, delay: i * 0.045, ease: EASE }}
-            className="inline-block"
-          >
-            {word}
-          </motion.span>
-        </span>
-      ))}
-      <span className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
-        <motion.span
-          initial={{ y: "115%" }}
-          animate={isInView ? { y: "0%" } : { y: "115%" }}
-          transition={{
-            duration: 0.9,
-            delay: words.length * 0.045,
-            ease: EASE,
-          }}
-          className="inline-block italic not-italic text-brote"
-        >
-          {highlight}
-        </motion.span>
-      </span>
-    </h2>
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) =>
+    latest.toLocaleString("es-BO", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    }),
   );
-}
-
-// Contador animado con números tabulares estables sin saltos de layout
-function Counter({ to, duration = 1.6, decimals = 0, suffix = "" }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   useEffect(() => {
-    if (!isInView) return;
-    let startTime = null;
-    let frameId;
-
-    const animate = (time) => {
-      if (!startTime) startTime = time;
-      const progress = Math.min((time - startTime) / (duration * 1000), 1);
-      const easeProgress = 1 - Math.pow(1 - progress, 4);
-      setCount(easeProgress * to);
-
-      if (progress < 1) {
-        frameId = requestAnimationFrame(animate);
-      } else {
-        setCount(to);
-      }
-    };
-
-    frameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frameId);
-  }, [isInView, to, duration]);
+    if (isInView) {
+      const controls = animate(count, to, {
+        duration,
+        ease: [0.16, 1, 0.3, 1],
+      });
+      return controls.stop;
+    }
+  }, [isInView, to, duration, count]);
 
   return (
     <span ref={ref} className="tabular-nums whitespace-nowrap">
-      {count.toLocaleString("es-BO", {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals,
-      })}
+      <motion.span>{rounded}</motion.span>
       {suffix && <span className="inline-block">{suffix}</span>}
     </span>
   );
@@ -151,10 +104,11 @@ export default function Story() {
               Quiénes somos
             </motion.div>
 
-            {/* Titular animado */}
-            <SplitHeadingStory
+            {/* Titular animado accesible */}
+            <SplitHeading
               text="Traemos movilidad eléctrica a Bolivia y la llevamos hasta"
               highlight="tu puerta."
+              className="text-white mb-[26px] text-[clamp(34px,4.4vw,64px)]"
             />
 
             <motion.p
@@ -170,7 +124,7 @@ export default function Story() {
               industrial.
             </motion.p>
 
-            {/* Imagen recortada con la foto real de la trimoto familiar solar */}
+            {/* Imagen de la trimoto familiar solar */}
             <motion.div
               initial={{ clipPath: "inset(100% 0 0 0 round 24px)" }}
               whileInView={{ clipPath: "inset(0 0 0 0 round 28px)" }}
@@ -291,7 +245,7 @@ export default function Story() {
                 <p className="text-[#a9c1b0] text-sm sm:text-[17px] max-w-[520px] leading-relaxed">
                   Estuvimos en Expo Cruz 2026 con nuestro propio stand, con
                   motos, trimotos, autos y maquinaria eléctrica para ver y
-                  probar en persona[cite: 2].
+                  probar en persona.
                 </p>
               </motion.li>
 

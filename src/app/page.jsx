@@ -17,22 +17,24 @@ import FAB from "@/components/ui/FAB";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <>
       <Navbar />
-      <Hero />
-      <Ribbon />
-      <Story />
-      <Catalog />
-      <Selector />
-      <Benefits />
-      <Calculator />
-      <Comparison />
-      <Steps />
-      <Gallery />
-      <Branches />
-      <CTA />
+      <main className="min-h-screen">
+        <Hero />
+        <Ribbon />
+        <Story />
+        <Catalog />
+        <Selector />
+        <Benefits />
+        <Calculator />
+        <Comparison />
+        <Steps />
+        <Gallery />
+        <Branches />
+        <CTA />
+      </main>
       <Footer />
       <FAB />
-    </main>
+    </>
   );
 }

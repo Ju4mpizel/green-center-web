@@ -341,8 +341,8 @@ export default function Calculator() {
         <p className="text-xs text-[#9db8a4] max-w-[760px] mt-4 sm:mt-6 leading-relaxed">
           Estimación referencial. Gasolina especial a Bs 6,96 por litro (precio
           vigente en 2026); consumo eléctrico calculado con la batería 48V 18Ah
-          y 40 km de autonomía de la Super Bike[cite: 20]. CO₂ calculado con
-          2,31 kg por litro quemado[cite: 20].
+          y 40 km de autonomía de la Super Bike. CO₂ calculado con 2,31 kg por
+          litro quemado.
         </p>
       </div>
     </section>

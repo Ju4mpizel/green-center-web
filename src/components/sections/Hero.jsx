@@ -39,14 +39,27 @@ const EASE_ORIGINAL = [0.2, 0.8, 0.2, 1];
 export default function Hero() {
   const [active, setActive] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detectar si estamos en vista móvil (<640px) donde el 5º arco está oculto
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     if (isPaused) return;
+    const totalItems = isMobile ? 4 : HERO_ITEMS.length;
+
     const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % HERO_ITEMS.length);
+      setActive((prev) => (prev + 1) % totalItems);
     }, 4600);
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, isMobile]);
 
   return (
     <section
