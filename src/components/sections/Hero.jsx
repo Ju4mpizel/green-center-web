@@ -40,40 +40,32 @@ export default function Hero() {
   const [active, setActive] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile, { passive: true });
-
-    // Retrasar el ciclo automático hasta después de la pintura inicial crítica
-    const timer = setTimeout(() => setIsLoaded(true), 2500);
-
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-      clearTimeout(timer);
-    };
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
-    if (isPaused || !isLoaded) return;
+    if (isPaused) return;
     const totalItems = isMobile ? 4 : HERO_ITEMS.length;
 
     const interval = setInterval(() => {
       setActive((prev) => (prev + 1) % totalItems);
-    }, 4800);
+    }, 4600);
     return () => clearInterval(interval);
-  }, [isPaused, isMobile, isLoaded]);
+  }, [isPaused, isMobile]);
 
   return (
     <section
       id="inicio"
       className="relative pt-[84px] sm:pt-[130px] pb-10 sm:pb-[70px] overflow-hidden bg-[radial-gradient(900px_500px_at_85%_10%,rgba(191,217,166,0.55),transparent_60%),radial-gradient(700px_500px_at_0%_70%,rgba(220,230,214,0.9),transparent_60%)]"
     >
-      {/* Marca de agua de fondo */}
+      {/* Marca de agua sutil al fondo derecho */}
       <div
         className="pointer-events-none absolute -right-28 top-10 w-[560px] h-[560px] opacity-[0.05] hidden md:block select-none"
         aria-hidden="true"
@@ -103,6 +95,7 @@ export default function Hero() {
                 fill
                 sizes="28px"
                 className="object-contain"
+                priority
               />
             </span>
             <span className="text-[12px] sm:text-[13.5px] font-semibold text-tinta tracking-tight">
@@ -115,7 +108,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Título Principal */}
+        {/* Título Principal animado con píldoras */}
         <h1
           aria-label="Movilidad eléctrica hecha para Bolivia"
           className="text-center font-display font-bold text-[clamp(32px,8vw,120px)] tracking-[-0.05em] leading-[1.02] sm:leading-[0.95] text-tinta"
@@ -132,22 +125,28 @@ export default function Hero() {
               </motion.span>
             </span>
 
-            {/* Píldora 1 */}
+            {/* Píldora 1: Valkiria */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
-              transition={{ duration: 1.1, delay: 0.5, ease: EASE_ORIGINAL }}
+              transition={{ duration: 1.3, delay: 0.7, ease: EASE_ORIGINAL }}
               className="inline-block h-[0.74em] rounded-full overflow-hidden align-[-0.03em] mx-[0.06em] bg-salvia relative"
             >
-              <div className="w-full h-full relative">
+              <motion.div
+                initial={{ scale: 1.25 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.6, delay: 0.7, ease: EASE_ORIGINAL }}
+                className="w-full h-full relative"
+              >
                 <Image
                   src="/img/motos/moto-valkiria.webp"
                   alt="Moto eléctrica Valkiria"
                   fill
-                  sizes="50px"
+                  sizes="100px"
                   className="object-cover"
+                  priority
                 />
-              </div>
+              </motion.div>
             </motion.span>
 
             <span className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
@@ -183,22 +182,27 @@ export default function Hero() {
                 para
               </motion.span>
             </span>
-            {/* Píldora 2 */}
+            {/* Píldora 2: Bicimoto Tornado */}
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "1.45em" }}
-              transition={{ duration: 1.1, delay: 0.65, ease: EASE_ORIGINAL }}
+              transition={{ duration: 1.3, delay: 0.95, ease: EASE_ORIGINAL }}
               className="inline-block h-[0.74em] rounded-full overflow-hidden align-[-0.03em] mx-[0.06em] bg-salvia relative"
             >
-              <div className="w-full h-full relative">
+              <motion.div
+                initial={{ scale: 1.25 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.6, delay: 0.95, ease: EASE_ORIGINAL }}
+                className="w-full h-full relative"
+              >
                 <Image
                   src="/img/bicicletas/bicimoto-tornado.webp"
                   alt="Bicimoto eléctrica Tornado"
                   fill
-                  sizes="50px"
+                  sizes="100px"
                   className="object-cover"
                 />
-              </div>
+              </motion.div>
             </motion.span>
             <span className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
               <motion.span
@@ -216,9 +220,9 @@ export default function Hero() {
         {/* Bajada y botones */}
         <div className="flex flex-col items-center text-center gap-4 sm:gap-6 mt-4 sm:mt-7">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: EASE_ORIGINAL }}
+            transition={{ duration: 0.9, delay: 0.8, ease: EASE_ORIGINAL }}
             className="text-musgo text-[14px] sm:text-lg max-w-[540px] leading-relaxed mx-auto px-2"
           >
             Motos, bicimotos, trimotos con panel solar, autos urbanos y
@@ -226,9 +230,9 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.75, ease: EASE_ORIGINAL }}
+            transition={{ duration: 0.9, delay: 0.95, ease: EASE_ORIGINAL }}
             className="flex flex-row items-center justify-center gap-2.5 sm:gap-3.5 w-full flex-wrap"
           >
             <Button href="#catalogo" variant="bosque">
@@ -240,7 +244,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Galería de Arcos */}
+        {/* Galería de Arcos: Entrada elegante + transición ágil por hardware */}
         <div
           className="flex gap-2 sm:gap-3.5 h-[320px] sm:h-[min(64vh,540px)] mt-6 sm:mt-12"
           onMouseEnter={() => setIsPaused(true)}
@@ -249,10 +253,18 @@ export default function Hero() {
           {HERO_ITEMS.map((item, index) => {
             const isActive = active === index;
             return (
-              <article
+              <motion.article
                 key={item.n}
                 onClick={() => setActive(index)}
-                className={`relative rounded-[50%_50%_20px_20px_/_34%_34%_20px_20px] sm:rounded-[50%_50%_28px_28px_/_34%_34%_28px_28px] overflow-hidden cursor-pointer bg-salvia transition-[flex-grow] duration-300 ease-out ${
+                initial={{ clipPath: "inset(100% 0 0 0)" }}
+                animate={{ clipPath: "inset(0 0 0 0)" }}
+                transition={{
+                  duration: 1.2,
+                  delay: 0.4 + index * 0.1,
+                  ease: EASE_ORIGINAL,
+                }}
+                style={{ willChange: "flex-grow" }}
+                className={`relative rounded-[50%_50%_20px_20px_/_34%_34%_20px_20px] sm:rounded-[50%_50%_28px_28px_/_34%_34%_28px_28px] overflow-hidden cursor-pointer bg-salvia transform-gpu transition-[flex-grow] duration-500 sm:duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
                   isActive ? "grow-[4] sm:grow-[3.4]" : "grow"
                 } ${index === 4 ? "hidden sm:block" : ""}`}
               >
@@ -260,10 +272,11 @@ export default function Hero() {
                   src={item.img}
                   alt={item.n}
                   fill
-                  sizes="(max-width: 640px) 280px, 340px"
-                  className="object-cover"
+                  sizes="(max-width: 640px) 75vw, (max-width: 1200px) 40vw, 30vw"
+                  className={`object-cover transform-gpu transition-transform duration-700 ease-out ${
+                    isActive ? "scale-105" : "scale-100"
+                  }`}
                   priority={index === 0}
-                  quality={75}
                 />
 
                 <div
@@ -277,21 +290,30 @@ export default function Hero() {
                 </span>
 
                 {isActive && (
-                  <div className="absolute left-3 right-3 sm:left-6 sm:right-6 bottom-3 sm:bottom-[22px] z-10 text-white">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 0.15,
+                      duration: 0.4,
+                      ease: EASE_ORIGINAL,
+                    }}
+                    className="absolute left-3 right-3 sm:left-6 sm:right-6 bottom-3 sm:bottom-[22px] z-10 text-white"
+                  >
                     <b className="block font-display text-[15px] sm:text-[clamp(20px,2.4vw,32px)] tracking-[-0.03em] leading-tight line-clamp-1">
                       {item.n}
                     </b>
                     <span className="text-[11px] sm:text-sm text-white/85 line-clamp-1">
                       {item.s}
                     </span>
-                  </div>
+                  </motion.div>
                 )}
-              </article>
+              </motion.article>
             );
           })}
         </div>
 
-        {/* Líneas de progreso */}
+        {/* Líneas de progreso optimizadas */}
         <div className="flex gap-1.5 sm:gap-2 mt-3.5">
           {HERO_ITEMS.map((_, index) => (
             <div
@@ -302,12 +324,12 @@ export default function Hero() {
               }`}
             >
               <div
-                className={`h-full bg-hoja transition-all duration-300 ${
+                className={`h-full bg-hoja origin-left transition-transform duration-300 ${
                   active === index
-                    ? "w-full"
+                    ? "w-full animate-[progress_4.6s_linear]"
                     : index < active
-                      ? "w-full"
-                      : "w-0"
+                      ? "scale-x-100 w-full"
+                      : "scale-x-0 w-full"
                 }`}
               />
             </div>
