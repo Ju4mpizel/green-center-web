@@ -4,6 +4,7 @@ export const BRANCHES = [
     id: "scz-central",
     name: "Showroom",
     label: "Showroom",
+    city: "Santa Cruz de la Sierra",
     address: "2do anillo, Av. Paraguá, entre calle Las Garzas y calle Guajojó.",
     query:
       "Av. Paraguá entre calle Las Garzas y calle Guajojó, 2do anillo, Santa Cruz de la Sierra, Bolivia",
@@ -15,6 +16,7 @@ export const BRANCHES = [
     id: "scz-motos",
     name: "Sucursal 4to anillo N° 39",
     label: "N° 39",
+    city: "Santa Cruz de la Sierra",
     address:
       "4to anillo N° 39, entre Av. Brasil y Av. Virgen de Cotoca, frente al puente a desnivel.",
     query:
@@ -27,6 +29,7 @@ export const BRANCHES = [
     id: "scz-3pasos",
     name: "Sucursal 4to anillo, 3 Pasos",
     label: "3 Pasos",
+    city: "Santa Cruz de la Sierra",
     address: "4to anillo, entre Av. Brasil y Av. 3 Pasos al Frente.",
     query:
       "4to anillo entre Av. Brasil y Av. 3 Pasos al Frente, Santa Cruz de la Sierra, Bolivia",
@@ -35,14 +38,13 @@ export const BRANCHES = [
     ang: 14,
   },
   {
-    id: "cbba-nueva",
-    name: "Green Center Cochabamba",
+    id: "cbba-central",
+    name: "Sucursal Cochabamba",
     label: "Cochabamba",
-    // TODO: confirmar la dirección exacta con el cliente. No inventar.
-    address:
-      "Nueva sucursal en Cochabamba. Consulta la dirección por WhatsApp.",
-    query: "Green Center Bolivia Cochabamba",
-    mapUrl: "https://maps.app.goo.gl/Z3WwmXmoDz1BExYo7",
+    city: "Cochabamba",
+    address: "Av. Uyuni, al lado de Multicenter (casi puente Muyurina).",
+    query: "Multicenter Cochabamba Av Uyuni",
+    mapUrl: "https://maps.app.goo.gl/7uSmQMatw6iMHAbC9",
     isNew: true,
   },
 ];

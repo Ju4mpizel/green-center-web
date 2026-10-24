@@ -218,7 +218,7 @@ export default function Branches() {
             {showRealMap ? (
               <iframe
                 title="Mapa de la sucursal"
-                src={`https://maps.google.com/maps?q=${encodeURIComponent(selectedBranch.query || selectedBranch.address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(selectedBranch.query || selectedBranch.address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
                 className="w-full h-full min-h-[380px] sm:min-h-[560px] border-0 saturate-[0.8] contrast-[1.05]"
                 loading="lazy"
               />
@@ -308,7 +308,7 @@ export default function Branches() {
                   Centro
                 </text>
 
-                {/* 4. Pines de Santa Cruz con pulso concéntrico centrado */}
+                {/* 4. Pines de Santa Cruz */}
                 {BRANCHES.filter((b) => b.ring).map((b, i) => {
                   const [x, y] = P(b.ring, b.ang);
                   const isLeft = Math.cos((b.ang * Math.PI) / 180) < 0;
@@ -474,7 +474,7 @@ export default function Branches() {
                           : "fill-bosque"
                       }`}
                     >
-                      Cochabamba (Nueva Sucursal)
+                      Cochabamba (Av. Uyuni)
                     </text>
                   </motion.g>
                 </g>
