@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import sharp from "sharp";
 
-const directories = ["public/img/bicicletas"];
+const directories = ["public/img/trimotos", "public/img/motos"];
 
 async function processImages() {
   for (const dir of directories) {

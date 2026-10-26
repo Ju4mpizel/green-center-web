@@ -16,6 +16,7 @@ const COLOR_HEX = {
   Amarillo: "#eab308",
   "Celeste eléctrico": "#06b6d4",
   Lila: "#c4b5fd",
+  Fucsia: "#d946ef",
 
   // Tonos pastel y nuevos colores
   "Verde pastel": "#86efac",
@@ -29,6 +30,10 @@ const COLOR_HEX = {
   "Café con crema": "#b45309",
   Celeste: "#38bdf8",
   "Azul eléctrico": "#1d4ed8",
+  "Verde olivo": "#556b2f",
+  Guindo: "#800020",
+  "Verde agua": "#48d1cc",
+  Naranja: "#f97316",
 };
 
 export default function ProductCard({ product, onSelect }) {
