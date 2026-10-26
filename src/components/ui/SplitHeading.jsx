@@ -20,9 +20,12 @@ export default function SplitHeading({
   return (
     <h2
       ref={ref}
-      aria-label={fullText}
       className={`font-display font-bold text-[clamp(32px,5.8vw,88px)] tracking-[-0.04em] leading-[0.98] text-tinta ${className}`}
     >
+      {/* Texto semántico completo para Googlebot y accesibilidad */}
+      <span className="sr-only">{fullText}</span>
+
+      {/* Capa visual animada palabra por palabra */}
       <span aria-hidden="true">
         {words.map((word, i) => (
           <span

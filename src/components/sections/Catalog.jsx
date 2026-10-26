@@ -25,10 +25,20 @@ export default function Catalog() {
     return () => window.removeEventListener("filter-catalog", handleFilter);
   }, []);
 
-  const filteredProducts =
+  const baseFiltered =
     activeCat === "Todo"
       ? PRODUCTS
       : PRODUCTS.filter((p) => p.cat === activeCat);
+
+  // Si está en "Todo", respeta el p.lg de products.js (Valkiria).
+  // Si entra a otra categoría (Motos, Autos, Trimotos...), el primer ítem se destaca en tamaño 6 columnas.
+  const filteredProducts = baseFiltered.map((p, idx) => {
+    if (activeCat === "Todo") return p;
+    return {
+      ...p,
+      lg: idx === 0,
+    };
+  });
 
   return (
     <section id="catalogo" className="py-[clamp(60px,9vw,160px)]">
@@ -67,7 +77,7 @@ export default function Catalog() {
           </div>
         </div>
 
-        {/* Transición fluida del grid sin colisiones ni rebotes */}
+        {/* Transición fluida del grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCat}

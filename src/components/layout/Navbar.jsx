@@ -53,7 +53,7 @@ export default function Navbar() {
           </div>
         </a>
 
-        {/* Links escritorio */}
+        {/* Links escritorio (solo en pantallas grandes) */}
         <nav className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <a
@@ -66,15 +66,16 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Botón WhatsApp escritorio */}
-        <div className="hidden sm:flex items-center">
+        {/* Acciones del lado derecho (WhatsApp + Hamburguesa agrupados) */}
+        <div className="flex items-center gap-2">
+          {/* Botón WhatsApp: visible junto a la hamburguesa en tablets o integrado en escritorio */}
           <a
             href={createWhatsAppLink(
               "Hola Green Center, quiero más información sobre sus vehículos eléctricos.",
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 px-4.5 py-2 rounded-full bg-hoja hover:bg-bosque text-white font-semibold text-[14px] transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
+            className="group hidden sm:inline-flex items-center gap-2 px-3.5 sm:px-4.5 py-1.5 sm:py-2 rounded-full bg-hoja hover:bg-bosque text-white font-semibold text-[13.5px] sm:text-[14px] transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
           >
             <div className="w-4 h-4 relative flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
               <Image
@@ -86,45 +87,45 @@ export default function Navbar() {
             </div>
             <span>Escríbenos</span>
           </a>
-        </div>
 
-        {/* Hamburguesa Móvil */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-bosque text-white flex items-center justify-center flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-hoja"
-          aria-expanded={mobileOpen}
-          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-        >
-          {mobileOpen ? (
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          )}
-        </button>
+          {/* Botón Hamburguesa Móvil y Tablet */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-bosque text-white flex items-center justify-center flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-hoja"
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+          >
+            {mobileOpen ? (
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
       </header>
 
       {/* Menú Móvil */}

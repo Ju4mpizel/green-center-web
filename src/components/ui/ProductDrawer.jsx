@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, ShieldCheck, BatteryCharging } from "lucide-react";
 import { createWhatsAppLink } from "@/lib/whatsapp";
 
-// Mapeo completo de colores
 const COLOR_HEX = {
   Blanco: "#f8fafc",
   "Blanco entero": "#f8fafc",
@@ -34,21 +33,20 @@ const COLOR_HEX = {
 const DRAWER_EASE = [0.16, 1, 0.3, 1];
 
 export default function ProductDrawer({ product, isOpen, onClose }) {
-  const [displayedProduct, setDisplayedProduct] = useState(product);
+  const [prevProduct, setPrevProduct] = useState(product);
   const [pick, setPick] = useState({ id: null, i: 0 });
-  const [selectedBattery, setSelectedBattery] = useState(0);
+  const [batteryState, setBatteryState] = useState({ id: null, idx: 0 });
 
-  useEffect(() => {
-    if (product) {
-      setDisplayedProduct(product);
-      setSelectedBattery(0);
-    }
-  }, [product]);
+  // Sincronizar producto sin llamar setState en useEffect (render-phase update)
+  if (product && product !== prevProduct) {
+    setPrevProduct(product);
+  }
 
-  const activeProduct = product || displayedProduct;
+  const activeProduct = product || prevProduct;
   const selectedImg = pick.id === activeProduct?.id ? pick.i : 0;
+  const selectedBattery =
+    batteryState.id === activeProduct?.id ? batteryState.idx : 0;
 
-  // Determinar si el producto tiene múltiples opciones de batería
   const hasBatteryOptions =
     activeProduct?.batteryOptions && activeProduct.batteryOptions.length > 0;
   const currentBattery = hasBatteryOptions
@@ -98,7 +96,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
             transition={{ duration: 0.3, ease: DRAWER_EASE }}
             className="fixed top-2 sm:top-3 right-2 sm:right-3 bottom-2 sm:bottom-3 w-[min(540px,calc(100%-16px))] bg-niebla rounded-[28px] sm:rounded-[32px] z-[96] overflow-hidden shadow-2xl flex flex-col justify-between will-change-transform transform-gpu"
           >
-            {/* Contenido con Scroll */}
             <div className="overflow-y-auto p-3.5 sm:p-5 pb-6 overscroll-contain">
               <button
                 onClick={onClose}
@@ -108,7 +105,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                 <X className="w-5 h-5 text-tinta" />
               </button>
 
-              {/* Imagen Principal */}
               <div className="rounded-[22px] sm:rounded-[26px] overflow-hidden aspect-square bg-salvia relative shadow-inner">
                 <Image
                   src={activeProduct.imgs[selectedImg]}
@@ -120,7 +116,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                 />
               </div>
 
-              {/* Miniaturas si existen más de una */}
               {activeProduct.imgs.length > 1 && (
                 <div className="flex gap-2.5 mt-2.5">
                   {activeProduct.imgs.map((img, i) => (
@@ -145,7 +140,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                 </div>
               )}
 
-              {/* Encabezado e Info */}
               <div className="pt-4 px-1.5 sm:px-2">
                 <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
                   <span className="inline-block text-xs font-semibold text-hoja bg-hoja/10 px-3 py-1 rounded-full">
@@ -168,7 +162,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   {activeProduct.desc}
                 </p>
 
-                {/* Selector de tipo de batería si el modelo ofrece opciones */}
                 {hasBatteryOptions && (
                   <div className="mb-5 p-3.5 rounded-2xl bg-white shadow-xs border border-hoja/20">
                     <span className="flex items-center gap-1.5 text-xs font-bold text-bosque mb-2.5 uppercase tracking-wider">
@@ -180,7 +173,9 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                         <button
                           key={b.type}
                           type="button"
-                          onClick={() => setSelectedBattery(idx)}
+                          onClick={() =>
+                            setBatteryState({ id: activeProduct.id, idx })
+                          }
                           className={`p-2.5 rounded-xl border text-left transition-all ${
                             selectedBattery === idx
                               ? "border-hoja bg-brote/20 ring-1 ring-hoja"
@@ -202,7 +197,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   </div>
                 )}
 
-                {/* Colores Disponibles */}
                 {activeProduct.colors && activeProduct.colors.length > 0 && (
                   <div className="mb-6 p-3.5 rounded-2xl bg-white shadow-xs border border-tinta/5">
                     <span className="block text-xs font-semibold text-musgo mb-2 uppercase tracking-wider">
@@ -227,13 +221,11 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                   </div>
                 )}
 
-                {/* Tabla de Especificaciones Técnicas */}
                 <span className="block text-xs font-semibold text-musgo mb-1 uppercase tracking-wider">
                   Especificaciones técnicas
                 </span>
                 <ul className="divide-y divide-tinta/10">
                   {activeProduct.specs.map((s, idx) => {
-                    // Si seleccionó litio y esta fila es la batería, reflejar la opción actual
                     const value =
                       hasBatteryOptions &&
                       s.label.toLowerCase().includes("batería")
@@ -255,7 +247,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
               </div>
             </div>
 
-            {/* Pie Fijo: Precio + Botón WhatsApp */}
             <div className="p-3.5 sm:p-4 bg-white border-t border-tinta/10 flex items-center justify-between gap-3 shadow-lg">
               <div>
                 <span className="block text-[11px] font-medium text-musgo leading-none">

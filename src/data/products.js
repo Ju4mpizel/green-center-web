@@ -219,6 +219,31 @@ export const PRODUCTS = [
   // BICICLETAS Y BICIMOTOS
   // ==========================================
   {
+    id: "sport-bike",
+    name: "Bicicleta Sport Bike",
+    tag: "Llanta Gruesa Aro 26",
+    cat: "Bicicletas y bicimotos",
+    price: "Bs 8.800",
+    line: "800 W · Aro 26 · Batería Litio 48V 10Ah",
+    desc: "Bicicleta eléctrica todoterreno de llanta gruesa Aro 26 con cuadro robusto, suspensión delantera, encendido inteligente por tarjeta NFC y batería de litio de alta durabilidad.",
+    imgs: ["/img/bicicletas/bicicleta-sportbike.webp"],
+    warranty: "+1 Año por motor eléctrico",
+    colors: ["Blanco", "Rojo", "Negro"],
+    specs: [
+      { label: "Potencia de motor", val: "800 Watts" },
+      { label: "Autonomía", val: "Hasta 40 km por carga" },
+      { label: "Velocidad máxima", val: "Hasta 40 - 45 km/h" },
+      { label: "Batería", val: "Litio (48V 10Ah)" },
+      { label: "Frenos", val: "Frenos a disco" },
+      { label: "Panel", val: "Digital completo" },
+      { label: "Capacidad de carga", val: "Soporta 150 kg" },
+      { label: "Amortiguadores", val: "Delanteros reforzados" },
+      { label: "Llantas", val: "Llanta gruesa Aro N° 26" },
+      { label: "Seguridad y visibilidad", val: "Guiñadores y Tarjeta NFC" },
+      { label: "Incluye", val: "2 llaves + 1 cargador inteligente" },
+    ],
+  },
+  {
     id: "tornado",
     name: "Bicimoto Tornado",
     tag: "Diseño Tipo Motocicleta",

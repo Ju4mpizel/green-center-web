@@ -42,7 +42,7 @@ const OPTIONS = [
           alt: "Bicimoto Tornado cafe racer para ciudad",
         },
       ],
-      cat: "Motos",
+      cat: "Motos y scooters",
     },
   },
   {
@@ -77,7 +77,7 @@ const OPTIONS = [
           alt: "Trimoto eléctrica para transporte",
         },
       ],
-      cat: "Maquinaria",
+      cat: "Maquinaria industrial",
     },
   },
   {
@@ -144,7 +144,7 @@ const OPTIONS = [
           alt: "Moto eléctrica Pantera deportiva",
         },
       ],
-      cat: "Bicimotos",
+      cat: "Bicicletas y bicimotos",
     },
   },
 ];
@@ -154,7 +154,6 @@ export default function Selector() {
   const resultRef = useRef(null);
   const selectedOption = OPTIONS.find((o) => o.k === selectedKey);
 
-  // Autoscroll suave hacia el resultado al abrir
   useEffect(() => {
     if (selectedKey && resultRef.current) {
       const timer = setTimeout(() => {
@@ -176,7 +175,6 @@ export default function Selector() {
   return (
     <section id="elegir" className="bg-salvia py-[clamp(60px,9vw,160px)]">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)]">
-        {/* Cabecera animada */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-10 items-end mb-8 sm:mb-14">
           <SplitHeading text="¿Para qué la vas a" highlight="usar?" />
 
@@ -192,7 +190,6 @@ export default function Selector() {
           </motion.p>
         </div>
 
-        {/* 4 Opciones: 2 columnas en móvil y 4 en escritorio */}
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
           {OPTIONS.map((opt, index) => {
             const isSelected = selectedKey === opt.k;
@@ -239,7 +236,6 @@ export default function Selector() {
           })}
         </div>
 
-        {/* Panel Desplegable con Resultado y Autoscroll */}
         <AnimatePresence>
           {selectedOption && (
             <motion.div
@@ -250,7 +246,6 @@ export default function Selector() {
               transition={{ duration: 0.5, ease: EASE }}
               className="mt-4 sm:mt-5 rounded-[24px] sm:rounded-[32px] bg-bosque text-white overflow-hidden grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] shadow-xl"
             >
-              {/* Texto y botón */}
               <div className="p-5 sm:p-[clamp(28px,4vw,56px)] flex flex-col justify-center">
                 <h3 className="font-display font-bold text-2xl sm:text-[clamp(28px,3.4vw,48px)] tracking-tight leading-tight mb-2 sm:mb-3.5 text-white">
                   {selectedOption.result.t}
@@ -274,7 +269,6 @@ export default function Selector() {
                 </div>
               </div>
 
-              {/* 2 Fotos de los modelos recomendados */}
               <div className="grid grid-cols-2 gap-2 sm:gap-2.5 p-2.5 sm:p-3.5">
                 {selectedOption.result.imgs.map((item, i) => (
                   <div
