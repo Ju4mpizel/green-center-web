@@ -8,5 +8,5 @@ export const siteConfig = {
   tiktok: "https://www.tiktok.com/@greencenter.bolivia?lang=es",
   facebook: "https://www.facebook.com/GreenCenterBolivia?locale=es_LA",
   openingHours: "Lunes a Sábado de 08:30 a 18:30",
-  priceRange: "Bs 8.900 - Bs 94.280",
+  priceRange: "Bs 6.500 - Bs 94.280",
 };
