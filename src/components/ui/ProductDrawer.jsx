@@ -6,34 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, ShieldCheck, BatteryCharging } from "lucide-react";
 import { createWhatsAppLink } from "@/lib/whatsapp";
-
-const COLOR_HEX = {
-  Blanco: "#f8fafc",
-  "Blanco entero": "#f8fafc",
-  Negro: "#1e293b",
-  Rojo: "#dc2626",
-  Azul: "#2563eb",
-  Plomo: "#64748b",
-  Amarillo: "#eab308",
-  "Celeste eléctrico": "#06b6d4",
-  Lila: "#c4b5fd",
-  Fucsia: "#d946ef",
-  "Verde pastel": "#86efac",
-  "Verde menta pastel": "#a7f3d0",
-  "Morado pastel": "#e9d5ff",
-  "Azul pastel": "#bae6fd",
-  "Celeste pastel": "#7dd3fc",
-  "Rosa completa": "#f472b6",
-  "Rosa con blanco": "#fbcfe8",
-  Crema: "#fef3c7",
-  "Café con crema": "#b45309",
-  Celeste: "#38bdf8",
-  "Azul eléctrico": "#1d4ed8",
-  "Verde olivo": "#556b2f",
-  Guindo: "#800020",
-  "Verde agua": "#48d1cc",
-  Naranja: "#f97316",
-};
+import { getColorStyle } from "@/data/colors";
 
 const DRAWER_EASE = [0.16, 1, 0.3, 1];
 
@@ -42,7 +15,6 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
   const [pick, setPick] = useState({ id: null, i: 0 });
   const [batteryState, setBatteryState] = useState({ id: null, idx: 0 });
 
-  // Sincronizar producto sin llamar setState en useEffect (render-phase update)
   if (product && product !== prevProduct) {
     setPrevProduct(product);
   }
@@ -214,10 +186,8 @@ export default function ProductDrawer({ product, isOpen, onClose }) {
                           className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-niebla text-tinta border border-tinta/10"
                         >
                           <span
-                            className="w-3 h-3 rounded-full border border-black/15 flex-shrink-0"
-                            style={{
-                              backgroundColor: COLOR_HEX[c] || "#94a3b8",
-                            }}
+                            className="w-3.5 h-3.5 rounded-full border border-black/15 flex-shrink-0 shadow-2xs"
+                            style={getColorStyle(c)}
                           />
                           {c}
                         </span>

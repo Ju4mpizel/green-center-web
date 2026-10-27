@@ -10,6 +10,7 @@ import {
   useTransform,
   animate,
 } from "framer-motion";
+import { Zap } from "lucide-react";
 import SplitHeading from "@/components/ui/SplitHeading";
 
 const EASE = [0.2, 0.8, 0.2, 1];
@@ -77,10 +78,10 @@ export default function Story() {
       id="historia"
       className="bg-bosque text-[#eaf1e6] py-[clamp(60px,9vw,160px)] relative overflow-hidden"
     >
-      {/* Hoja decorativa de fondo */}
-      <div className="absolute right-[6%] top-[8%] w-[60px] text-brote opacity-20 pointer-events-none hidden md:block">
+      {/* Rayo decorativo de fondo */}
+      <div className="absolute right-[6%] top-[8%] w-[64px] h-[64px] text-brote opacity-15 pointer-events-none hidden md:block">
         <svg viewBox="0 0 24 24" className="w-full h-full fill-current">
-          <path d="M20.5 3.5C11 3 4.5 7.5 4.5 14.2c0 1.7.5 3 1.2 4.1L3 21l1.4.9 2.7-2.6c1.1.6 2.4.9 3.8.9 6.4 0 10.2-6.2 9.6-16.7z" />
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
         </svg>
       </div>
 
@@ -93,18 +94,13 @@ export default function Story() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: EASE }}
-              className="inline-flex items-center gap-2.5 text-sm font-semibold text-[#9db8a4] mb-3 sm:mb-[22px]"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#9db8a4] mb-3 sm:mb-[22px]"
             >
-              <svg
-                className="w-[18px] h-[18px] text-brote fill-current"
-                viewBox="0 0 24 24"
-              >
-                <path d="M20.5 3.5C11 3 4.5 7.5 4.5 14.2c0 1.7.5 3 1.2 4.1L3 21l1.4.9 2.7-2.6c1.1.6 2.4.9 3.8.9 6.4 0 10.2-6.2 9.6-16.7z" />
-              </svg>
+              <Zap className="w-4 h-4 text-brote fill-current" />
               Quiénes somos
             </motion.div>
 
-            {/* Titular animado accesible */}
+            {/* Titular animado */}
             <SplitHeading
               text="Traemos movilidad eléctrica a Bolivia y la llevamos hasta"
               highlight="tu puerta."
@@ -124,7 +120,6 @@ export default function Story() {
               industrial.
             </motion.p>
 
-            {/* Imagen de la trimoto familiar solar */}
             <motion.div
               initial={{ clipPath: "inset(100% 0 0 0 round 24px)" }}
               whileInView={{ clipPath: "inset(0 0 0 0 round 28px)" }}
@@ -144,17 +139,14 @@ export default function Story() {
 
           {/* Columna Derecha con Línea de Tiempo */}
           <div className="relative pl-9 sm:pl-12">
-            {/* Línea base */}
             <div className="absolute left-[9px] sm:left-[11px] top-2 bottom-2 w-[2px] bg-[rgba(191,217,166,0.18)]" />
 
-            {/* Línea verde activa */}
             <div
               className="absolute left-[9px] sm:left-[11px] top-2 bottom-2 w-[2px] bg-brote origin-top transition-transform duration-150 ease-out"
               style={{ transform: `scaleY(${progress})` }}
             />
 
             <ol ref={tlRef} className="relative list-none">
-              {/* Item 1 */}
               <motion.li
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -179,7 +171,6 @@ export default function Story() {
                 </p>
               </motion.li>
 
-              {/* Item 2 */}
               <motion.li
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -203,7 +194,6 @@ export default function Story() {
                   eléctrico.
                 </p>
 
-                {/* Grid fijo de estadísticas */}
                 <div className="grid grid-cols-2 gap-3 sm:gap-[clamp(24px,5vw,64px)] max-w-[420px]">
                   <div className="flex flex-col min-h-[72px] justify-start">
                     <b className="font-display text-[clamp(32px,7vw,72px)] font-bold tracking-[-0.05em] leading-none text-white block">
@@ -224,7 +214,6 @@ export default function Story() {
                 </div>
               </motion.li>
 
-              {/* Item 3 */}
               <motion.li
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -249,7 +238,6 @@ export default function Story() {
                 </p>
               </motion.li>
 
-              {/* Item 4 */}
               <motion.li
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}

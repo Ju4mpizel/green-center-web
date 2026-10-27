@@ -383,15 +383,14 @@ export const PRODUCTS = [
     name: "Trimoto Familiar Solar",
     tag: "Techo con Panel Solar",
     cat: "Trimotos",
-    price: "Bs 21.480",
-    line: "1.500 W · hasta 55 km/h · Ref. $us 1.820",
-    desc: "Cabina abierta con techo y panel solar integrado para recarga continua durante el día. Asientos amplios y cómodos para traslados familiares o compras.",
+    price: "Bs 23.500",
+    line: "1.500 W · hasta 55 km/h · Capacidad familiar",
+    desc: "Cabina abierta con techo y panel solar integrado para recarga continua durante el día. Asientos amplios y cómodos para traslados familiares o compras con motor potente de 1.500 Watts.",
     imgs: ["/img/trimotos/trimoto-familiar.webp"],
-    colors: ["Lila"],
+    colors: ["Lila", "Celeste", "Verde agua", "Guindo con crema", "Amarillo"],
     specs: [
-      { label: "Precio ref.", val: "Bs 21.480 ($us 1.820)" },
       { label: "Potencia de motor", val: "1.500 Watts" },
-      { label: "Autonomía", val: "30 a 40 km" },
+      { label: "Autonomía", val: "30 a 40 km por carga" },
       { label: "Velocidad máxima", val: "45 a 55 km/h" },
       { label: "Capacidad de carga", val: "Soporta 250 kg" },
       { label: "Llantas", val: "Aro 10" },
@@ -403,11 +402,17 @@ export const PRODUCTS = [
     name: "Trimoto Zafira",
     tag: "3 Ruedas · Pasajeros",
     cat: "Trimotos",
-    price: "Bs 18.880",
+    price: "Bs 13.500",
     line: "1.000 W · 3 Ruedas · Asientos confort",
     desc: "Trimoto de tres ruedas diseñada para transporte urbano cómodo y estable. Asientos acolchados para pasajeros y suspensión reforzada para circular sin combustible.",
     imgs: ["/img/trimotos/trimoto-zafira.webp"],
-    colors: ["Celeste pastel"],
+    colors: [
+      "Celeste",
+      "Beige con lila",
+      "Beige con rosado",
+      "Beige con café",
+      "Verde agua con beige",
+    ],
     specs: [
       { label: "Tipo de vehículo", val: "Trimoto (3 Ruedas)" },
       { label: "Potencia de motor", val: "1.000 Watts" },
@@ -428,7 +433,7 @@ export const PRODUCTS = [
     desc: "Trimoto eléctrica de pasajeros con capacidad para 2 adultos y 1 niño. Equipada con sistema de reversa, alarma antirrobo, puerto de carga y amortiguación para traslados cómodos y seguros.",
     imgs: ["/img/trimotos/trimoto-promax.webp"],
     warranty: "+1 Año por motor eléctrico",
-    colors: ["Rojo", "Negro", "Blanco", "Celeste", "Rosa completa"],
+    colors: ["Rojo", "Negro", "Blanco", "Celeste", "Fucsia"],
     specs: [
       { label: "Potencia de motor", val: "1.000 W" },
       { label: "Autonomía", val: "Hasta 40 km por carga" },
@@ -535,6 +540,7 @@ export const PRODUCTS = [
       },
     ],
   },
+
   // ==========================================
   // AUTOS ELÉCTRICOS (Mini Autos)
   // ==========================================

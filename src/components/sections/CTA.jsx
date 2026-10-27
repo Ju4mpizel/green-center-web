@@ -56,15 +56,15 @@ function SplitHeadingCTA({ text, highlight }) {
 export default function CTA() {
   return (
     <section className="bg-bosque text-white py-[clamp(60px,8vw,130px)] relative overflow-hidden text-center">
-      {/* Hojas decorativas de fondo */}
-      <div className="absolute left-[10%] top-[20%] w-[54px] text-brote opacity-15 pointer-events-none hidden md:block">
+      {/* Rayos eléctricos decorativos de fondo */}
+      <div className="absolute left-[8%] top-[24%] w-[52px] h-[52px] text-brote opacity-15 pointer-events-none hidden md:block rotate-[-12deg]">
         <svg viewBox="0 0 24 24" className="w-full h-full fill-current">
-          <path d="M20.5 3.5C11 3 4.5 7.5 4.5 14.2c0 1.7.5 3 1.2 4.1L3 21l1.4.9 2.7-2.6c1.1.6 2.4.9 3.8.9 6.4 0 10.2-6.2 9.6-16.7z" />
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
         </svg>
       </div>
-      <div className="absolute right-[12%] bottom-[22%] w-[42px] text-brote opacity-15 pointer-events-none hidden md:block">
+      <div className="absolute right-[10%] bottom-[20%] w-[44px] h-[44px] text-brote opacity-15 pointer-events-none hidden md:block rotate-[15deg]">
         <svg viewBox="0 0 24 24" className="w-full h-full fill-current">
-          <path d="M20.5 3.5C11 3 4.5 7.5 4.5 14.2c0 1.7.5 3 1.2 4.1L3 21l1.4.9 2.7-2.6c1.1.6 2.4.9 3.8.9 6.4 0 10.2-6.2 9.6-16.7z" />
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
         </svg>
       </div>
 

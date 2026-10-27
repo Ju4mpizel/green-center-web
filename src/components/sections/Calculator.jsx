@@ -3,6 +3,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { Zap } from "lucide-react";
 
 const EASE = [0.2, 0.8, 0.2, 1];
 
@@ -72,29 +73,25 @@ export default function Calculator() {
   return (
     <section
       id="ahorro"
-      className="bg-bosque text-[#eaf1e6] py-[clamp(60px,9vw,160px)] relative"
+      className="bg-bosque text-[#eaf1e6] py-[clamp(60px,9vw,160px)] relative overflow-hidden"
     >
-      <div className="absolute left-[3%] top-[10%] w-[54px] text-brote opacity-[0.18] pointer-events-none hidden md:block">
+      {/* Rayo decorativo de fondo */}
+      <div className="absolute left-[3%] top-[10%] w-[58px] h-[58px] text-brote opacity-15 pointer-events-none hidden md:block">
         <svg viewBox="0 0 24 24" className="w-full h-full fill-current">
-          <path d="M20.5 3.5C11 3 4.5 7.5 4.5 14.2c0 1.7.5 3 1.2 4.1L3 21l1.4.9 2.7-2.6c1.1.6 2.4.9 3.8.9 6.4 0 10.2-6.2 9.6-16.7z" />
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
         </svg>
       </div>
 
       <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)]">
-        {/* Kicker */}
+        {/* Kicker con rayo */}
         <motion.div
           initial={{ opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="inline-flex items-center gap-2.5 text-sm font-semibold text-[#9db8a4] mb-3 sm:mb-[22px]"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-[#9db8a4] mb-3 sm:mb-[22px]"
         >
-          <svg
-            className="w-[18px] h-[18px] text-brote fill-current"
-            viewBox="0 0 24 24"
-          >
-            <path d="M20.5 3.5C11 3 4.5 7.5 4.5 14.2c0 1.7.5 3 1.2 4.1L3 21l1.4.9 2.7-2.6c1.1.6 2.4.9 3.8.9 6.4 0 10.2-6.2 9.6-16.7z" />
-          </svg>
+          <Zap className="w-4 h-4 text-brote fill-current" />
           Calculadora de ahorro
         </motion.div>
 
@@ -244,9 +241,7 @@ export default function Calculator() {
             transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
             className="bg-niebla text-tinta rounded-[28px] sm:rounded-[32px] p-5 sm:p-[clamp(24px,3vw,44px)] flex flex-col justify-between gap-5 sm:gap-7 shadow-sm"
           >
-            {/* Comparación mensual */}
             <div>
-              {/* Barra Gasolina */}
               <div className="mb-4 sm:mb-5">
                 <div className="flex justify-between items-baseline mb-1.5 font-semibold">
                   <span className="text-musgo text-xs sm:text-base">
@@ -268,7 +263,6 @@ export default function Calculator() {
                 </div>
               </div>
 
-              {/* Barra Eléctrica */}
               <div>
                 <div className="flex justify-between items-baseline mb-1.5 font-semibold">
                   <span className="text-musgo text-xs sm:text-base">
@@ -295,7 +289,6 @@ export default function Calculator() {
               </div>
             </div>
 
-            {/* Cuadro de Ahorro Anual */}
             <div className="bg-hoja text-white rounded-[24px] sm:rounded-[28px] p-5 sm:p-8 shadow-sm">
               <span className="text-xs sm:text-[15px] opacity-85 block">
                 Ahorro estimado en un año
@@ -309,7 +302,6 @@ export default function Calculator() {
               </b>
             </div>
 
-            {/* Mini Cuadros compactos en móvil */}
             <div className="grid grid-cols-2 gap-2 sm:gap-3.5">
               <div className="bg-white rounded-[18px] sm:rounded-[22px] p-3.5 sm:p-5 shadow-sm">
                 <b className="block font-display text-xl sm:text-3xl font-bold tracking-tight text-tinta leading-none">
@@ -337,7 +329,6 @@ export default function Calculator() {
           </motion.div>
         </div>
 
-        {/* Nota legal */}
         <p className="text-xs text-[#9db8a4] max-w-[760px] mt-4 sm:mt-6 leading-relaxed">
           Estimación referencial. Gasolina especial a Bs 6,96 por litro (precio
           vigente en 2026); consumo eléctrico calculado con la batería 48V 18Ah

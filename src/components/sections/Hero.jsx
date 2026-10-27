@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Zap } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 const HERO_ITEMS = [
@@ -65,6 +66,18 @@ export default function Hero() {
       id="inicio"
       className="relative pt-[84px] sm:pt-[130px] pb-10 sm:pb-[70px] overflow-hidden bg-[radial-gradient(900px_500px_at_85%_10%,rgba(191,217,166,0.55),transparent_60%),radial-gradient(700px_500px_at_0%_70%,rgba(220,230,214,0.9),transparent_60%)]"
     >
+      {/* Rayos geométricos tenues flotantes */}
+      <div className="absolute left-[5%] top-[18%] w-[48px] h-[48px] text-hoja opacity-15 pointer-events-none hidden md:block rotate-[-15deg]">
+        <svg viewBox="0 0 24 24" className="w-full h-full fill-current">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+      </div>
+      <div className="absolute right-[8%] top-[30%] w-[40px] h-[40px] text-hoja opacity-15 pointer-events-none hidden md:block rotate-[20deg]">
+        <svg viewBox="0 0 24 24" className="w-full h-full fill-current">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+      </div>
+
       {/* Marca de agua sutil al fondo derecho */}
       <div
         className="pointer-events-none absolute -right-28 top-10 w-[560px] h-[560px] opacity-[0.05] hidden md:block select-none"
@@ -98,17 +111,17 @@ export default function Hero() {
                 priority
               />
             </span>
-            <span className="text-[12px] sm:text-[13.5px] font-semibold text-tinta tracking-tight">
+            <span className="text-[12px] sm:text-[13.5px] font-semibold text-tinta tracking-tight flex items-center gap-1.5">
               Green Center Bolivia
+              <Zap className="w-3.5 h-3.5 text-hoja fill-current" />
               <span className="hidden sm:inline font-medium text-musgo">
-                {" "}
-                · Movilidad eléctrica
+                · Movilidad 100% eléctrica
               </span>
             </span>
           </div>
         </motion.div>
 
-        {/* Título Principal animado con píldoras */}
+        {/* Título Principal animado */}
         <h1
           aria-label="Movilidad eléctrica hecha para Bolivia"
           className="text-center font-display font-bold text-[clamp(32px,8vw,120px)] tracking-[-0.05em] leading-[1.02] sm:leading-[0.95] text-tinta"
@@ -244,7 +257,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Galería de Arcos: Entrada elegante + transición ágil por hardware */}
+        {/* Galería de Arcos */}
         <div
           className="flex gap-2 sm:gap-3.5 h-[320px] sm:h-[min(64vh,540px)] mt-6 sm:mt-12"
           onMouseEnter={() => setIsPaused(true)}
@@ -313,7 +326,7 @@ export default function Hero() {
           })}
         </div>
 
-        {/* Líneas de progreso optimizadas */}
+        {/* Líneas de progreso */}
         <div className="flex gap-1.5 sm:gap-2 mt-3.5">
           {HERO_ITEMS.map((_, index) => (
             <div

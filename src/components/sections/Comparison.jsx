@@ -4,6 +4,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
+import { Zap } from "lucide-react";
 
 const EASE = [0.2, 0.8, 0.2, 1];
 
@@ -92,20 +93,15 @@ export default function Comparison() {
   return (
     <section id="comparar" className="py-[clamp(60px,9vw,160px)]">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)]">
-        {/* Kicker */}
+        {/* Kicker con rayo */}
         <motion.div
           initial={{ opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="inline-flex items-center gap-2.5 text-sm font-semibold text-musgo mb-4 sm:mb-5"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-musgo mb-4 sm:mb-5"
         >
-          <svg
-            className="w-[18px] h-[18px] text-hoja fill-current"
-            viewBox="0 0 24 24"
-          >
-            <path d="M20.5 3.5C11 3 4.5 7.5 4.5 14.2c0 1.7.5 3 1.2 4.1L3 21l1.4.9 2.7-2.6c1.1.6 2.4.9 3.8.9 6.4 0 10.2-6.2 9.6-16.7z" />
-          </svg>
+          <Zap className="w-4 h-4 text-hoja fill-current" />
           Comparativa
         </motion.div>
 
@@ -121,7 +117,7 @@ export default function Comparison() {
           <span>→</span>
         </div>
 
-        {/* Tabla con scroll suave */}
+        {/* Tabla */}
         <motion.div
           ref={tableRef}
           initial={{ opacity: 0, y: 26 }}
@@ -131,7 +127,6 @@ export default function Comparison() {
           className="rounded-[24px] sm:rounded-[32px] overflow-hidden bg-white shadow-sm overflow-x-auto border border-tinta/[0.04]"
         >
           <div className="min-w-[620px] sm:min-w-[700px] grid grid-cols-[1.1fr_repeat(4,1fr)]">
-            {/* FILA 1: Encabezados */}
             <div className="p-3.5 sm:p-[22px_18px] border-b border-tinta/[0.08]" />
             {TYPES.map((t, c) => (
               <div
@@ -157,7 +152,6 @@ export default function Comparison() {
               </div>
             ))}
 
-            {/* FILA 2: Ideal para */}
             <div className="p-3.5 sm:p-[22px_18px] border-b border-tinta/[0.07] font-semibold text-musgo text-xs sm:text-[15px] flex items-center">
               Ideal para
             </div>
@@ -176,7 +170,6 @@ export default function Comparison() {
               </div>
             ))}
 
-            {/* FILAS 3 a 6: Puntos animados */}
             {ROWS.map((r, ri) => (
               <div key={ri} className="contents">
                 <div className="p-3.5 sm:p-[22px_18px] border-b border-tinta/[0.07] font-semibold text-musgo text-xs sm:text-[15px] flex items-center">
@@ -223,7 +216,6 @@ export default function Comparison() {
           </div>
         </motion.div>
 
-        {/* Nota */}
         <p className="mt-5 sm:mt-8 text-xs sm:text-sm text-musgo text-center">
           Guía orientativa para elegir. Cada modelo tiene sus propias
           características técnicas.

@@ -3,27 +3,36 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Zap, ChevronDown, ChevronUp } from "lucide-react";
 import { PRODUCTS, CATEGORIES } from "@/data/products";
 import ProductDrawer from "@/components/ui/ProductDrawer";
 import ProductCard from "@/components/ui/ProductCard";
 import SplitHeading from "@/components/ui/SplitHeading";
 
 const EASE = [0.2, 0.8, 0.2, 1];
+const INITIAL_LIMIT = 6;
 
 export default function Catalog() {
   const [activeCat, setActiveCat] = useState("Todo");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Escuchar el evento personalizado desde Selector.jsx
   useEffect(() => {
     const handleFilter = (e) => {
       if (e.detail && (CATEGORIES.includes(e.detail) || e.detail === "Todo")) {
         setActiveCat(e.detail);
+        setIsExpanded(false);
       }
     };
     window.addEventListener("filter-catalog", handleFilter);
     return () => window.removeEventListener("filter-catalog", handleFilter);
   }, []);
+
+  const handleCategoryChange = (cat) => {
+    setActiveCat(cat);
+    setIsExpanded(false);
+  };
 
   const baseFiltered =
     activeCat === "Todo"
@@ -31,8 +40,8 @@ export default function Catalog() {
       : PRODUCTS.filter((p) => p.cat === activeCat);
 
   // Si está en "Todo", respeta el p.lg de products.js (Valkiria).
-  // Si entra a otra categoría (Motos, Autos, Trimotos...), el primer ítem se destaca en tamaño 6 columnas.
-  const filteredProducts = baseFiltered.map((p, idx) => {
+  // Si entra a otra categoría, el primer ítem se destaca en tamaño 6 columnas.
+  const processedProducts = baseFiltered.map((p, idx) => {
     if (activeCat === "Todo") return p;
     return {
       ...p,
@@ -40,19 +49,35 @@ export default function Catalog() {
     };
   });
 
+  // Limitar únicamente cuando esté en la pestaña "Todo" y no esté expandido
+  const displayedProducts =
+    activeCat === "Todo" && !isExpanded
+      ? processedProducts.slice(0, INITIAL_LIMIT)
+      : processedProducts;
+
+  const hasMore =
+    activeCat === "Todo" && processedProducts.length > INITIAL_LIMIT;
+  const remainingCount = processedProducts.length - INITIAL_LIMIT;
+
+  const handleToggleExpand = () => {
+    if (isExpanded) {
+      // Al plegar, hacer scroll suave al inicio del catálogo para no perder la vista
+      const catalogEl = document.getElementById("catalogo");
+      if (catalogEl) {
+        catalogEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <section id="catalogo" className="py-[clamp(60px,9vw,160px)]">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)]">
         {/* Cabecera del catálogo */}
         <div className="flex flex-col gap-4 sm:gap-6 mb-8 sm:mb-12">
           <div>
-            <div className="inline-flex items-center gap-2.5 text-sm font-semibold text-musgo mb-3 sm:mb-4">
-              <svg
-                className="w-[18px] h-[18px] text-hoja fill-current"
-                viewBox="0 0 24 24"
-              >
-                <path d="M20.5 3.5C11 3 4.5 7.5 4.5 14.2c0 1.7.5 3 1.2 4.1L3 21l1.4.9 2.7-2.6c1.1.6 2.4.9 3.8.9 6.4 0 10.2-6.2 9.6-16.7z" />
-              </svg>
+            <div className="inline-flex items-center gap-2 text-sm font-semibold text-musgo mb-3 sm:mb-4">
+              <Zap className="w-4 h-4 text-hoja fill-current" />
               Catálogo
             </div>
 
@@ -64,7 +89,7 @@ export default function Catalog() {
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActiveCat(cat)}
+                onClick={() => handleCategoryChange(cat)}
                 className={`whitespace-nowrap px-4 py-2 sm:px-5 sm:py-2.5 rounded-full font-semibold text-xs sm:text-[15px] transition-all duration-300 flex-shrink-0 ${
                   activeCat === cat
                     ? "bg-bosque text-white shadow-none"
@@ -87,7 +112,7 @@ export default function Catalog() {
             transition={{ duration: 0.28, ease: EASE }}
             className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-5"
           >
-            {filteredProducts.map((p) => (
+            {displayedProducts.map((p) => (
               <ProductCard
                 key={p.id}
                 product={p}
@@ -96,6 +121,27 @@ export default function Catalog() {
             ))}
           </motion.div>
         </AnimatePresence>
+
+        {/* Botón Ver Más / Ver Menos (exclusivo para "Todo") */}
+        {hasMore && (
+          <div className="mt-8 sm:mt-12 flex justify-center">
+            <button
+              onClick={handleToggleExpand}
+              className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-white hover:bg-bosque text-tinta hover:text-white font-semibold text-xs sm:text-[15px] transition-all duration-300 shadow-sm hover:shadow-md border border-tinta/10 hover:border-bosque active:scale-95"
+            >
+              <span>
+                {isExpanded
+                  ? "Ver menos modelos"
+                  : `Ver más vehículos (+${remainingCount})`}
+              </span>
+              {isExpanded ? (
+                <ChevronUp className="w-4 h-4 text-hoja group-hover:text-white transition-colors" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-hoja group-hover:text-white transition-colors" />
+              )}
+            </button>
+          </div>
+        )}
 
         {/* Nota informativa */}
         <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-musgo text-center px-4">
