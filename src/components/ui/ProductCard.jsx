@@ -17,8 +17,9 @@ export default function ProductCard({ product, onSelect }) {
     }
   };
 
+  // En tarjetas estándar de 2 columnas mostramos hasta 3 bolitas para evitar desbordes en móvil
   const colorsList = product.colors || [];
-  const maxColorsShown = isLg ? 6 : 4;
+  const maxColorsShown = isLg ? 5 : 3;
   const visibleColors = colorsList.slice(0, maxColorsShown);
   const extraColorsCount = colorsList.length - maxColorsShown;
 
@@ -62,13 +63,13 @@ export default function ProductCard({ product, onSelect }) {
       </div>
 
       {/* Info de la Card */}
-      <div className="pt-2.5 sm:pt-3.5 px-1 sm:px-2 flex flex-col justify-between flex-1 min-w-0">
+      <div className="pt-2 sm:pt-3.5 px-0.5 sm:px-2 flex flex-col justify-between flex-1 min-w-0">
         <div>
-          {/* Fila superior: etiqueta y muestras de color calibradas */}
-          <div className="flex items-center justify-between gap-1.5 mb-1.5 sm:mb-2 min-h-[24px]">
+          {/* Fila superior: etiqueta calibrada y badge de colores protegido */}
+          <div className="flex items-center justify-between gap-1 mb-1.5 sm:mb-2 min-h-[22px]">
             <span
               title={product.tag}
-              className="inline-block text-[9.5px] sm:text-[12.5px] font-semibold text-hoja bg-hoja/10 px-2 sm:px-2.5 py-0.5 rounded-full shrink-0 max-w-[65%] truncate sm:max-w-none"
+              className="inline-block text-[9.5px] sm:text-[12.5px] font-semibold text-hoja bg-hoja/10 px-2 py-0.5 rounded-full truncate flex-1 min-w-0 max-w-[62%] sm:max-w-none"
             >
               {product.tag}
             </span>
@@ -76,18 +77,18 @@ export default function ProductCard({ product, onSelect }) {
             {/* Muestras circulares de colores con contador */}
             {colorsList.length > 0 && (
               <div
-                className="flex items-center gap-1 py-0.5 px-1.5 rounded-full bg-niebla/80 border border-tinta/5 shrink-0"
+                className="flex items-center gap-0.5 sm:gap-1 py-0.5 px-1 sm:px-1.5 rounded-full bg-niebla/80 border border-tinta/5 shrink-0"
                 title={`Colores: ${colorsList.join(", ")}`}
               >
                 {visibleColors.map((c) => (
                   <span
                     key={c}
-                    className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full border border-black/15 shadow-2xs shrink-0"
+                    className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border border-black/15 shadow-2xs shrink-0"
                     style={getColorStyle(c)}
                   />
                 ))}
                 {extraColorsCount > 0 && (
-                  <span className="text-[9px] font-bold text-musgo leading-none pl-0.5">
+                  <span className="text-[8.5px] sm:text-[9.5px] font-bold text-musgo leading-none pl-0.5">
                     +{extraColorsCount}
                   </span>
                 )}
@@ -100,14 +101,14 @@ export default function ProductCard({ product, onSelect }) {
             className={`font-display font-bold tracking-tight text-tinta mb-1 leading-snug truncate ${
               isLg
                 ? "text-[15px] sm:text-[clamp(22px,2.2vw,30px)]"
-                : "text-[13.5px] sm:text-[clamp(18px,1.5vw,22px)]"
+                : "text-[13px] sm:text-[clamp(18px,1.5vw,22px)]"
             }`}
           >
             {product.name}
           </h3>
 
           {/* Subtítulo / línea técnica */}
-          <p className="text-musgo text-[11px] sm:text-[13.5px] truncate">
+          <p className="text-musgo text-[10.5px] sm:text-[13.5px] truncate">
             {product.line}
           </p>
         </div>
