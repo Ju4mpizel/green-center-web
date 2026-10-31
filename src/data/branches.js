@@ -2,8 +2,8 @@
 export const BRANCHES = [
   {
     id: "scz-central",
-    name: "Showroom",
-    label: "Showroom",
+    name: "Showroom Av. Paraguá",
+    label: "Paraguá",
     city: "Santa Cruz de la Sierra",
     address: "2do anillo, Av. Paraguá, entre calle Las Garzas y calle Guajojó.",
     query:
@@ -11,6 +11,19 @@ export const BRANCHES = [
     mapUrl: "https://maps.app.goo.gl/n4WiTRP6acExiKAv6",
     ring: 70,
     ang: 198,
+  },
+  {
+    id: "scz-2do-anillo",
+    name: "Sucursal 2do Anillo (Av. Santa Cruz)",
+    label: "2do Anillo",
+    city: "Santa Cruz de la Sierra",
+    address: "2do Anillo, sobre Av. Santa Cruz, esquina San Pablo.",
+    query:
+      "Av. Santa Cruz esquina San Pablo, 2do anillo, Santa Cruz de la Sierra, Bolivia",
+    mapUrl: "https://maps.app.goo.gl/BmbGDonnHWipZ2FY7",
+    ring: 70,
+    ang: 52,
+    isNew: true,
   },
   {
     id: "scz-motos",
@@ -45,6 +58,5 @@ export const BRANCHES = [
     address: "Av. Uyuni, al lado de Multicenter (casi puente Muyurina).",
     query: "Multicenter Cochabamba Av Uyuni",
     mapUrl: "https://maps.app.goo.gl/7uSmQMatw6iMHAbC9",
-    isNew: true,
   },
 ];

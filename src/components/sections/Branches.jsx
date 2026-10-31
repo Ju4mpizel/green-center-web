@@ -81,6 +81,12 @@ export default function Branches() {
     { a: 198, n: "Av. Paraguá" },
   ];
 
+  const cbbaIdx = BRANCHES.findIndex((b) => b.city === "Cochabamba");
+  const sczBranches = BRANCHES.map((b, originalIdx) => ({
+    ...b,
+    originalIdx,
+  })).filter((b) => b.ring);
+
   return (
     <section id="ubicacion" className="py-[clamp(60px,9vw,160px)]">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-[clamp(20px,4vw,56px)]">
@@ -104,7 +110,7 @@ export default function Branches() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[4.6fr_7.4fr] gap-4 sm:gap-[18px] mt-6 sm:mt-14">
-          {/* LADO IZQUIERDO */}
+          {/* LADO IZQUIERDO: Tarjetas de sucursales */}
           <div className="flex flex-col gap-2.5 sm:gap-3.5">
             {BRANCHES.map((b, idx) => {
               const isSelected = selectedIdx === idx;
@@ -186,7 +192,7 @@ export default function Branches() {
             </p>
           </div>
 
-          {/* LADO DERECHO: Mapa */}
+          {/* LADO DERECHO: Mapa y Esquema Interactivo */}
           <motion.div
             ref={mapRef}
             initial={{ opacity: 0, y: 26 }}
@@ -305,14 +311,14 @@ export default function Branches() {
                 </text>
 
                 {/* 4. Pines de Santa Cruz */}
-                {BRANCHES.filter((b) => b.ring).map((b, i) => {
+                {sczBranches.map((b) => {
                   const [x, y] = P(b.ring, b.ang);
                   const isLeft = Math.cos((b.ang * Math.PI) / 180) < 0;
-                  const isSelected = selectedIdx === i;
+                  const isSelected = selectedIdx === b.originalIdx;
                   return (
                     <g
                       key={b.id}
-                      onClick={() => setSelectedIdx(i)}
+                      onClick={() => setSelectedIdx(b.originalIdx)}
                       className="cursor-pointer"
                       style={{ transform: `translate(${x}px, ${y}px)` }}
                     >
@@ -325,7 +331,7 @@ export default function Branches() {
                         }
                         transition={{
                           duration: 0.8,
-                          delay: 1.1 + i * 0.18,
+                          delay: 1.1 + b.originalIdx * 0.15,
                           ease: EASE,
                         }}
                       >
@@ -391,7 +397,7 @@ export default function Branches() {
                           fill="#fff"
                           className="font-display font-bold text-sm pointer-events-none"
                         >
-                          {i + 1}
+                          {b.originalIdx + 1}
                         </text>
                         <text
                           x={isLeft ? -26 : 26}
@@ -410,70 +416,78 @@ export default function Branches() {
                   );
                 })}
 
-                {/* Pin 4: Cochabamba */}
-                <g
-                  onClick={() => setSelectedIdx(3)}
-                  className="cursor-pointer"
-                  style={{ transform: "translate(90px, 470px)" }}
-                >
-                  <motion.g
-                    initial={{ opacity: 0, scale: 0, y: -30 }}
-                    animate={
-                      isMapInView
-                        ? { opacity: 1, scale: 1, y: 0 }
-                        : { opacity: 0, scale: 0, y: -30 }
-                    }
-                    transition={{
-                      duration: 0.8,
-                      delay: 1.1 + 3 * 0.18,
-                      ease: EASE,
-                    }}
+                {/* Pin: Cochabamba */}
+                {cbbaIdx !== -1 && (
+                  <g
+                    onClick={() => setSelectedIdx(cbbaIdx)}
+                    className="cursor-pointer"
+                    style={{ transform: "translate(90px, 470px)" }}
                   >
-                    {selectedIdx === 3 && (
-                      <circle cx="0" cy="0" r="16" fill="#1E8A4B" opacity="0.4">
-                        <animate
-                          attributeName="r"
-                          values="16;38"
-                          dur="1.8s"
-                          repeatCount="indefinite"
-                        />
-                        <animate
-                          attributeName="opacity"
-                          values="0.45;0"
-                          dur="1.8s"
-                          repeatCount="indefinite"
-                        />
-                      </circle>
-                    )}
-                    <circle
-                      cx="0"
-                      cy="0"
-                      r="16"
-                      fill={selectedIdx === 3 ? "#1E8A4B" : "#0D2A1C"}
-                      stroke="#fff"
-                      strokeWidth="3"
-                    />
-                    <text
-                      y="5"
-                      textAnchor="middle"
-                      fill="#fff"
-                      className="font-display font-bold text-sm pointer-events-none"
+                    <motion.g
+                      initial={{ opacity: 0, scale: 0, y: -30 }}
+                      animate={
+                        isMapInView
+                          ? { opacity: 1, scale: 1, y: 0 }
+                          : { opacity: 0, scale: 0, y: -30 }
+                      }
+                      transition={{
+                        duration: 0.8,
+                        delay: 1.1 + cbbaIdx * 0.15,
+                        ease: EASE,
+                      }}
                     >
-                      4
-                    </text>
-                    <text
-                      x="24"
-                      y="5"
-                      className={`text-[13px] font-bold font-sans transition-colors ${
-                        selectedIdx === 3
-                          ? "fill-hoja font-extrabold"
-                          : "fill-bosque"
-                      }`}
-                    >
-                      Cochabamba (Av. Uyuni)
-                    </text>
-                  </motion.g>
-                </g>
+                      {selectedIdx === cbbaIdx && (
+                        <circle
+                          cx="0"
+                          cy="0"
+                          r="16"
+                          fill="#1E8A4B"
+                          opacity="0.4"
+                        >
+                          <animate
+                            attributeName="r"
+                            values="16;38"
+                            dur="1.8s"
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="opacity"
+                            values="0.45;0"
+                            dur="1.8s"
+                            repeatCount="indefinite"
+                          />
+                        </circle>
+                      )}
+                      <circle
+                        cx="0"
+                        cy="0"
+                        r="16"
+                        fill={selectedIdx === cbbaIdx ? "#1E8A4B" : "#0D2A1C"}
+                        stroke="#fff"
+                        strokeWidth="3"
+                      />
+                      <text
+                        y="5"
+                        textAnchor="middle"
+                        fill="#fff"
+                        className="font-display font-bold text-sm pointer-events-none"
+                      >
+                        {cbbaIdx + 1}
+                      </text>
+                      <text
+                        x="24"
+                        y="5"
+                        className={`text-[13px] font-bold font-sans transition-colors ${
+                          selectedIdx === cbbaIdx
+                            ? "fill-hoja font-extrabold"
+                            : "fill-bosque"
+                        }`}
+                      >
+                        Cochabamba (Av. Uyuni)
+                      </text>
+                    </motion.g>
+                  </g>
+                )}
               </svg>
             )}
 

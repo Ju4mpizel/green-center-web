@@ -47,7 +47,7 @@ export default function Hero() {
       setIsMobile(window.innerWidth < 640);
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile, { passive: true });
+    window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
@@ -121,7 +121,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Título Principal animado */}
+        {/* Título Principal animado con píldoras */}
         <h1
           aria-label="Movilidad eléctrica hecha para Bolivia"
           className="text-center font-display font-bold text-[clamp(32px,8vw,120px)] tracking-[-0.05em] leading-[1.02] sm:leading-[0.95] text-tinta"
@@ -145,7 +145,12 @@ export default function Hero() {
               transition={{ duration: 1.3, delay: 0.7, ease: EASE_ORIGINAL }}
               className="inline-block h-[0.74em] rounded-full overflow-hidden align-[-0.03em] mx-[0.06em] bg-salvia relative"
             >
-              <div className="w-full h-full relative">
+              <motion.div
+                initial={{ scale: 1.25 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.6, delay: 0.7, ease: EASE_ORIGINAL }}
+                className="w-full h-full relative"
+              >
                 <Image
                   src="/img/motos/moto-valkiria.webp"
                   alt="Moto eléctrica Valkiria"
@@ -154,7 +159,7 @@ export default function Hero() {
                   className="object-cover"
                   priority
                 />
-              </div>
+              </motion.div>
             </motion.span>
 
             <span className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
@@ -197,7 +202,12 @@ export default function Hero() {
               transition={{ duration: 1.3, delay: 0.95, ease: EASE_ORIGINAL }}
               className="inline-block h-[0.74em] rounded-full overflow-hidden align-[-0.03em] mx-[0.06em] bg-salvia relative"
             >
-              <div className="w-full h-full relative">
+              <motion.div
+                initial={{ scale: 1.25 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.6, delay: 0.95, ease: EASE_ORIGINAL }}
+                className="w-full h-full relative"
+              >
                 <Image
                   src="/img/bicicletas/bicimoto-tornado.webp"
                   alt="Bicimoto eléctrica Tornado"
@@ -205,7 +215,7 @@ export default function Hero() {
                   sizes="100px"
                   className="object-cover"
                 />
-              </div>
+              </motion.div>
             </motion.span>
             <span className="inline-block overflow-hidden align-top pb-[0.1em] -mb-[0.1em]">
               <motion.span
@@ -247,7 +257,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Galería de Arcos de Alto Rendimiento */}
+        {/* Galería de Arcos Original optimizada con loading='eager' */}
         <div
           className="flex gap-2 sm:gap-3.5 h-[320px] sm:h-[min(64vh,540px)] mt-6 sm:mt-12 select-none"
           onMouseEnter={() => setIsPaused(true)}
@@ -256,55 +266,66 @@ export default function Hero() {
           {HERO_ITEMS.map((item, index) => {
             const isActive = active === index;
             return (
-              <article
+              <motion.article
                 key={item.n}
                 onClick={() => setActive(index)}
-                style={{
-                  flex: isActive ? (isMobile ? 3 : 3.4) : 1,
-                  transition: "flex 0.45s cubic-bezier(0.16, 1, 0.3, 1)",
-                  willChange: "flex",
+                initial={{ clipPath: "inset(100% 0 0 0)" }}
+                animate={{ clipPath: "inset(0 0 0 0)" }}
+                transition={{
+                  duration: 1.2,
+                  delay: 0.4 + index * 0.1,
+                  ease: EASE_ORIGINAL,
                 }}
-                className={`relative rounded-[50%_50%_20px_20px_/_34%_34%_20px_20px] sm:rounded-[50%_50%_28px_28px_/_34%_34%_28px_28px] overflow-hidden cursor-pointer bg-salvia transform-gpu ${
-                  index === 4 ? "hidden sm:block" : ""
-                }`}
+                style={{
+                  willChange: "flex-grow",
+                  touchAction: "manipulation",
+                }}
+                className={`relative rounded-[50%_50%_20px_20px_/_34%_34%_20px_20px] sm:rounded-[50%_50%_28px_28px_/_34%_34%_28px_28px] overflow-hidden cursor-pointer bg-salvia transform-gpu transition-[flex-grow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  isActive ? "grow-[3.6]" : "grow"
+                } ${index === 4 ? "hidden sm:block" : ""}`}
               >
                 <Image
                   src={item.img}
                   alt={item.n}
                   fill
-                  sizes="(max-width: 640px) 75vw, (max-width: 1200px) 40vw, 30vw"
-                  className="object-cover transform-gpu pointer-events-none"
+                  sizes="(max-width: 640px) 70vw, (max-width: 1200px) 40vw, 30vw"
+                  loading="eager"
                   priority={index === 0}
+                  className={`object-cover transform-gpu pointer-events-none transition-transform duration-500 ease-out ${
+                    isActive ? "scale-105" : "scale-100"
+                  }`}
                 />
 
-                {/* Sombra inferior suave con fade por opacidad pura (acelerado por GPU) */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bosque/90 transition-opacity duration-300 pointer-events-none ${
+                  className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bosque/85 transition-opacity duration-300 pointer-events-none ${
                     isActive ? "opacity-100" : "opacity-0"
                   }`}
                 />
 
-                {/* Número de tarjeta */}
                 <span className="absolute top-3 sm:top-[22px] left-1/2 -translate-x-1/2 z-10 w-6.5 h-6.5 sm:w-[34px] sm:h-[34px] rounded-full bg-white/90 text-tinta flex items-center justify-center font-display font-bold text-[11px] sm:text-[13px] shadow-xs pointer-events-none">
                   {index + 1}
                 </span>
 
-                {/* Textos con transición de opacidad nativa en CSS */}
-                <div
-                  className={`absolute left-3 right-3 sm:left-6 sm:right-6 bottom-3 sm:bottom-[22px] z-10 text-white pointer-events-none transition-all duration-300 ${
-                    isActive
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-3 pointer-events-none"
-                  }`}
-                >
-                  <b className="block font-display text-[15px] sm:text-[clamp(20px,2.4vw,32px)] tracking-[-0.03em] leading-tight line-clamp-1">
-                    {item.n}
-                  </b>
-                  <span className="text-[11px] sm:text-sm text-white/85 line-clamp-1">
-                    {item.s}
-                  </span>
-                </div>
-              </article>
+                {isActive && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 0.1,
+                      duration: 0.35,
+                      ease: EASE_ORIGINAL,
+                    }}
+                    className="absolute left-3 right-3 sm:left-6 sm:right-6 bottom-3 sm:bottom-[22px] z-10 text-white pointer-events-none"
+                  >
+                    <b className="block font-display text-[15px] sm:text-[clamp(20px,2.4vw,32px)] tracking-[-0.03em] leading-tight line-clamp-1">
+                      {item.n}
+                    </b>
+                    <span className="text-[11px] sm:text-sm text-white/85 line-clamp-1">
+                      {item.s}
+                    </span>
+                  </motion.div>
+                )}
+              </motion.article>
             );
           })}
         </div>
